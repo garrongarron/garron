@@ -7,7 +7,7 @@
 		<meta name="description" content="">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" type="image/png" href="/Screenshot from 2018-04-22 07-10-13.png"/>	
+        <link rel="shortcut icon" type="image/png" href="/favicon.png"/>	
 	<title>Garron Consulting Group</title>
 		
 		<style type="text/css">
