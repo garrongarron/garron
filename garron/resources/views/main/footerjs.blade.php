@@ -1,0 +1,14 @@
+<script type='text/javascript' src='js/modernizr.js?ver=1.0.0'></script>
+<script type='text/javascript' src='js/jquery.scrollUp.js?ver=1.0.0'></script>
+<script type='text/javascript' src='js/wow.js?ver=1.0.0'></script>
+<script type='text/javascript' src='js/jquery.slicknav.js?ver=1.0.0'></script>
+<script type='text/javascript' src='js/jquery.nav.js?ver=1.0.0'></script>
+<script type='text/javascript' src='js/typed.js?ver=1.0.0'></script>
+<script type='text/javascript' src='js/jquery.magnific-popup.js?ver=1.0.0'></script>
+<script type='text/javascript' src='js/jquery.stellar.js?ver=1.0.0'></script>
+<script type='text/javascript' src='js/jquery.counterup.js?ver=1.0.0'></script>
+<script type='text/javascript' src='js/waypoints.js?ver=1.0.0'></script>
+<script type='text/javascript' src='js/owl.carousel.js?ver=1.0.0'></script>
+<script type='text/javascript' src='js/bootstrap.js?ver=1.0.0'></script>
+<script type='text/javascript' src='js/main.js?ver=1.0.0'></script>
+<script type='text/javascript' src='js/wp-embed.min.js?ver=4.9.5'></script>
