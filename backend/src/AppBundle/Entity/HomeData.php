@@ -38,6 +38,13 @@ class HomeData
     /**
      * @var string
      *
+     * @ORM\Column(name="url", type="string", length=255)
+     */
+    private $url;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="img", type="string", length=255)
      */
     private $img;
@@ -45,9 +52,9 @@ class HomeData
     /**
      * @var string
      *
-     * @ORM\Column(name="url", type="string", length=255)
+     * @ORM\Column(name="type", type="string", length=255)
      */
-    private $url;
+    private $type;
 
     /**
      * @var string
@@ -116,6 +123,30 @@ class HomeData
     }
 
     /**
+     * Set url
+     *
+     * @param string $url
+     *
+     * @return HomeData
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
      * Set img
      *
      * @param string $img
@@ -140,27 +171,27 @@ class HomeData
     }
 
     /**
-     * Set url
+     * Set type
      *
-     * @param string $url
+     * @param string $type
      *
      * @return HomeData
      */
-    public function setUrl($url)
+    public function setType($type)
     {
-        $this->url = $url;
+        $this->type = $type;
 
         return $this;
     }
 
     /**
-     * Get url
+     * Get type
      *
      * @return string
      */
-    public function getUrl()
+    public function getType()
     {
-        return $this->url;
+        return $this->type;
     }
 
     /**

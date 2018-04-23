@@ -9,8 +9,9 @@
                 <th>Id</th>
                 <th>Title</th>
                 <th>Description</th>
-                <th>Img</th>
                 <th>Url</th>
+                <th>Img</th>
+                <th>Type</th>
                 <th>Lang</th>
                 <th>Actions</th>
             </tr>
@@ -21,8 +22,9 @@
                 <td><a href="{{ path('homedata_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.title }}</td>
                 <td>{{ entity.description }}</td>
-                <td>{{ entity.img }}</td>
                 <td>{{ entity.url }}</td>
+                <td>{{ entity.img }}</td>
+                <td>{{ entity.type }}</td>
                 <td>{{ entity.lang }}</td>
                 <td>
                 <ul>
