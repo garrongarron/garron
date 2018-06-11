@@ -7,6 +7,8 @@
 		<meta name="description" content="">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Meta tag google site verification-->    
+        <meta name="google-site-verification" content="_j9Odvd7R5lCOb7_w48wcP3yy-2z2vQIQ8FOnrxOZ50" />
         <link rel="shortcut icon" type="image/png" href="/favicon.png"/>	
 	<title>Garron Consulting Group</title>
 		
