@@ -13,6 +13,8 @@
 
 Route::get('/', 'HomeController@home');
 Route::get('/locale', 'HomeController@chooser');
+Route::get('/ITResources', 'ITResources@init');
+
 Route::get('/welcome', function () {
     return view('welcome');
 });
