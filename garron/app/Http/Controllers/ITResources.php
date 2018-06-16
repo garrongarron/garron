@@ -10,6 +10,19 @@ use Illuminate\Support\Facades\Lang;
 
 class ITResources extends Controller
 {
+    private $positions = [
+            'Full Stack Developer'
+            ,'Team Leader'
+            ,'System Administrator'
+            ,'DBA'];
+
+    public function __construct(){
+        $var = [];
+        foreach ($this->positions as $key => $value) {
+            $var[str_slug($value)] = $value;
+        }
+        $this->positions = $var;
+    }
     public function home(){
         Lang::setLocale(session('locale')); 
         view()->composer('main.slider', function($view){
@@ -31,9 +44,29 @@ class ITResources extends Controller
     }
 
 
+    public function search($position){
+        return view('ITResources.search', [
+            'position'=>$this->positions[$position],
+            'positions' => $this->positions]);
+    }
+
+    public function offer($position){
+        return view('ITResources.offer', [
+            'position'=>$this->positions[$position],
+            'positions' => $this->positions]);
+    }
+    
+    public function salary($position){
+        return view('ITResources.salary', [
+            'position'=>$this->positions[$position],
+            'positions' => $this->positions]);
+    }
+
     public function init(){
        // return 'jaja';
-        return view('ITResources.landing');
+        //return str_slug('Federico zacayan');
+        return view('ITResources.landing', [
+            'positions' => $this->positions]);
     }
 
 

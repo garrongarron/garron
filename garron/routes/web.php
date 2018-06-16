@@ -13,7 +13,14 @@
 
 Route::get('/', 'HomeController@home');
 Route::get('/locale', 'HomeController@chooser');
-Route::get('/ITResources', 'ITResources@init');
+
+
+Route::get('/ITResources', 'ITResources@init')->name('ITResources');
+Route::get('/ITResources/busco/{position}', 'ITResources@search')->name('ITResources.search');
+Route::get('/ITResources/soy/{position}', 'ITResources@offer')->name('ITResources.Iam');
+
+Route::get('/ITResources/salario/{position}', 'ITResources@salary')->name('ITResources.salary');
+Route::get('/ITResources/tareas/{position}', 'ITResources@salary')->name('ITResources.tasks');
 
 Route::get('/welcome', function () {
     return view('welcome');

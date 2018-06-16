@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
+	<base href="<?php echo env('APP_URL', 'http://localhost') ?>">
 	<!-- Meta tag -->
 		<meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">

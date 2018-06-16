@@ -6,8 +6,11 @@
 			<div class="row">
 				
 				<div class="col-md-3 col-sm-6 col-xs-12">
+
+
 					<!-- Logo -->
-					<div class="logo" style="padding-top: 0px;">
+					<div class="logo" style="padding-top: 0px; cursor: pointer;"
+					onclick="javascript:window.location.href = ('{{ route('ITResources') }}')">
 							<div style="color:white; 
 							font-size: 15px;
 							font-weight: 500;
@@ -21,6 +24,9 @@
 													font-style: italic;">Consulting Group</span></div>
 					</div>
 					<!--/ End Logo -->
+
+
+					
 				</div>
 				
 				<div class="col-md-9 col-sm-6 col-xs-12">
@@ -41,6 +47,9 @@
 							</div>				
 						</nav>
 						<!--/ End Main Menu -->
+
+
+
 						<!-- Search Form -->
 						<ul class="search">
 							<li><a href="#header"><i class="fa fa-search"></i></a></li>
