@@ -59,3 +59,19 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+	(function(document, $){
+		$(document).ready(function(){
+			var $ = jQuery;
+			$('#exampleModal').modal('show');
+			$('input[name=name]').keyup(function(){
+				$('h2').html($(this).val());
+			});
+			$('textarea[name=description]').keyup(function(){
+				$('.description').html($(this).val());
+			});
+		});
+
+	})(document, jQuery)
+	
+</script>
