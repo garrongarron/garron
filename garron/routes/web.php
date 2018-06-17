@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', 'HomeController@home');
-Route::get('/locale', 'HomeController@chooser');
+Route::get('/', 'Garron@home');
+Route::get('/locale', 'Garron@chooser');
 
 
 Route::get('/ITResources', 'ITResources@init')->name('ITResources');
