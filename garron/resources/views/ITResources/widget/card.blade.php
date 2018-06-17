@@ -2,7 +2,7 @@
 				<ul class="list">
 					<li><i class="fa fa-map"></i> <span>Address: Viamonte 1549 , Ciudad Autónoma de Bs. As.</span></li>
 					<li><i class="fa fa-phone"></i> <span>Phone: +15-6260-4333</span></li>
-					<li><i class="fa fa-envelope"></i> <span>Email: <a href="mailto:info@garron.com.ar">Info@garron.com.ar</a></span></li>
+					<li><i class="fa fa-envelope"></i> <span>Email: <a href="mailto:info@garron.com.ar">{{$empleado->email or 'Info@garron.com.ar' }}</a></span></li>
 				</ul>
 			</div>
 			
