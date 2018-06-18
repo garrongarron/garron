@@ -33,7 +33,7 @@
 			<h2>Busco empleo</h2> 
 			<ul>
 				@foreach ($positions as $key => $position)
-				<li><a href="{{ route('ITResources.Iam', ['position' => $key]) }}">{{ $position }}</a></li>
+				<li><a href="{{ route('ITResources.jobs', ['position' => $key]) }}">{{ $position }}</a></li>
 				@endforeach
 				<li><input type="text" placeholder="Soy Full Stack Developer" name="search-resource">
 				@include('ITResources.modal-button')

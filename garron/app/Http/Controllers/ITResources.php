@@ -44,6 +44,18 @@ class ITResources extends Controller
     }
 
 
+    public function jobs($position){
+        return view('ITResources.jobs',[
+            'position'=>$this->positions[$position],
+            'positions' => $this->positions]);
+    }
+
+     public function position($position){
+        return view('ITResources.position',[
+            'position'=>$this->positions[$position],
+            'positions' => $this->positions]);
+    }
+
     public function search($position){
         return view('ITResources.search', [
             'position'=>$this->positions[$position],

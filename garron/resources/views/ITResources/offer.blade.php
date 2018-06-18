@@ -4,7 +4,7 @@
 
  @include('ITResources.header')
 
- @include('ITResources.widget.offer-modal')
+ @include('ITResources.widget.offer-modal', ['position' =>  $position ])
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12" style="background: silver; height: 150px;">
@@ -28,12 +28,11 @@
 				<i class="fa fa-edit"></i>
 				</button>
 				
-				<h2>Federico Zacayan</h2>
+				<h2>Nombre Aprellido</h2>
 				
 				<h3>{{ $position }}</h3>
 				<p class="description">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					Mis tareas consisten en... <br>Mi funcion es ...
 				</p>
 				
 

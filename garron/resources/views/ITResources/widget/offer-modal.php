@@ -10,46 +10,42 @@
         </button>
       </div>
       <div class="modal-body">
+
         <div style="max-height: 300px; overflow-y: scroll;">
-          <ul>
-
-
-				<div class="form-group">
-					
-					<label for="name" class="col-2 col-form-label">Nombre</label>
-					<div class="col-10">
-						<input class="form-control" type="text" name="name" placeholder="Nombre y Apellido">
-					</div>
-
-				</div>
-				<div class="form-group">
-					<label for="position">Posición</label>
-					<input class="form-control" type="text" name="position" placeholder="Posición">
-				</div>
-				<div class="form-group">
-					<label for="description">Descripción</label>
-					<textarea class="form-control" name="description" placeholder="Descripción de mis tareas">
-					</textarea>
-				</div>
-				<div class="form-group">
-					<label for="email">Email</label>
-					<input class="form-control" type="text" name="email" placeholder="nombre.apellido@email.com" style="color:black">
+			<div class="form-group">
+				
+				<label for="name" class="col-2 col-form-label">Nombre</label>
+				<div class="col-10">
+					<input class="form-control" type="text" name="name" placeholder="Nombre y Apellido">
 				</div>
 
-				<div class="form-group">
-					<label for="phone">Teléfono</label>
-					<input class="form-control" type="text" name="phone" placeholder="4444-4444" style="color:black">
-				</div>
+			</div>
+			<div class="form-group">
+				<label for="position">Posición</label>
+				<input class="form-control" type="text" name="position" placeholder="Posición" value="<?php echo  $position; ?>" disabled="disabled">
+			</div>
+			
+			<div class="form-group">
+				<label for="description">Descripción</label>
+				<textarea class="form-control" name="description" placeholder="Descripción de mis tareas"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input class="form-control" type="text" name="email" placeholder="nombre.apellido@email.com" style="color:black">
+			</div>
 
-				<hr>
-				<div class="form-group">
-					<label class="custom-file">Imagen de perfil</label>
-				  <input type="file" id="file" class="custom-file-input">
-				  <span class="custom-file-control"></span>
-				</div>
+			<div class="form-group">
+				<label for="phone">Teléfono</label>
+				<input class="form-control" type="text" name="phone" placeholder="4444-4444" style="color:black">
+			</div>
 
+			<hr>
+			<div class="form-group">
+				<label class="custom-file">Imagen de perfil</label>
+			  <input type="file" id="file" class="custom-file-input">
+			  <span class="custom-file-control"></span>
+			</div>
 
-          </ul>
         </div>
       </div>
       <div class="modal-footer">
