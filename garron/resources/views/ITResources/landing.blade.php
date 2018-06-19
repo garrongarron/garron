@@ -4,6 +4,7 @@
 
  @include('ITResources.header')
 
+
 <div class="container">
 	<div class="row">
 		@include('ITResources.modal')
@@ -35,8 +36,8 @@
 				@foreach ($positions as $key => $position)
 				<li><a href="{{ route('ITResources.jobs', ['position' => $key]) }}">{{ $position }}</a></li>
 				@endforeach
-				<li><input type="text" placeholder="Soy Full Stack Developer" name="search-resource">
-				@include('ITResources.modal-button')
+				<li><input type="text" placeholder="Soy Full Stack Developer" name="search-job">
+				@include('ITResources.modalButton', ['class' => 'search-job'])
 				</li>
 			</ul>
 		</div>
@@ -48,7 +49,7 @@
 				<li><a href="{{ route('ITResources.salary', ['position' => $key]) }}">{{ $position }}</a></li>
 				@endforeach
 				<li><input type="text" placeholder="Salario Neto y Bruto de un" name="search-resource"> 
-				@include('ITResources.modal-button')
+				@include('ITResources.modalButton')
 				</li>
 			</ul>
 		</div>
@@ -60,7 +61,7 @@
 				<li><a href="{{ route('ITResources.tasks', ['position' => $key]) }}">{{ $position }}</a></li>
 				@endforeach
 				<li><input type="text" placeholder="Funciones y tareas de un" name="search-resource"> 
-				@include('ITResources.modal-button')
+				@include('ITResources.modalButton')
 				</li>
 			</ul>
 		</div>
@@ -99,9 +100,23 @@
 
 
 <script type="text/javascript">
-$('input').on('shown.bs.modal', function () {
-	$('#myInput').trigger('focus')
-})
+(function(document, $){
+	$('input').on('shown.bs.modal', function () {
+		$('#myInput').trigger('focus')
+	});
+
+	$(document).ready(function(){
+		$('.search-job').on('click', function(){
+			var str = $('input[name=search-job').val();
+			if(str == ''){
+				return false;
+			}
+			$('.result-job-offer').html(str);
+		})
+	});
+
+})(document, jQuery)
+	
 </script>
 			
 		</div>

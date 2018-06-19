@@ -29,12 +29,15 @@
 				</div>
 				<div class="col-md-4" style="background: #ddd; ">
 					<h4 style="padding-top: 10px;">Garron Consulting Group</h4>
-					<p style="text-align: justify;">La compañía donde las mejores empresas buscan a los mejores empleados</p>
+					<p style="text-align: justify;">Aquí las mejores empresas buscan a los mejores profesionales.</p>
 					<img src="/img/GarronConsultingGroup.png" style="margin-left: 10%;  margin-bottom: 10px; width: 80%;  background: gray">
 				</div>
 			</div>
 			<hr>
-			<button type="button" class="btn btn-success" onclick="window.location.href= '{{ route('ITResources.Iam', ['position'=>str_slug($position)])}}'">Enviar CV</button>
+			<a target="_blank" class="btn btn-success" href="{{ route('ITResources.Iam', [
+			'position'=>str_slug($position),
+			'apply'=>true,
+			])}}">Enviar CV</a>
 			<br>
 			
 			<b>Descripción</b>
@@ -49,7 +52,7 @@
 			<b>Se ofrece</b>
 			<p>Flexibilidad horaria y beneficios corporativos, tales como clases de inglés, reconocimiento al desempeño plan de carrera.</p>
 
-			<button type="button" class="btn btn-success">Enviar CV</button>
+			<a target="_blank" class="btn btn-success" href="{{ route('ITResources.Iam', ['position'=>str_slug($position)])}}">Enviar CV</a>
 		</div>
 	</div>
 </div>

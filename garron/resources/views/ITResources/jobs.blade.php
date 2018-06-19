@@ -26,13 +26,13 @@ h3, img{
 				<div style="background: gray; padding: 10px; color: white;"><b>Búsqueda de trabajo</b></div>
 				<ul style="padding: 0px 10px;">
 					@foreach($positions as $title)
-						<li><a href="{{ route('ITResources.position', ['position' => str_slug($title)]) }}">{{ $title }}</a></li>
+						<li><a target="_blank" href="{{ route('ITResources.position', ['position' => str_slug($title)]) }}">{{ $title }}</a></li>
 					@endforeach
 				</ul>
 				<div style="padding: 0px 10px; color: black;"><b>Búsqueda de trabajo</b></div>
 				<ul style="padding: 0px 10px;">
 					@foreach($positions as $title)
-						<li><a href="{{ route('ITResources.Iam', ['position' => str_slug($title)]) }}">{{ $title }}</a></li>
+						<li><a target="_blank" href="{{ route('ITResources.Iam', ['position' => str_slug($title)]) }}">{{ $title }}</a></li>
 					@endforeach
 				</ul>
 			</div>

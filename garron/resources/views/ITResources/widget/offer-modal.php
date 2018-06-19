@@ -26,22 +26,22 @@
 			</div>
 			
 			<div class="form-group">
-				<label for="description">Descripción</label>
+				<label for="description">Descripción</label> 
 				<textarea class="form-control" name="description" placeholder="Descripción de mis tareas"></textarea>
 			</div>
 			<div class="form-group">
-				<label for="email">Email</label>
+				<label for="email">Email</label> (No se verá en tu perfil) <a href="javascript:return false;" onclick="alert('Funcionalidad no disponible')">Editar</a>
 				<input class="form-control" type="text" name="email" placeholder="nombre.apellido@email.com" style="color:black">
 			</div>
 
 			<div class="form-group">
-				<label for="phone">Teléfono</label>
+				<label for="phone">Teléfono</label> (No se verá en tu perfil) <a href="javascript:return false;" onclick="alert('Funcionalidad no disponible')">Editar</a>
 				<input class="form-control" type="text" name="phone" placeholder="4444-4444" style="color:black">
 			</div>
 
 			<hr>
 			<div class="form-group">
-				<label class="custom-file">Imagen de perfil</label>
+				<label class="custom-file">Curriculum</label>
 			  <input type="file" id="file" class="custom-file-input">
 			  <span class="custom-file-control"></span>
 			</div>

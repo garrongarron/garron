@@ -11,7 +11,7 @@
       <div class="modal-body">
         <div style="max-height: 300px; overflow-y: scroll;">
           <ul>
-            <li><a href="{{ route('ITResources.Iam', ['position'=>'dba'])}}">Resultado</a></li>
+            <li>Postularme como <a class="result-job-offer" href="{{ route('ITResources.Iam', ['position'=>'dba'])}}">Resultado</a></li>
           </ul>
         </div>
       </div>
