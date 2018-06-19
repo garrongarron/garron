@@ -14,7 +14,8 @@ class ITResources extends Controller
             'Full Stack Developer'
             ,'Team Leader'
             ,'System Administrator'
-            ,'DBA'];
+            ,'DBA'
+            ,'IT Profesional'];
 
     public function __construct(){
         $var = [];
@@ -63,9 +64,13 @@ class ITResources extends Controller
     }
 
     public function offer($position){
+
+        $apply = request()->input('apply');
+        
         return view('ITResources.offer', [
             'position'=>$this->positions[$position],
-            'positions' => $this->positions]);
+            'positions' => $this->positions,
+            'edit'=> $apply]);
     }
     
     public function salary($position){

@@ -4,7 +4,17 @@
 
  @include('ITResources.header')
 
- @include('ITResources.widget.offer-modal', ['position' =>  $position ])
+@guest
+	@include('ITResources.auth.nav')
+@else
+	@include('ITResources.auth.nav')
+@endguest
+
+@if($edit == '1')
+	@include('ITResources.widget.offer-modal', ['position' =>  $position ])
+@endif
+ 
+ 
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12" style="background: silver; height: 150px;">
@@ -20,6 +30,8 @@
 				"></div>
 
 			</div>
+
+
 
 			<div class="col-md-6" style="margin-top: 80px; ">
 				<!-- Button trigger modal -->
@@ -52,23 +64,25 @@
 					<input class="form-control" type="text" name="tags" placeholder="Habilidades">
 				</div>
 
-				<span class="badge badge-success">Tarea Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Tarea Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Tarea Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Tarea Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Tarea Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Tarea Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Tarea Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Tarea Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Tarea Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Tarea Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Tarea Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Tarea Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Tarea Específica <a href="#">x</a></span>
+				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
+				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
+				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
+				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
+				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
+				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
+				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
+				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
+				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
+				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
+				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
+				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
+				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
 
 
 			</div>
 			<div class="col-md-12">
+			<hr>
+			<!--{--
 				<hr>
 				<h3>Otra cosa</h3>
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -78,6 +92,7 @@
 				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 				<hr>
+			--}}-->
 			</div>
 
 

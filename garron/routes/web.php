@@ -17,7 +17,9 @@ Route::get('/locale', 'Garron@chooser');
 
 Route::get('/ITResources', 'ITResources@init')->name('ITResources');
 Route::get('/ITResources/busco/{position}', 'ITResources@search')->name('ITResources.search');
-Route::get('/ITResources/soy/{position}', 'ITResources@offer')->name('ITResources.Iam');
+Route::get('/ITResources/soy/{position}', 'ITResources@offer')
+					->name('ITResources.Iam')
+					->middleware('auth');
 Route::get('/ITResources/empleos/{position}', 'ITResources@jobs')->name('ITResources.jobs');
 Route::get('/ITResources/posicion/{position}', 'ITResources@position')->name('ITResources.position');
 
@@ -29,3 +31,7 @@ Route::get('/welcome', function () {
 });
 
 
+
+Auth::routes();
+
+Route::get('/home', 'ITResources@init')->name('ITResources');

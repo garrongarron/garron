@@ -11,13 +11,13 @@
       <div class="modal-body">
         <div style="max-height: 300px; overflow-y: scroll;">
           <ul>
-            <li>Postularme como <a class="result-job-offer" href="{{ route('ITResources.Iam', ['position'=>'dba'])}}">Resultado</a></li>
+            <li>Postularme como <a class="result-job-offer" href="{{ route('ITResources.Iam', ['position'=>'it-profesional'])}}">_Texto a reemplazar__</a></li>
           </ul>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" onclick="window.location.href = '{{ route('ITResources.Iam', ['position'=>'it-profesional'])}}'">Save changes</button>
       </div>
     </div>
   </div>

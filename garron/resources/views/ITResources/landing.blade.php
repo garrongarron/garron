@@ -36,12 +36,12 @@
 				@foreach ($positions as $key => $position)
 				<li><a href="{{ route('ITResources.jobs', ['position' => $key]) }}">{{ $position }}</a></li>
 				@endforeach
-				<li><input type="text" placeholder="Soy Full Stack Developer" name="search-job">
+				<li><input type="text" placeholder="Analista Funcional" name="search-job">
 				@include('ITResources.modalButton', ['class' => 'search-job'])
 				</li>
 			</ul>
 		</div>
-		
+		<!-- {{-- 
 		<div class="col-md-3">
 			<h2>Salarios</h2>
 			<ul>
@@ -93,6 +93,7 @@
 				<li><a href="#">Migraciones de servidores</a></li>
 			</ul>
 		</div>
+	--}}-->
 
 		<div class="col-md-12">
 			<hr>
