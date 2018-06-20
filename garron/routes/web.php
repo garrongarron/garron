@@ -17,6 +17,9 @@ Route::get('/locale', 'Garron@chooser');
 
 Route::get('/ITResources', 'ITResources@init')->name('ITResources');
 Route::get('/ITResources/busco/{position}', 'ITResources@search')->name('ITResources.search');
+Route::get('/ITResources/soy/{position}/{slug}', 'ITResources@offer')
+					->name('ITResources.Iam2')
+					->middleware('auth');
 Route::get('/ITResources/soy/{position}', 'ITResources@offer')
 					->name('ITResources.Iam')
 					->middleware('auth');

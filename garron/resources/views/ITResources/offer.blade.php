@@ -4,11 +4,6 @@
 
  @include('ITResources.header')
 
-@guest
-	@include('ITResources.auth.nav')
-@else
-	@include('ITResources.auth.nav')
-@endguest
 
 @if($edit == '1')
 	@include('ITResources.widget.offer-modal', ['position' =>  $position ])
@@ -35,18 +30,18 @@
 
 			<div class="col-md-6" style="margin-top: 80px; ">
 				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-				style="position: absolute; top: 0px; right: 20px; margin-top: -50px;">
-				<i class="fa fa-edit"></i>
-				</button>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+					style="position: absolute; top: 0px; right: 20px; margin-top: -50px;">
+					<i class="fa fa-edit"></i>
+					</button>
 				
-				<h2>Nombre Aprellido</h2>
-				
-				<h3>{{ $position }}</h3>
-				<p class="description">
-					Mis tareas consisten en... <br>Mi funcion es ...
-				</p>
-				
+					<h2>{{ $user->name or 'Nombre Aprellido' }}</h2>
+					
+					<h3>{{ $position }}</h3>
+					<p class="description">
+						{{ $user->description or 'Mis tareas consisten en... Mi funcion es ...'}}
+					</p>
+					
 
 
 			</div>

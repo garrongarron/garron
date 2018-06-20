@@ -58,19 +58,29 @@ class ITResources extends Controller
     }
 
     public function search($position){
+        $employees = DB::table('users')->where('role', '=', 'employee')->get();
         return view('ITResources.search', [
             'position'=>$this->positions[$position],
-            'positions' => $this->positions]);
+            'positions' => $this->positions,
+            'employees' => $employees]);
     }
 
-    public function offer($position){
+    public function offer($position, $slug = null){
 
         $apply = request()->input('apply');
-        
+
+        if($slug!==null){
+            $user = $employees = DB::table('users')->where('slug', '=', $slug)->get();
+            return view('ITResources.offer', [
+                'position'=>$this->positions[$position],
+                'positions' => $this->positions,
+                'edit'=> $apply,
+                'user'=> $user[0]]);
+        }
         return view('ITResources.offer', [
-            'position'=>$this->positions[$position],
-            'positions' => $this->positions,
-            'edit'=> $apply]);
+                'position'=>$this->positions[$position],
+                'positions' => $this->positions,
+                'edit'=> $apply]);
     }
     
     public function salary($position){
