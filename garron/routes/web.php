@@ -20,14 +20,21 @@ Route::get('/ITResources/busco/{position}', 'ITResources@search')->name('ITResou
 Route::get('/ITResources/soy/{position}/{slug}', 'ITResources@offer')
 					->name('ITResources.Iam2')
 					->middleware('auth');
-Route::get('/ITResources/soy/{position}', 'ITResources@offer')
+Route::get('/ITResources/soy', 'ITResources@offer')
 					->name('ITResources.Iam')
 					->middleware('auth');
+
+Route::get('/ITResources/update', 'ITResources@update')
+					->name('ITResources.update')
+					->middleware('auth');
+
 Route::get('/ITResources/empleos/{position}', 'ITResources@jobs')->name('ITResources.jobs');
 Route::get('/ITResources/posicion/{position}', 'ITResources@position')->name('ITResources.position');
 
 Route::get('/ITResources/salario/{position}', 'ITResources@salary')->name('ITResources.salary');
 Route::get('/ITResources/tareas/{position}', 'ITResources@salary')->name('ITResources.tasks');
+
+Route::get('/ITResources/tablero', 'ITResources@board')->name('ITResources.board');
 
 Route::get('/welcome', function () {
     return view('welcome');
