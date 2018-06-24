@@ -13,9 +13,9 @@ class AddEducation extends Migration
      */
     public function up()
     {
-        Schema::table('education', function (Blueprint $table) {
+        Schema::create('education', function (Blueprint $table) {
             $table->increments('id');
-            $table->int('user_id');
+            $table->integer('user_id');
             $table->string('school');
             $table->string('degree');
             $table->string('field_of_study');
@@ -35,8 +35,6 @@ class AddEducation extends Migration
      */
     public function down()
     {
-        Schema::table('education', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('education');
     }
 }
