@@ -6,9 +6,21 @@
 
 
 @if($edit == '1')
-	@include('ITResources.widget.offer-modal', ['position' =>  $position ])
+	@include('ITResources.widget.offerModal', [
+		'position' =>  $position,
+		'update' => route('ITResources.update')])
 @endif
- 
+<style type="text/css">
+	.encuadre{
+		border: 1px solid gray;
+		border-radius: 10px;
+		padding: 10px;
+		margin: 10px 0px;
+	}
+	h4, h5{
+		display: inline;
+	}
+</style>
  
 	<div class="container">
 		<div class="row">
@@ -29,55 +41,91 @@
 
 
 			<div class="col-md-6" style="margin-top: 80px; ">
-				<!-- Button trigger modal -->
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-					style="position: absolute; top: 0px; right: 20px; margin-top: -50px;">
-					<i class="fa fa-edit"></i>
-					</button>
-				
-					<h2>{{ $user->name or 'Nombre Aprellido' }}</h2>
+					<!-- Button trigger modal -->
+					<div class="encuadre">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+						style="position: absolute; top: 0px; right: 20px; margin-top: -50px;">
+						<i class="fa fa-edit"></i>
+						</button>
 					
-					<h3>{{ $position }}</h3>
-					<p class="description">
-						{{ $user->description or 'Mis tareas consisten en... Mi funcion es ...'}}
-					</p>
+						<h2>{{ $user->name or 'Nombre Aprellido' }}</h2>
+						
+						<h3>{{ $position }}</h3>
+						<p class="description">
+							{{ $user->description or 'Mis tareas consisten en... Mi funcion es ...'}}
+						</p>
+					</div>
+
 					
-
-
+					@include('ITResources.widget.card')
+					
+					<div class="encuadre">
+						<h4>Experiencia Laboral</h4> <a href="#"><i class="fa fa-plus"></i></a>
+						<ul>
+							<li>
+								<h5>Experiencia Laboral</h5> <a href="#"><i class="fa fa-edit"></i></a>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+								consequat.</p>
+							</li>
+							<li>
+								<h5>Experiencia Laboral</h5> <a href="#"><i class="fa fa-edit"></i></a>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+								consequat.</p>
+							</li>
+						</ul>
+					</div>
+					<div class="encuadre">
+						<h4>Estudios</h4> <a href="#"><i class="fa fa-plus"></i></a>
+						<ul>
+							<li>
+								<h5>Estudios </h5> <a href="#"><i class="fa fa-edit"></i></a>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+								consequat.</p>
+							</li>
+							<li>
+								<h5>Estudios</h5> <a href="#"><i class="fa fa-edit"></i></a>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+								consequat.</p>
+							</li>
+						</ul>
+					</div>
 			</div>
 
-
-			<div class="col-md-6" style="margin-top: -150px; padding-top: 20px; padding-bottom: 40px;">
-				@include('ITResources.widget.card')
-			</div>
 
 
 			<div class="col-md-6" >
-
-				<div class="form-group">
-					<!--<label for="tags">Etiquetas</label>-->
-					<input class="form-control" type="text" name="tags" placeholder="Habilidades">
-				</div>
-
-				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
-				<span class="badge badge-success">Habilidad Específica <a href="#">x</a></span>
-
-
+				<input class="form-control" list="browsers" type="text" name="tags" placeholder="Habilidades">
+					<datalist id="browsers">
+						<option value="Internet Explorer">
+						<option value="Firefox">
+						<option value="Chrome">
+						<option value="Opera">
+						<option value="Safari">
+					</datalist>
+					<script type="text/javascript">
+						(function(window, document){
+							var $ = jQuery;
+							$('input[name=tags]').keypress(function( event ) {
+							  if ( event.which == 13 ) {
+							     $('.tags').prepend('<span class="badge badge-success">'+$(this).val()+'<a href="#">x</a></span>');
+							     $(this).val('')
+							  }
+							});
+						})(window, document)
+					</script>
+				<div class="tags"></div>
 			</div>
-			<div class="col-md-12">
-			<hr>
-			<!--{--
+			{{--<!--<div class="col-md-12">
+				<hr>
+
 				<hr>
 				<h3>Otra cosa</h3>
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -87,12 +135,11 @@
 				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 				<hr>
-			--}}-->
 			</div>
 
 
 
-		<!--
+		
 			<p>Aquí las mejores empresas buscan a los mejores recursos. Oportunidades de mejora.</p>
 			<div class="col-md-12">
 				<hr>
@@ -104,8 +151,8 @@
 					<li>{{ $position }}</li>
 					<li>{{ $position }}</li>
 				</ul>
-			</div>
-		-->
+			</div>-->--}}
+		
 
 		</div>
 	</div>

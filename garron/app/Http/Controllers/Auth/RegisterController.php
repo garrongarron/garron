@@ -63,6 +63,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if(isset($data['phone'])){
+            $this->redirectTo = route('ITResources.Iam');
+        }
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

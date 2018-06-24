@@ -4,9 +4,25 @@
 
  @include('ITResources.header')
 
+@guest
+	<?php $guest = true; ?>
+	@include('ITResources.widget.firstApplication', [
+		'position' =>  $position,
+		'update' => route('ITResources.update')])
+@endguest
 <div class="container">
 	<div class="row">
 		<div class="col-md-12" style="margin: 20px 0px;">
+			@if ($errors->any())
+			    <div class="alert alert-danger">
+			        <ul>
+			            @foreach ($errors->all() as $error)
+			                <li>{{ $error }}</li>
+			            @endforeach
+			        </ul>
+			    </div>
+			@endif
+			
 			<div class="row">
 				<div class="col-md-8">
 					<h2>{{ $position }}</h2>
@@ -23,7 +39,7 @@
 							<td>Salario</td><td>No especificado</td>
 						</tr>
 						<tr>
-							<td>Luhar</td><td>CABA</td>
+							<td>Lugar</td><td>CABA</td>
 						</tr>
 					</table>
 				</div>
@@ -34,10 +50,14 @@
 				</div>
 			</div>
 			<hr>
-			<a target="_blank" class="btn btn-success" href="{{ route('ITResources.Iam', [
+			{{-- <!--<a target="_blank" class="btn btn-success" href="{{ route('ITResources.Iam', [
 			'position'=>str_slug($position),
 			'apply'=>true,
-			])}}">Enviar CV</a>
+			])}}">Enviar CV</a>--> --}}
+
+
+			<input type="button" class="btn btn-success" value="Enviar CV" name="" data-toggle="modal" data-target="#exampleModal">
+			
 			<br>
 			
 			<b>Descripción</b>
@@ -52,7 +72,7 @@
 			<b>Se ofrece</b>
 			<p>Flexibilidad horaria y beneficios corporativos, tales como clases de inglés, reconocimiento al desempeño plan de carrera.</p>
 
-			<a target="_blank" class="btn btn-success" href="{{ route('ITResources.Iam', ['position'=>str_slug($position)])}}">Enviar CV</a>
+			<input type="button" class="btn btn-success" value="Enviar CV" name="" data-toggle="modal" data-target="#exampleModal">
 		</div>
 	</div>
 </div>

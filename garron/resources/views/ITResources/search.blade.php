@@ -21,7 +21,7 @@
 								</div>
 							</div>
 							<div class="col-md-9">
-								<h2><a href="{{ route('ITResources.Iam2', [
+								<h2><a target="_blank" href="{{ route('ITResources.Iam2', [
 									'position' => str_slug($position),
 									'slug' => $employee->slug
 									]) }}">{{ $employee->name }}</a></h2>

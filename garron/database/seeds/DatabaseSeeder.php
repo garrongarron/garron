@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
         
-        foreach (range(1,5) as $index) {
+        /*foreach (range(1,5) as $index) {
             DB::table('users')->insert([
                 'name' => $faker->name,
                 'email' => $faker->email,
@@ -43,6 +43,6 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt('secret'),
                 'slug' => str_slug($faker->name),
             ]);
-        }
+        }*/
     }
 }

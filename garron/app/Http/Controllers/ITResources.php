@@ -44,6 +44,17 @@ class ITResources extends Controller
     	return view('main.body');
     }
 
+    public function board(){
+        return view('ITResources.board');
+    }
+
+    public function update(Request $request){
+        $user = auth()->user();
+        $user->description = request()->description;
+       // $user->phone = request()->phone;
+        $user->save();
+        return redirect()->back();
+    }
 
     public function jobs($position){
         return view('ITResources.jobs',[
@@ -65,7 +76,7 @@ class ITResources extends Controller
             'employees' => $employees]);
     }
 
-    public function offer($position, $slug = null){
+    public function offer($position = 'it-profesional', $slug = null){
 
         $apply = request()->input('apply');
 
@@ -77,10 +88,12 @@ class ITResources extends Controller
                 'edit'=> $apply,
                 'user'=> $user[0]]);
         }
+        
         return view('ITResources.offer', [
                 'position'=>$this->positions[$position],
                 'positions' => $this->positions,
-                'edit'=> $apply]);
+                'edit'=> $apply,
+                'user'=> auth()->user()]);
     }
     
     public function salary($position){
