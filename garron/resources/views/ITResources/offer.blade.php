@@ -21,7 +21,12 @@
 		display: inline;
 	}
 </style>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
  
+ @include('ITResources.widget.experienceForm')
+ @include('ITResources.widget.studyForm')
+
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12" style="background: silver; height: 150px;">
@@ -60,7 +65,7 @@
 					@include('ITResources.widget.card')
 					
 					<div class="encuadre">
-						<h4>Experiencia Laboral</h4> <a href="#"><i class="fa fa-plus"></i></a>
+						<h4>Experiencia Laboral</h4> <a href="#" class="addExperience"><i class="fa fa-plus"></i></a>
 						<ul>
 							<li>
 								<h5>Experiencia Laboral</h5> <a href="#"><i class="fa fa-edit"></i></a>
@@ -79,7 +84,7 @@
 						</ul>
 					</div>
 					<div class="encuadre">
-						<h4>Estudios</h4> <a href="#"><i class="fa fa-plus"></i></a>
+						<h4>Estudios</h4> <a href="#"  class="addStudy"><i class="fa fa-plus"></i></a>
 						<ul>
 							<li>
 								<h5>Estudios </h5> <a href="#"><i class="fa fa-edit"></i></a>
@@ -118,6 +123,14 @@
 							     $('.tags').prepend('<span class="badge badge-success">'+$(this).val()+'<a href="#">x</a></span>');
 							     $(this).val('')
 							  }
+							});
+							$('.addExperience').on('click', function(){
+								$('#experience').modal('show');
+								return false;
+							});
+							$('.addStudy').on('click', function(){
+								$('#study').modal('show');
+								return false;
 							});
 						})(window, document)
 					</script>

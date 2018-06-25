@@ -19,6 +19,7 @@ class AddEducation extends Migration
             $table->string('school');
             $table->string('degree');
             $table->string('field_of_study');
+            $table->string('grade');
             $table->string('activities');
             $table->date('from');
             $table->date('to');

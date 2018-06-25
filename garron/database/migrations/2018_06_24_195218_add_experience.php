@@ -20,6 +20,7 @@ class AddExperience extends Migration
             $table->string('company');
             $table->date('from');
             $table->date('to');
+            $table->string('industry');
             $table->string('headline');
             $table->string('description');
             $table->enum('status',['enable', 'disable', 'deleted']);
