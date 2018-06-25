@@ -16,14 +16,14 @@ class AddEducation extends Migration
         Schema::create('education', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->string('school');
-            $table->string('degree');
-            $table->string('field_of_study');
-            $table->string('grade');
-            $table->string('activities');
-            $table->date('from');
-            $table->date('to');
-            $table->string('description');
+            $table->string('school')->nullable();
+            $table->string('degree')->nullable();
+            $table->string('field_of_study')->nullable();
+            $table->string('grade')->nullable();
+            $table->string('activities')->nullable();
+            $table->date('from')->nullable();
+            $table->date('to')->nullable();
+            $table->string('description')->nullable();
             $table->enum('status',['enable', 'disable', 'deleted']);
             $table->timestamps();
         });

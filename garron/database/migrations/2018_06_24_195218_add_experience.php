@@ -16,13 +16,13 @@ class AddExperience extends Migration
         Schema::create('experience', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->string('title');
-            $table->string('company');
-            $table->date('from');
-            $table->date('to');
-            $table->string('industry');
-            $table->string('headline');
-            $table->string('description');
+            $table->string('title')->nullable();
+            $table->string('company')->nullable();
+            $table->date('from')->nullable();
+            $table->date('to')->nullable();
+            $table->string('industry')->nullable();
+            $table->string('headline')->nullable();
+            $table->string('description')->nullable();
             $table->enum('status',['enable', 'disable', 'deleted']);
             $table->timestamps();
         });
