@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Experience;
+use Auth;
 
 class ExperienceController extends Controller
 {
@@ -13,7 +15,12 @@ class ExperienceController extends Controller
      */
     public function index()
     {
-        //
+        $experience = new Experience();
+        $user = auth()->user();
+        
+        $experience->user_id = $user->id;
+        $experience->save();
+        dd(Experience::all());
     }
 
     /**

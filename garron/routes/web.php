@@ -40,7 +40,8 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-
+Route::resource('experience','ExperienceController');
+Route::resource('education','EducationController');
 
 Auth::routes();
 

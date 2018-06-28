@@ -9,75 +9,50 @@
 				</button>
 
 			</div>
+			{{ Form::open(array('url' => 'experience')) }}
 			<div class="modal-body">
-				<form method="POST" action="{{ route('register') }}">
-				{{ csrf_field() }}
-				{{--<!-- 
-            $table->string('title');
-            $table->string('company');
-            $table->date('from');
-            $table->date('to');
-            $table->string('headline');
-            $table->string('description');
-				-->--}}
-					<div class="form-group">
-						<label for="name" class="col-2 col-form-label" >Cargo</label>
+				<div class="form-group">
+					{{ Form::label('title', 'Cargo') }}
+					{{ Form::text('title', Input::old('title'), array('class' => 'form-control')) }}
+				</div>
+				<div class="form-group">
+					{{ Form::label('company', 'Empresa') }}
+					{{ Form::text('company', Input::old('company'), array('class' => 'form-control')) }}
+				</div>
+				<div class="form-group">
+					{{ Form::label('location', 'Ubicación') }}
+					{{ Form::text('location', Input::old('location'), array('class' => 'form-control')) }}
+				</div>
+				<div class="form-group">
+					{{ Form::label('from', 'Desde') }}
+					{{ Form::text('from', Input::old('from'), array('class' => 'form-control', 'id'=>'from')) }}
+				</div>
+				<div class="form-group">
+					{{ Form::label('to', 'Hasta') }}
+					{{ Form::text('to', Input::old('to'), array('class' => 'form-control', 'id'=>'to')) }}
 
-							<input class="form-control" type="text" name="title" placeholder="P. ej. Gerente" tabindex="1">
+				</div>
+				<div class="form-group">
+					{{ Form::label('industry', 'Sector') }}
+					{{ Form::select('industry', ['2018'=>'2018','2017'=>'2017','2016'=>'2016'],
+					null,
+					array('class' => 'form-control')) }}
+				</div>
+				<div class="form-group">
+					{{ Form::label('headline', 'Titular') }}
+					{{ Form::text('headline', Input::old('headline'), array('class' => 'form-control')) }}
+				</div>
 
-					</div>
-					<div class="form-group">
-						<label for="name" class="col-2 col-form-label" >Empresa</label>
-
-							<input class="form-control" type="text" name="company" placeholder="P. ej. Google" tabindex="1">
-
-					</div>
-					<div class="form-group">
-						<label for="name" class="col-2 col-form-label" >Ubicación</label>
-
-							<input class="form-control" type="text" name="location" placeholder="P. ej. Buenos Aires, Argentina" tabindex="1">
-
-					</div>
-					<div class="form-group">
-						<label for="name" class="col-2 col-form-label" >Desde</label>
-
-							<input class="form-control" type="text" id="from" name="from" placeholder="P. ej. x" tabindex="1">
-
-					</div>
-					<div class="form-group">
-						<label for="name" class="col-2 col-form-label" >Hasta</label>
-
-							<input class="form-control" type="text" id="to" name="to" placeholder="P. ej. x" tabindex="1">
-
-					</div>
-					<div class="form-group">
-						<label for="name" class="col-2 col-form-label" >Sector</label>
-							<select class="form-control" name="industry">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-							</select>
-					</div>
-					<div class="form-group">
-						<label for="name" class="col-2 col-form-label" >Titular</label>
-
-							<input class="form-control" type="text" name="headline" placeholder="P. ej. Co-Founder" tabindex="1">
-
-					</div>
-
-					<div class="form-group">
-						<label for="name" class="col-2 col-form-label" >Descripción</label>
-							<textarea  class="form-control" name="description" tabindex="1"></textarea>
-
-					</div>
-
-				</form>
+				<div class="form-group">
+					{{ Form::label('description', 'Descripción') }}
+					{{ Form::textarea('description', Input::old('description'), array('class' => 'form-control','size'=>'2x2')) }}
+				</div>
 			</div>
 			<div class="modal-footer">
-					<button type="submit" class="btn btn-secondary" tabindex="6">Enviar CV</button>
-					<button type="button" class="btn btn-primary apply-line"  tabindex="4">Crear CV y Ususario (recomendado)</button>
+				{{ Form::submit('Create the Nerd!', array('class' => 'btn btn-primary')) }}
+					
 			</div>
+			{{ Form::close() }}
 		</div>
 	</div>
 </div>

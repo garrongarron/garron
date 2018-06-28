@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
  
  @include('ITResources.widget.experienceForm')
- @include('ITResources.widget.studyForm')
+ @include('ITResources.widget.educationForm')
 
 	<div class="container">
 		<div class="row">
@@ -129,7 +129,7 @@
 								return false;
 							});
 							$('.addStudy').on('click', function(){
-								$('#study').modal('show');
+								$('#education').modal('show');
 								return false;
 							});
 						})(window, document)
