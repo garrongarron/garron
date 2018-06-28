@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
-
+use App\Experience;
 
 class ITResources extends Controller
 {
@@ -79,6 +79,9 @@ class ITResources extends Controller
     public function offer($position = 'it-profesional', $slug = null){
 
         $apply = request()->input('apply');
+        $experience = Experience::where('user_id' , auth()->user()->id )->get();
+        //$experience = Experience::all();
+        //dd($experience);
 
         if($slug!==null){
             $user = $employees = DB::table('users')->where('slug', '=', $slug)->get();
@@ -86,14 +89,17 @@ class ITResources extends Controller
                 'position'=>$this->positions[$position],
                 'positions' => $this->positions,
                 'edit'=> $apply,
-                'user'=> $user[0]]);
+                'user'=> $user[0],
+                'experience'=>$experience]);
         }
+
         
         return view('ITResources.offer', [
                 'position'=>$this->positions[$position],
                 'positions' => $this->positions,
                 'edit'=> $apply,
-                'user'=> auth()->user()]);
+                'user'=> auth()->user(),
+                'experience'=>$experience]);
     }
     
     public function salary($position){

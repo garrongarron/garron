@@ -7,7 +7,6 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close" tabindex="8">
 				  <span aria-hidden="true">&times;</span>
 				</button>
-
 			</div>
 			{{ Form::open(array('url' => 'education')) }}
 			<div class="modal-body">

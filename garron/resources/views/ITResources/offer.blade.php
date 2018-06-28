@@ -67,20 +67,15 @@
 					<div class="encuadre">
 						<h4>Experiencia Laboral</h4> <a href="#" class="addExperience"><i class="fa fa-plus"></i></a>
 						<ul>
+							
+							@foreach($experience as $value)
 							<li>
-								<h5>Experiencia Laboral</h5> <a href="#"><i class="fa fa-edit"></i></a>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-								consequat.</p>
+
+								<h5>{{ $value->title }}</h5> <a href="#"><i class="fa fa-edit"></i></a> en {{ $value->company }}
+								<p><b>{{ $value->headline }}</b>: {{ $value->description }}</p>
 							</li>
-							<li>
-								<h5>Experiencia Laboral</h5> <a href="#"><i class="fa fa-edit"></i></a>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-								consequat.</p>
-							</li>
+							@endforeach
+
 						</ul>
 					</div>
 					<div class="encuadre">
@@ -107,6 +102,20 @@
 
 
 			<div class="col-md-6" >
+				@if ($errors->any())
+				<div>
+				    <div class="alert alert-danger">
+				        <ul>
+				            @foreach ($errors->all() as $error)
+				                <li>{{ $error }}</li>
+				            @endforeach
+				        </ul>
+				    </div>
+				</div>
+				@endif
+				@if(Session::has('message'))
+					<p class="alert alert-success">{{ Session::get('message') }}</p>
+				@endif
 				<input class="form-control" list="browsers" type="text" name="tags" placeholder="Habilidades">
 					<datalist id="browsers">
 						<option value="Internet Explorer">

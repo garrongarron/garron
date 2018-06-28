@@ -18,6 +18,7 @@ class AddExperience extends Migration
             $table->integer('user_id');
             $table->string('title')->nullable();
             $table->string('company')->nullable();
+            $table->string('location')->nullable();
             $table->date('from')->nullable();
             $table->date('to')->nullable();
             $table->string('industry')->nullable();
