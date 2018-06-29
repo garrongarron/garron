@@ -11,7 +11,7 @@
 			{{ Form::open(array('url' => 'education')) }}
 			<div class="modal-body">
 				<div class="form-group">
-					{{ Form::label('school', 'Name') }}
+					{{ Form::label('school', 'Escuela') }}
 					{{ Form::text('school', Input::old('school'), array('class' => 'form-control')) }}
 				</div>
 				<div class="form-group">
@@ -32,11 +32,15 @@
 				</div>
 				<div class="form-group">
 					{{ Form::label('from', 'Desde') }}
-					{{ Form::select('from', ['2018'=>'2018','2017'=>'2017','2016'=>'2016'], array('class' => 'form-control')) }}
+					{{ Form::select('from', ['2018'=>'2018','2017'=>'2017','2016'=>'2016'], 
+					null,
+					array('class' => 'form-control')) }}
 				</div>
 				<div class="form-group">
 					{{ Form::label('to', 'Hasta') }}
-					{{ Form::select('to', ['2018'=>'2018','2017'=>'2017','2016'=>'2016'], array('class' => 'form-control')) }}
+					{{ Form::select('to', ['2018'=>'2018','2017'=>'2017','2016'=>'2016'],
+					null,
+					array('class' => 'form-control')) }}
 				</div>
 				<div class="form-group">
 					{{ Form::label('description', 'Descripción') }}
@@ -44,7 +48,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-					{{ Form::submit('Create the Nerd!', array('class' => 'btn btn-primary')) }}
+					{{ Form::submit('Enviar!', array('class' => 'btn btn-primary')) }}
 			</div>
 			{{ Form::close() }}
 		</div>

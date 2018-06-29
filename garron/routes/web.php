@@ -30,6 +30,7 @@ Route::get('/ITResources/update', 'ITResources@update')
 
 Route::get('/ITResources/empleos/{position}', 'ITResources@jobs')->name('ITResources.jobs');
 Route::get('/ITResources/posicion/{position}', 'ITResources@position')->name('ITResources.position');
+Route::get('/ITResources/skills', 'ITResources@saveSkill');
 
 Route::get('/ITResources/salario/{position}', 'ITResources@salary')->name('ITResources.salary');
 Route::get('/ITResources/tareas/{position}', 'ITResources@salary')->name('ITResources.tasks');

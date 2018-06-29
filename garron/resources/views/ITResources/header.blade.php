@@ -38,7 +38,7 @@
 
 							<div class="collapse navbar-collapse">
 								<ul id="menu-top-menu" class="nav navbar-nav">
-<li class="menu-item menu-item-type-custom menu-item-object-custom"><a title="{{ trans('home.home') }}" href="#header">{{ trans('home.home') }}</a></li>
+<!--<li class="menu-item menu-item-type-custom menu-item-object-custom"><a title="{{ trans('home.home') }}" href="#header">{{ trans('home.home') }}</a></li>-->
 		 						<!-- Authentication Links -->
 		                        @guest
 		                            <li><a href="{{ route('login') }}">Login</a></li>
@@ -75,9 +75,9 @@
 
 
 						<!-- Search Form -->
-						<ul class="search">
+						<!--<ul class="search">
 							<li><a href="#header"><i class="fa fa-search"></i></a></li>
-						</ul>
+						</ul>-->
 						<div class="search-form">
 							<form class="form" 
 								action="https://demo.samuraithemes.com/agency-x/" method="get" id="searchform" role="search">

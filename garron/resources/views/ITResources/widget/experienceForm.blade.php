@@ -21,7 +21,8 @@
 				</div>
 				<div class="form-group">
 					{{ Form::label('location', 'Ubicación') }}
-					{{ Form::text('location', Input::old('location'), array('class' => 'form-control')) }}
+					{{ Form::text('location', 'Argentina'
+					, array('class' => 'form-control')) }}
 				</div>
 				<div class="form-group">
 					{{ Form::label('from', 'Desde') }}
@@ -49,7 +50,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				{{ Form::submit('Create the Nerd!', array('class' => 'btn btn-primary')) }}
+				{{ Form::submit('Enviar!', array('class' => 'btn btn-primary')) }}
 					
 			</div>
 			{{ Form::close() }}
@@ -64,6 +65,6 @@
 	});
 	$('#experience #from').datepicker();
 	$('#experience  #to').datepicker();
-	$('#experience #from, #experience  #to, #experience #industry').attr('disabled', 'disabled');
+	$('#experience #industry').attr('disabled', 'disabled');
 })(window,document);
 </script>

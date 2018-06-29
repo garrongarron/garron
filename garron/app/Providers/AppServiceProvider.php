@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Lang;
+use Carbon\Carbon;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,7 +19,8 @@ class AppServiceProvider extends ServiceProvider
         if(empty(session('locale'))){
             session(['locale' => Lang::locale()]);
         }
-        Lang::setLocale(session('locale'));   
+        Lang::setLocale(session('locale')); 
+        Carbon::setLocale(session('locale'));
     }
 
     /**

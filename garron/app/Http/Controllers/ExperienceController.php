@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 
 class ExperienceController extends Controller
 {
@@ -65,8 +66,8 @@ class ExperienceController extends Controller
             $experience->title       = Input::get('title');
             $experience->company       = Input::get('company');
             $experience->location       = Input::get('location');
-            //$experience->from       = Input::get('from');
-            //$experience->to       = Input::get('to');
+            $experience->from       = Carbon::parse(Input::get('from'));
+            $experience->to       = Carbon::parse(Input::get('to'));
             $experience->industry       = Input::get('industry');
             $experience->headline       = Input::get('headline');
             $experience->description       = Input::get('description');

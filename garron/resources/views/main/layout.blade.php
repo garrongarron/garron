@@ -10,7 +10,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Meta tag google site verification-->    
         <meta name="google-site-verification" content="_j9Odvd7R5lCOb7_w48wcP3yy-2z2vQIQ8FOnrxOZ50" />
-        <link rel="shortcut icon" type="image/png" href="/favicon.png"/>	
+        <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+        <meta name="csrf-token" content="{{ csrf_token() }}">	
 	<title>Garron Consulting Group</title>
 		
 		<style type="text/css">

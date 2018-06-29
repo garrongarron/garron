@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
 use App\Experience;
+use App\Education;
+use App\UserSkill;
+use App\Skill;
+
 
 class ITResources extends Controller
 {
@@ -56,6 +60,33 @@ class ITResources extends Controller
         return redirect()->back();
     }
 
+    public function saveSkill(Request $request){
+        $user = auth()->user();
+        $skill = $this->getSkill($request->input('tags'));
+        $conditions = ['user_id'=>$user->id, 'skill_id'=>$skill->id];
+        $userSkill = UserSkill::where($conditions)->get();
+        if($userSkill->isEmpty()){
+            $newUserSkill = new UserSkill();   
+            $newUserSkill->user_id = $user->id;
+            $newUserSkill->skill_id = $skill->id;
+            $newUserSkill->save();
+        }
+        return $skill->name;
+    }
+
+    private function getSkill($skillName){
+        $slug = str_slug($skillName);
+        $skill = Skill::where('slug' ,$slug )->first();
+        if(empty($skill)){
+            $newSkill = new Skill();
+            $newSkill->name = $skillName;
+            $newSkill->slug = $slug;
+            $newSkill->save();
+            return $newSkill;
+        }
+        return $skill;
+    }
+
     public function jobs($position){
         return view('ITResources.jobs',[
             'position'=>$this->positions[$position],
@@ -77,9 +108,15 @@ class ITResources extends Controller
     }
 
     public function offer($position = 'it-profesional', $slug = null){
-
         $apply = request()->input('apply');
-        $experience = Experience::where('user_id' , auth()->user()->id )->get();
+        $userId = auth()->user()->id;
+        $experience = Experience::where('user_id' , $userId)->get();
+        $education = Education::where('user_id' , $userId)->get();
+        //$userSkills = UserSkill::where('user_id' , $userId)->get();
+        $userSkills = DB::table('skills')
+                ->join('user_skill', 'skills.id', '=', 'user_skill.skill_id')
+                ->select('skills.*') 
+                ->where('user_skill.user_id', '=', $userId)->get();
         //$experience = Experience::all();
         //dd($experience);
 
@@ -90,7 +127,9 @@ class ITResources extends Controller
                 'positions' => $this->positions,
                 'edit'=> $apply,
                 'user'=> $user[0],
-                'experience'=>$experience]);
+                'experience'=>$experience,
+                'education'=>$education,
+                'userSkills'=>$userSkills]);
         }
 
         
@@ -99,7 +138,9 @@ class ITResources extends Controller
                 'positions' => $this->positions,
                 'edit'=> $apply,
                 'user'=> auth()->user(),
-                'experience'=>$experience]);
+                'experience'=>$experience,
+                'education'=>$education,
+                'userSkills'=>$userSkills]);
     }
     
     public function salary($position){
