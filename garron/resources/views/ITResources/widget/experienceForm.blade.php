@@ -21,8 +21,9 @@
 				</div>
 				<div class="form-group">
 					{{ Form::label('location', 'Ubicación') }}
-					{{ Form::text('location', 'Argentina'
-					, array('class' => 'form-control')) }}
+					{{ Form::select('location', $country,
+					null,
+					array('class' => 'form-control')) }}
 				</div>
 				<div class="form-group">
 					{{ Form::label('from', 'Desde') }}
@@ -35,7 +36,7 @@
 				</div>
 				<div class="form-group">
 					{{ Form::label('industry', 'Sector') }}
-					{{ Form::select('industry', ['2018'=>'2018','2017'=>'2017','2016'=>'2016'],
+					{{ Form::select('industry', $sectores,
 					null,
 					array('class' => 'form-control')) }}
 				</div>
@@ -65,6 +66,6 @@
 	});
 	$('#experience #from').datepicker();
 	$('#experience  #to').datepicker();
-	$('#experience #industry').attr('disabled', 'disabled');
+	//$('#experience #industry').attr('disabled', 'disabled');
 })(window,document);
 </script>

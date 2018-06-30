@@ -112,13 +112,22 @@ class ITResources extends Controller
         $userId = auth()->user()->id;
         $experience = Experience::where('user_id' , $userId)->get();
         $education = Education::where('user_id' , $userId)->get();
-        //$userSkills = UserSkill::where('user_id' , $userId)->get();
         $userSkills = DB::table('skills')
                 ->join('user_skill', 'skills.id', '=', 'user_skill.skill_id')
                 ->select('skills.*') 
                 ->where('user_skill.user_id', '=', $userId)->get();
-        //$experience = Experience::all();
-        //dd($experience);
+        $sectoresTmp = DB::table('industry')->select('id', 'description_es')->get();
+        $sectores = [];
+        $sectores[''] = 'Escoge un sector…';
+        foreach($sectoresTmp as $value){
+                $sectores[$value->id] = $value->description_es;
+        }
+        $countryTmp = DB::table('country')->select('code', 'name')->get();
+        $country = [];
+        foreach($countryTmp as $value){
+                $country[$value->code] = $value->name;
+        }
+
 
         if($slug!==null){
             $user = $employees = DB::table('users')->where('slug', '=', $slug)->get();
@@ -129,6 +138,8 @@ class ITResources extends Controller
                 'user'=> $user[0],
                 'experience'=>$experience,
                 'education'=>$education,
+                'sectores'=>$sectores,
+                'country'=>$country,
                 'userSkills'=>$userSkills]);
         }
 
@@ -138,6 +149,8 @@ class ITResources extends Controller
                 'positions' => $this->positions,
                 'edit'=> $apply,
                 'user'=> auth()->user(),
+                'sectores'=>$sectores,
+                'country'=>$country,
                 'experience'=>$experience,
                 'education'=>$education,
                 'userSkills'=>$userSkills]);

@@ -12,7 +12,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->call(CountryTableSeeder::class);
+        $this->call(IndustryTableSeeder::class);
         $faker = Faker::create();
         DB::table('users')->insert([
             'name' => 'Fede',
@@ -44,5 +45,9 @@ class DatabaseSeeder extends Seeder
                 'slug' => str_slug($faker->name),
             ]);
         }*/
+        
+
+
+       
     }
 }
