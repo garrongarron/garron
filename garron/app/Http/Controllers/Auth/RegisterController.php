@@ -6,6 +6,9 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Wellcome;
 
 class RegisterController extends Controller
 {
@@ -66,7 +69,8 @@ class RegisterController extends Controller
         if(isset($data['phone'])){
             $this->redirectTo = route('ITResources.Iam');
         }
-        return User::create([
+
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
@@ -74,5 +78,19 @@ class RegisterController extends Controller
             'description' => '',
             'role' => $data['role']
         ]);
+
+        if(isset($data['position'])){
+            DB::table('application')->insert([
+                'position_id'=>$data['position'],
+                'user_id'=>$user->id,
+            ]);
+            session()->flash('message', 'Successfully created Application!');
+        }
+        
+        Mail::to($data['email'],$data['name'])
+            ->send(new Wellcome($data));
+
+        
+        return $user;
     }
 }

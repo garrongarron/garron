@@ -3,7 +3,8 @@
 				@foreach ($positions as $key => $position)
 				<li><a href="{{ route('ITResources.search', ['position' => $key]) }}">{{ $position }}</a></li>
 				@endforeach
-				<!--{{--<li><input type="text" placeholder="Analista Funcional" name="search-resource">
-				@include('ITResources.modal-button')
-				</li>--}}-->
+				<form action="{{ route('ITResources.searchProfesional') }}">
+					<input placeholder="Analista Funcional" class="form-control" type="text" name="s">
+					<input class="btn btn-success form-control" type="submit" value="Buscar">
+				</form>
 			</ul>

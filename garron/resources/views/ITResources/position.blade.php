@@ -2,14 +2,9 @@
 
 @section('content')
 
- @include('ITResources.header')
+@include('ITResources.header')
 
-@guest
-	<?php $guest = true; ?>
-	@include('ITResources.widget.firstApplication', [
-		'position' =>  $position,
-		'update' => route('ITResources.update')])
-@endguest
+@include('ITResources.widget.positionForm', ['industry'=>$industry])
 <div class="container">
 	<div class="row">
 		<div class="col-md-12" style="margin: 20px 0px;">
@@ -22,24 +17,28 @@
 			        </ul>
 			    </div>
 			@endif
+			@if(Session::has('message'))
+					<p class="alert alert-success">{{ Session::get('message') }}</p>
+				@endif
+
 			
 			<div class="row">
 				<div class="col-md-8">
-					<h2>{{ $position }}</h2>
+					<h2>{{ $position->title or 'Position' }}</h2>
 					<table class="table">
 						<tr>
-							<td>Publicado</td><td>Hoy</td>
+							<td>Publicado</td><td>{{ $position->when or 'Hoy' }}</td>
 						</tr>
 						<tr>
-							<td>Area</td><td>Tecnologia</td>
+							<td>Area</td><td>{{ $position->industry or 'Tecnologia' }}</td>
 						</tr>
-							<td>Tipo de puesto</td><td>Full-Time</td>
-						</tr>
-						<tr>
-							<td>Salario</td><td>No especificado</td>
+							<td>Tipo de puesto</td><td>{{ $position->type or 'Full-Time*' }}</td>
 						</tr>
 						<tr>
-							<td>Lugar</td><td>CABA</td>
+							<td>Salario</td><td>{{ $position->salary or 'No especificado*' }}</td>
+						</tr>
+						<tr>
+							<td>Lugar</td><td>{{ $position->location or 'CABA*' }}</td>
 						</tr>
 					</table>
 				</div>
@@ -49,30 +48,39 @@
 					<img src="/img/GarronConsultingGroup.png" style="margin-left: 10%;  margin-bottom: 10px; width: 80%;  background: gray">
 				</div>
 			</div>
-			<hr>
-			{{-- <!--<a target="_blank" class="btn btn-success" href="{{ route('ITResources.Iam', [
-			'position'=>str_slug($position),
-			'apply'=>true,
-			])}}">Enviar CV</a>--> --}}
 
+			@guest
+				@include('ITResources.widget.firstApplication', [
+					'position' =>  $position,
+					'update' => route('ITResources.update')])
+				<input type="button" class="btn btn-success" value="Enviar CV" data-toggle="modal" data-target="#exampleModal">
+			@else
+				@if($applied)
+					<div class="alert alert-danger">CV enviado</div>
+				@else
+					<form method="GET"  action="{{ route('ITResources.apply') }}">
+						<input type="hidden" name="positionid" value={{ $positionId }}>
+						<input type="submit" class="btn btn-primary" value="Enviar CV">
+					</form>
+				@endif
+			@endguest
 
-			<input type="button" class="btn btn-success" value="Enviar CV" name="" data-toggle="modal" data-target="#exampleModal">
 			
 			<br>
 			
 			<b>Descripción</b>
-			<p>En Garron Consulting Group estamos buscando candidatos para la posición de {{ $position }}</p>
+			<p>{{ $position->description or 'CABA*' }}</p>
 			
 			<b>Requisitos Obligatorios</b>
-			<p>El candidato debera contar con experiencia, y expertis en diferentes áreas y con diferentes herramientas que serán evaluadas con nuestro sistema de evaluación online</p>
+			<p>{{ $position->mandatory_requirements or 'CABA*' }}</p>
 			
 			<b>Requisitos Deseables</b>
-			<p>Se valorará la proximidad a las oficinas, flexibilidad para trabajar antes y despues de hora</p>
+			<p>{{ $position->desiderable_requirements or 'CABA*' }}</p>
 
 			<b>Se ofrece</b>
 			<p>Flexibilidad horaria y beneficios corporativos, tales como clases de inglés, reconocimiento al desempeño plan de carrera.</p>
 
-			<input type="button" class="btn btn-success" value="Enviar CV" name="" data-toggle="modal" data-target="#exampleModal">
+			<input type="button" class="btn btn-success" value="Enviar CV" name="" data-toggle="modal" data-target="#positionForm">
 		</div>
 	</div>
 </div>

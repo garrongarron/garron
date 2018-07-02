@@ -29,6 +29,7 @@ input[type="file"] {
 				
 				<form id="first-application" method="POST" action="{{ route('register') }}">
 		        	{{ csrf_field() }}
+		        	<input type="hidden" name="position" value="{{ $position->id }}">
 		        	<input type="hidden" name="password" value="secret">
 		        	<input type="hidden" name="password_confirmation" value="secret">
 		        	<input type="hidden" name="role" value="employee">
@@ -43,19 +44,19 @@ input[type="file"] {
 						</div>
 						<div class="form-group">
 							<label for="position">Posición</label>
-							<input class="form-control" type="text" name="position" placeholder="Posición" value="<?php echo  $position; ?>" disabled="disabled">
+							<input class="form-control" type="text" name="position" placeholder="Posición" value="<?php echo  $position->title; ?>" disabled="disabled">
 						</div>
 						
 						{{--<!--<div class="form-group">
 							<label for="description">Descripción</label> 
 							<textarea class="form-control" name="description" placeholder="Descripción de mis tareas"></textarea>
 						</div>-->--}}
-						<?php if(isset($guest)&&$guest===true): ?>
+						@if(Auth::guest())
 						<div class="form-group">
 							<label for="email">Email</label>
 							<input class="form-control" type="text" name="email" placeholder="nombre.apellido@email.com" style="color:black" tabindex="2">
 						</div>
-						<?php endif ?>
+						@endif
 
 						<div class="form-group">
 							<label for="phone">Teléfono</label>

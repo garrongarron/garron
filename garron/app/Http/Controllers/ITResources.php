@@ -6,10 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Auth;
 use App\Experience;
 use App\Education;
 use App\UserSkill;
+use App\Position;
 use App\Skill;
+use App\User;
 
 
 class ITResources extends Controller
@@ -27,6 +30,8 @@ class ITResources extends Controller
             $var[str_slug($value)] = $value;
         }
         $this->positions = $var;
+
+        
     }
     public function home(){
         Lang::setLocale(session('locale')); 
@@ -54,7 +59,8 @@ class ITResources extends Controller
 
     public function update(Request $request){
         $user = auth()->user();
-        $user->description = request()->description;
+        $user->name = request()->name;
+        //$user->description = request()->description;
        // $user->phone = request()->phone;
         $user->save();
         return redirect()->back();
@@ -87,66 +93,153 @@ class ITResources extends Controller
         return $skill;
     }
 
-    public function jobs($position){
+    public function jobs($position =null, Request $request){
+        if($position==null){
+            $position = request()->input('s');
+            if(empty($position)){
+                $position = session('itSearch');
+            } else {
+                session(['itSearch' =>$position]);
+            }
+            $jobs = Position::where('title_slug','LIKE','%'.str_slug($position).'%')->paginate(4);
+        } else {
+            $title = $position;
+            $jobs = Position::where('title_slug', $title)->paginate(4);
+            $position = $this->positions[$position];
+        }
+        $paginatorLink = $jobs->links();
+
+
+        $last = Position::limit(5)->get();
+
         return view('ITResources.jobs',[
-            'position'=>$this->positions[$position],
-            'positions' => $this->positions]);
+            'position'=>$position,
+            'positions' => $jobs,
+            'last' => $last,
+            'paginatorLink'=>$paginatorLink]);
     }
 
-     public function position($position){
+    public function position($position){
+        $positionId = explode('-', $position);
+        $positionId = $positionId[count($positionId)-1];
+        $position = Position::find($positionId);
+        if(Auth::guest()){
+            $applied = false;
+        } else {
+            $applied = DB::table('application')
+                    ->where('user_id',auth()->user()->id)
+                    ->where('position_id',$positionId)->exists();
+        }
+
         return view('ITResources.position',[
-            'position'=>$this->positions[$position],
-            'positions' => $this->positions]);
+            'position' => $position,
+            'positionId' => $positionId,
+            'applied' => $applied,
+            'industry' => $this->getIndustry()]);
+    }
+
+
+
+    public function searchProfesional(){
+        $position = request()->input('s');
+        if(empty($position)){
+            $position = session('itSearch');
+        } else {
+            session(['itSearch' =>$position]);
+        }
+
+        $users = DB::table('users as U')
+            ->join('user_skill as US', 'US.user_id', '=', 'U.id')
+            ->join('skills as S', 'S.id', '=', 'US.skill_id')
+            ->select('U.*','S.name as skill')
+            ->where('S.name', 'LIKE', '%'.$position.'%')->get();
+            //dd($users);
+        $skill = DB::table('skills')->get();
+
+        return view('ITResources.search', [
+            'position'=>$position,
+            'skills' => $skill,
+            'employees' => $users
+        ]);
     }
 
     public function search($position){
+        $skill = DB::table('skills')->get();
         $employees = DB::table('users')->where('role', '=', 'employee')->get();
         return view('ITResources.search', [
             'position'=>$this->positions[$position],
             'positions' => $this->positions,
+            'skills' => $skill,
             'employees' => $employees]);
     }
 
-    public function offer($position = 'it-profesional', $slug = null){
-        $apply = request()->input('apply');
-        $userId = auth()->user()->id;
-        $experience = Experience::where('user_id' , $userId)->get();
-        $education = Education::where('user_id' , $userId)->get();
-        $userSkills = DB::table('skills')
-                ->join('user_skill', 'skills.id', '=', 'user_skill.skill_id')
-                ->select('skills.*') 
-                ->where('user_skill.user_id', '=', $userId)->get();
+    private function getIndustry(){
         $sectoresTmp = DB::table('industry')->select('id', 'description_es')->get();
         $sectores = [];
         $sectores[''] = 'Escoge un sector…';
         foreach($sectoresTmp as $value){
                 $sectores[$value->id] = $value->description_es;
         }
+        return $sectores;
+    }
+
+    private function getCountry(){
         $countryTmp = DB::table('country')->select('code', 'name')->get();
         $country = [];
         foreach($countryTmp as $value){
                 $country[$value->code] = $value->name;
         }
+        return $country;
+    }
+    public function offer2($position = 'it-profesional', $slug = null){
 
+    }
 
-        if($slug!==null){
-            $user = $employees = DB::table('users')->where('slug', '=', $slug)->get();
-            return view('ITResources.offer', [
-                'position'=>$this->positions[$position],
-                'positions' => $this->positions,
-                'edit'=> $apply,
-                'user'=> $user[0],
+    public function profile($slug){
+        $profile = User::where('slug', $slug)->first();
+        $userId = $profile->id;
+        $experience = Experience::where('user_id' , $userId)->get();
+        $education = Education::where('user_id' , $userId)->get();
+        $userSkills = DB::table('skills')
+                ->join('user_skill', 'skills.id', '=', 'user_skill.skill_id')
+                ->select('skills.*') 
+                ->where('user_skill.user_id', '=', $userId)->get();
+        return view('ITResources.offer',
+            [
+                'user' => $profile,
+                'position' => 'adasdasd',
                 'experience'=>$experience,
                 'education'=>$education,
-                'sectores'=>$sectores,
-                'country'=>$country,
-                'userSkills'=>$userSkills]);
+                'userSkills'=>$userSkills,
+            ]);
+    }
+
+
+    public function offer($position = 'it-profesional', $slug = null){
+        $apply = request()->input('apply');
+        $userId = auth()->user()->id;
+        if($slug!==null){
+            $employee = DB::table('users')->where('slug', '=', $slug)->first();
+            $userId = $employee->id;
         }
+        $experience = Experience::where('user_id' , $userId)->get();
+        $education = Education::where('user_id' , $userId)->get();
+        $userSkills = DB::table('skills')
+                ->join('user_skill', 'skills.id', '=', 'user_skill.skill_id')
+                ->select('skills.*') 
+                ->where('user_skill.user_id', '=', $userId)->get();
+        $sectores = $this->getIndustry();
+        $country = $this->getCountry();
+
+        $applications = DB::table('position')
+            ->select('position.*')
+            ->join('application', 'position.id', '=','application.position_id' )
+            ->where('application.user_id', $userId)->get();
 
         
-        return view('ITResources.offer', [
+        return view('ITResources.profile', [
                 'position'=>$this->positions[$position],
-                'positions' => $this->positions,
+                'positions' => $applications,
                 'edit'=> $apply,
                 'user'=> auth()->user(),
                 'sectores'=>$sectores,

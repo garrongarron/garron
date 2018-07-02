@@ -15,7 +15,7 @@
 		<div class="col-md-6">
 			<hr>
 			<h1>IT Resources</h1>
-			<p>Aquí las mejores empresas buscan a los mejores recursos. Oportunidades de mejora.</p>
+			<p>Aquí las mejores empresas buscan a los mejores recursos.</p>
 		</div>
 		
 		<div class="col-md-6">
@@ -36,11 +36,31 @@
 				@foreach ($positions as $key => $position)
 				<li><a href="{{ route('ITResources.jobs', ['position' => $key]) }}">{{ $position }}</a></li>
 				@endforeach
-				<li><input type="text" placeholder="Analista Funcional" name="search-job">
-				@include('ITResources.modalButton', ['class' => 'search-job'])
+				<li>
+					<form action="{{ route('ITResources.searchJobs') }}">
+						<input placeholder="Analista Funcional" class="form-control" type="text" name="s">
+						<input class="btn btn-success form-control" type="submit" value="Buscar">
+					</form>
 				</li>
 			</ul>
 		</div>
+
+		@if(false)
+    		<div class="col-md-3">
+				<h2>Mis aplicaciones</h2> 
+				<ul>
+					@foreach ($positions as $key => $position)
+					<li><a href="{{ route('ITResources.jobs', ['position' => $key]) }}">{{ $position }}</a></li>
+					@endforeach
+					<li>
+						<form action="{{ route('ITResources.searchJobs') }}">
+							<input placeholder="Analista Funcional" class="form-control" type="text" name="s">
+							<input class="btn btn-success form-control" type="submit" value="Buscar">
+						</form>
+					</li>
+				</ul>
+			</div>
+    	@endif
 		<!-- {{-- 
 		<div class="col-md-3">
 			<h2>Salarios</h2>

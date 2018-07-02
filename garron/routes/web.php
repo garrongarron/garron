@@ -16,7 +16,13 @@ Route::get('/locale', 'Garron@chooser');
 
 
 Route::get('/ITResources', 'ITResources@init')->name('ITResources');
+Route::get('/home', 'ITResources@init');
+
+Route::get('/ITResources/home', 'ITResources@offer')->name('ITResources.professional.home');
+Route::get('/ITResources/apply', 'EmployeeController@apply')->name('ITResources.apply');
+Route::get('/ITResources/busco', 'ITResources@searchProfesional')->name('ITResources.searchProfesional');
 Route::get('/ITResources/busco/{position}', 'ITResources@search')->name('ITResources.search');
+Route::get('/ITResources/perfil/{slug}', 'ITResources@profile')->name('ITResources.profile');
 Route::get('/ITResources/soy/{position}/{slug}', 'ITResources@offer')
 					->name('ITResources.Iam2')
 					->middleware('auth');
@@ -28,8 +34,10 @@ Route::get('/ITResources/update', 'ITResources@update')
 					->name('ITResources.update')
 					->middleware('auth');
 
+Route::get('/ITResources/empleos', 'ITResources@jobs')->name('ITResources.searchJobs');
 Route::get('/ITResources/empleos/{position}', 'ITResources@jobs')->name('ITResources.jobs');
 Route::get('/ITResources/posicion/{position}', 'ITResources@position')->name('ITResources.position');
+//Route::post('/ITResources/posicion', 'ITResources@addPosition')->name('ITResources.addposition');
 Route::get('/ITResources/skills', 'ITResources@saveSkill');
 
 Route::get('/ITResources/salario/{position}', 'ITResources@salary')->name('ITResources.salary');
@@ -43,7 +51,12 @@ Route::get('/welcome', function () {
 
 Route::resource('experience','ExperienceController');
 Route::resource('education','EducationController');
+Route::resource('position','PositionController');
 
 Auth::routes();
 
-Route::get('/home', 'ITResources@init')->name('ITResources');
+Route::get('test', function(){
+	return view('emails.wellcome');
+});
+
+
