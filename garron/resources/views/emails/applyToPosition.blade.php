@@ -1,0 +1,35 @@
+@extends('emails.template')
+
+@section('content')
+<div class="container">
+	<div class="title">
+		<img src="http://localhost/img/GarronConsultingGroup.png">
+	</div>
+	<div class="body">
+		<div align="center">
+			<h2>Éxitos</h2>
+			<small>Tu <b>Desarrollo Profesional</b> depende sólo de ti. En <b>GCG</b> generamos las oportunidades para ayudarte a conseguirlo.</small>
+		</div>
+		<hr>
+		<h3>Aplicaste para una posición</h3>
+		<p>Pronto tendrás novedades del proceso</p>
+		<ul>
+			<li>Posición: {{ $position->title or '[Team Leader]' }}</li>
+			<li>Tipo: {{ $position->type or '[Full-Time]' }}</li>
+			<li>Salario: {{ $position->salary or '[$40.000]' }}</li>
+			@if(isset($position))
+				<li>Haz clic <a href="{{ route('ITResources.position', ['position' => str_slug($position->title).'-'.$position->id]) }}">aquí</a> para ver más información</li>
+			@else
+				<li>Haz clic <a href="{{ route('ITResources') }}">aquí</a> para ver más información</li>
+			@endif
+		</ul>
+		<div align="center">
+			<a href="{{ route('ITResources') }}">www.garron.com.ar/ITResources</a>
+		</div>
+	</div>
+	<div class="footer">
+		Garron Consulting Group
+	</div>
+</div>
+
+@endsection	

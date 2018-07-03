@@ -1,4 +1,26 @@
 <?php
+
+/*
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=garron.garron@gmail.com
+MAIL_PASSWORD=Pi3141592
+MAIL_ENCRYPTION=tls
+*/
+return array(
+  "driver" => "smtp",
+  "host" => "smtp.gmail.com",
+  "port" => 587,
+  "from" => array(
+      "address" => "garron.garron@gmail.com",
+      "name" => "Example"
+  ),
+  "username" => "garron.garron@gmail.com",
+  "password" => "Pi3141592",
+  "sendmail" => "/usr/sbin/sendmail -bs",
+  "pretend" => false
+);
 return array(
   "driver" => "smtp",
   "host" => "smtp.mailtrap.io",

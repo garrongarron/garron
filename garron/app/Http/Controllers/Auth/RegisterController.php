@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Wellcome;
 
+use App\Http\Controllers\EmployeeController;
+
 class RegisterController extends Controller
 {
     /*
@@ -79,18 +81,17 @@ class RegisterController extends Controller
             'role' => $data['role']
         ]);
 
-        if(isset($data['position'])){
-            DB::table('application')->insert([
-                'position_id'=>$data['position'],
-                'user_id'=>$user->id,
-            ]);
-            session()->flash('message', 'Successfully created Application!');
-        }
-        
         Mail::to($data['email'],$data['name'])
             ->send(new Wellcome($data));
-
         
+        if(isset($data['positionId'])){
+            $positionId = $data['positionId'];
+            $EmployeeController = new EmployeeController();
+            $EmployeeController->saveApplication($user->id, $positionId);
+            $EmployeeController->sendMailConfirmation($user, $positionId);
+            session()->flash('message', 'Successfully created Application!');
+        }
+
         return $user;
     }
 }

@@ -5,6 +5,7 @@
  @include('ITResources.header')
 
 
+
 <div class="container">
 	<div class="row">
 		@include('ITResources.modal')
@@ -61,6 +62,8 @@
 				</ul>
 			</div>
     	@endif
+
+    	
 		<!-- {{-- 
 		<div class="col-md-3">
 			<h2>Salarios</h2>

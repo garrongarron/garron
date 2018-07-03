@@ -179,9 +179,21 @@
 						<span class="badge badge-success">{{ $skill->name }}<a href="#">x</a></span>
 					@endforeach
 				</div>
-
-				@if(!Auth::guest())
+				
+				@if(auth()->user()->role != 'company')
 					<h4>Aplicaste como:</h4>
+					<ul>
+					@foreach($positions as $application)
+					<?php $slug = str_slug($application->title).'-'.$application->id; ?>
+						<li><a href="{{ route('ITResources.position',  $slug) }}">{{ $application->title }}</a></li>
+					@endforeach
+					</ul>
+				@else
+					@include('ITResources.widget.positionForm', ['industry'=>$industry])
+						<div style="padding: 10px 0px;">
+							<input type="button" class="btn btn-success" value="Crear publicación" name="" data-toggle="modal" data-target="#positionForm">
+						</div>
+					<h4>Tus Publicaciones:</h4>
 					<ul>
 					@foreach($positions as $application)
 					<?php $slug = str_slug($application->title).'-'.$application->id; ?>

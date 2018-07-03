@@ -55,8 +55,14 @@ Route::resource('position','PositionController');
 
 Auth::routes();
 
+Route::get('termsandconditions', function(){
+	return view('ITResources.termsandconditions');
+})->name('policies');
 Route::get('test', function(){
 	return view('emails.wellcome');
+});
+Route::get('test2', function(){
+	return view('emails.applyToPosition');
 });
 
 

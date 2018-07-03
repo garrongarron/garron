@@ -29,7 +29,7 @@ input[type="file"] {
 				
 				<form id="first-application" method="POST" action="{{ route('register') }}">
 		        	{{ csrf_field() }}
-		        	<input type="hidden" name="position" value="{{ $position->id }}">
+		        	<input type="hidden" name="positionId" value="{{ $position->id }}">
 		        	<input type="hidden" name="password" value="secret">
 		        	<input type="hidden" name="password_confirmation" value="secret">
 		        	<input type="hidden" name="role" value="employee">

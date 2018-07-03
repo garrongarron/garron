@@ -15,6 +15,7 @@ class AddPosition extends Migration
     {
         Schema::create('position', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->default(1);
             $table->string('title');
             $table->string('title_slug');
             $table->string('description');

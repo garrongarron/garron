@@ -126,8 +126,9 @@ class ITResources extends Controller
         if(Auth::guest()){
             $applied = false;
         } else {
+            $user = auth()->user();
             $applied = DB::table('application')
-                    ->where('user_id',auth()->user()->id)
+                    ->where('user_id',$user->id)
                     ->where('position_id',$positionId)->exists();
         }
 
@@ -236,7 +237,6 @@ class ITResources extends Controller
             ->join('application', 'position.id', '=','application.position_id' )
             ->where('application.user_id', $userId)->get();
 
-        
         return view('ITResources.profile', [
                 'position'=>$this->positions[$position],
                 'positions' => $applications,
@@ -246,7 +246,8 @@ class ITResources extends Controller
                 'country'=>$country,
                 'experience'=>$experience,
                 'education'=>$education,
-                'userSkills'=>$userSkills]);
+                'userSkills'=>$userSkills,
+                'industry' => $this->getIndustry(),]);
     }
     
     public function salary($position){
@@ -259,7 +260,7 @@ class ITResources extends Controller
        // return 'jaja';
         //return str_slug('Federico zacayan');
         return view('ITResources.landing', [
-            'positions' => $this->positions]);
+                'positions' => $this->positions]);
     }
 
 

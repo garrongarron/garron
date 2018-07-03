@@ -6,6 +6,9 @@ use App\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+
 
 
 class PositionController extends Controller
@@ -38,21 +41,62 @@ class PositionController extends Controller
      */
     public function store(Request $request)
     {
-        $position = new Position();
-        $position->title = $request->title;
-        $position->title_slug = str_slug($request->title);
-        $position->description = $request->description;
-        $position->type = $request->type;
-        $position->salary = $request->salary;
-        $position->mandatory_requirements = $request->mandatory_requirements;
-        $position->desiderable_requirements = $request->desiderable_requirements;
-        $position->industry = $request->industry;
-        $position->location = $request->location;
-        $position->save();
 
-        //dd(Position::all());
-        Session::flash('message', 'Successfully created Position!');
-        return Redirect::back();
+        $rules = array(
+            'title'       => 'required',
+            'title_slug'       => 'required',
+            'description'       => 'required',
+            'type'       => 'required',
+            'salary'       => 'required',
+            'desiderable_requirements'       => 'required',
+            'mandatory_requirements'       => 'required',
+            'industry'       => 'required',
+            'location'       => 'required',
+        );
+        $validator = Validator::make(Input::all(), $rules);
+        if ($validator->fails()) {
+            return Redirect::back()
+                ->withErrors($validator)
+                ->withInput(Input::except('password'))
+                ;
+        } else {
+            $position = new Position();
+            $position->user_id = auth()->user()->id;
+            $position->title = $request->title;
+            $position->title_slug = str_slug($request->title);
+            $position->description = $request->description;
+            $position->type = $request->type;
+            $position->salary = $request->salary;
+            $position->mandatory_requirements = $request->mandatory_requirements;
+            $position->desiderable_requirements = $request->desiderable_requirements;
+            $position->industry = $request->industry;
+            $position->location = $request->location;
+            $position->save();
+
+            //dd(Position::all());
+            Session::flash('message', 'Successfully created Position!');
+            return Redirect::back();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
     }
 
     /**
