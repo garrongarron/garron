@@ -4,7 +4,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel" style="float: left;">Mis datos personales</h5>
+				<h5 class="modal-title" id="exampleModalLabel" style="float: left;">Mis datos personales***</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				  <span aria-hidden="true">&times;</span>
 				</button>
@@ -95,8 +95,6 @@
 </style>
 
 							<input type="file" name="file" id="file" class="inputfile" />
-							<button type="button" class="btn btn-primary file">Subir CV</button>
-							<button type="button" class="btn btn-primary">Crear CV Online (recomendado)</button>
 						</div>
 
 		        	</div>
@@ -114,12 +112,12 @@
 		$(document).ready(function(){
 			var $ = jQuery;
 			$('#exampleModal').modal('show');
-			$('input[name=name]').keyup(function(){
+			/*$('input[name=name]').keyup(function(){
 				$('h2').html($(this).val());
-			});
-			$('textarea[name=description]').keyup(function(){
+			});*/
+			/*$('textarea[name=description]').keyup(function(){
 				$('.description').html($(this).val());
-			});
+			});*/s
 		});
 		$('.file').on('click', function(){
 			$('input[type=file]').click();	

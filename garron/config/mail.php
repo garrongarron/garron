@@ -7,20 +7,16 @@ MAIL_PORT=587
 MAIL_USERNAME=garron.garron@gmail.com
 MAIL_PASSWORD=Pi3141592
 MAIL_ENCRYPTION=tls
+
+
+MAIL_DRIVER=log
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=befbd3640ff320
+MAIL_PASSWORD=c84c64d57f6fb7
+MAIL_ENCRYPTION=null
 */
-return array(
-  "driver" => "smtp",
-  "host" => "smtp.gmail.com",
-  "port" => 587,
-  "from" => array(
-      "address" => "garron.garron@gmail.com",
-      "name" => "Example"
-  ),
-  "username" => "garron.garron@gmail.com",
-  "password" => "Pi3141592",
-  "sendmail" => "/usr/sbin/sendmail -bs",
-  "pretend" => false
-);
+
 return array(
   "driver" => "smtp",
   "host" => "smtp.mailtrap.io",

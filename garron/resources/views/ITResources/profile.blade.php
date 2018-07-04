@@ -195,7 +195,7 @@
 						</div>
 					<h4>Tus Publicaciones:</h4>
 					<ul>
-					@foreach($positions as $application)
+					@foreach($myPositions as $application)
 					<?php $slug = str_slug($application->title).'-'.$application->id; ?>
 						<li><a href="{{ route('ITResources.position',  $slug) }}">{{ $application->title }}</a></li>
 					@endforeach

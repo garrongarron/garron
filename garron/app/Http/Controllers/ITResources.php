@@ -131,12 +131,13 @@ class ITResources extends Controller
                     ->where('user_id',$user->id)
                     ->where('position_id',$positionId)->exists();
         }
-
+        $password = substr( str_shuffle( str_repeat( 'abcdefghijklmnopqrstuvwxyz0123456789', 10 ) ), 0, 6 );
         return view('ITResources.position',[
             'position' => $position,
             'positionId' => $positionId,
             'applied' => $applied,
-            'industry' => $this->getIndustry()]);
+            'industry' => $this->getIndustry(),
+            'password'=> $password]);
     }
 
 
@@ -218,7 +219,8 @@ class ITResources extends Controller
 
     public function offer($position = 'it-profesional', $slug = null){
         $apply = request()->input('apply');
-        $userId = auth()->user()->id;
+        $user = auth()->user();
+        $userId = $user->id;
         if($slug!==null){
             $employee = DB::table('users')->where('slug', '=', $slug)->first();
             $userId = $employee->id;
@@ -237,9 +239,16 @@ class ITResources extends Controller
             ->join('application', 'position.id', '=','application.position_id' )
             ->where('application.user_id', $userId)->get();
 
+        $myPositions = null;
+        if($user->role =='company'){
+            $myPositions = DB::table('position')
+            ->where('user_id', $userId)
+            ->get();
+        }
         return view('ITResources.profile', [
                 'position'=>$this->positions[$position],
                 'positions' => $applications,
+                'myPositions' => $myPositions,
                 'edit'=> $apply,
                 'user'=> auth()->user(),
                 'sectores'=>$sectores,

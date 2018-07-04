@@ -1,9 +1,9 @@
 @extends('emails.template')
 
 @section('content')
-			<div class="container">
-				<div class="title">
-					<img src="http://localhost/img/GarronConsultingGroup.png">
+			<div class="container" style="background: white">
+				<div class="title" style="margin-bottom: 10px;">
+					<img style="width: 280px" src="http://garron.com.ar/img/GarronConsultingGroup.png">
 				</div>
 				<div class="body">
 					<div align="center">
@@ -14,7 +14,7 @@
 					<h3>Busca Trabajo o a tus Candidatos</h3>
 					<p>Aquí las mejores empresas buscan a los mejores profesionales.</p>
 					<ul>
-						<li>Tu Ususario: {{ $data['name'] or 'Pepe' }}</li>
+						<li>Tu ususario: {{ $data['name'] or 'Pepe' }}</li>
 						<li>Tu email: {{ $data['email'] or 'pepe@gmail.com' }}</li>
 						<li>Tu pasword: {{ $data['password'] or '123456' }}</li>
 						<li>Haz clic <a href="{{ route('ITResources') }}">aquí</a> para empezar</li>

@@ -60,7 +60,7 @@
 	$(document).ready(function(){
 		/*$('#education').modal('show');*/
 	});
-	$('#education #from').datepicker();
-	$('#education  #to').datepicker();
+	/*$('#education #from').datepicker();
+	$('#education  #to').datepicker();*/
 })(window,document);
 </script>

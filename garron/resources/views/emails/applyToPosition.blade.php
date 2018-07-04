@@ -1,11 +1,11 @@
 @extends('emails.template')
 
 @section('content')
-<div class="container">
-	<div class="title">
-		<img src="http://localhost/img/GarronConsultingGroup.png">
+<div class="container" style="background: white">
+	<div class="title" style="margin-bottom: 10px;">
+		<img style="width: 280px" src="http://garron.com.ar/img/GarronConsultingGroup.png">
 	</div>
-	<div class="body">
+	<div class="body" >
 		<div align="center">
 			<h2>Éxitos</h2>
 			<small>Tu <b>Desarrollo Profesional</b> depende sólo de ti. En <b>GCG</b> generamos las oportunidades para ayudarte a conseguirlo.</small>
@@ -18,9 +18,9 @@
 			<li>Tipo: {{ $position->type or '[Full-Time]' }}</li>
 			<li>Salario: {{ $position->salary or '[$40.000]' }}</li>
 			@if(isset($position))
-				<li>Haz clic <a href="{{ route('ITResources.position', ['position' => str_slug($position->title).'-'.$position->id]) }}">aquí</a> para ver más información</li>
+				<li>Haz clic <a href="{{ route('ITResources.position', ['position' => str_slug($position->title).'-'.$position->id]) }}">aquí</a> para ver más detalles</li>
 			@else
-				<li>Haz clic <a href="{{ route('ITResources') }}">aquí</a> para ver más información</li>
+				<li>Haz clic <a href="{{ route('ITResources') }}">aquí</a> para ver más detalles</li>
 			@endif
 		</ul>
 		<div align="center">

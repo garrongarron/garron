@@ -11,7 +11,7 @@
 <style type="text/css">
 body{
 	font-family: Arial;
-	background: #ddd;
+	background: #ddd !important;
 }
 body,h1,h2,h3,h4, table, tr, td{
 	margin: 0px;
@@ -59,7 +59,7 @@ img{
 }
 a{
 	font-weight: bold;
-	color: #252525;
+	color: #252525 !important;
 	text-decoration: none;
 }
 table{
@@ -88,7 +88,7 @@ td.margin-right{width: 50%}
 
 </style>
 </head>
-<body>
+<body style="background: #ddd">
 <table>
 	<tr>
 		<td class="margin-left"></td>
@@ -97,7 +97,7 @@ td.margin-right{width: 50%}
 			@yield('content')
 			<!-- Content END-->
 			<div class="legal">
-				<small>Garron Consulting Group es una marca de Garron S.A.S hubicada en la Republica Argentina CUIT 33-71600383-9.</small>
+				<small>Garron Consulting Group es una marca de Garron S.A.S ubicada en la Republica Argentina CUIT 33-71600383-9.</small>
 				<br>
 				<small>Ver términos y condiciones <a style="font-weight: normal; color: gray; text-decoration: underline;" href="{{ route('policies') }}">aquí</a></small>
 			</div>

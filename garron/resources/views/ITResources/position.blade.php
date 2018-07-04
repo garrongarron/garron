@@ -4,7 +4,6 @@
 
 @include('ITResources.header')
 
-@include('ITResources.widget.positionForm', ['industry'=>$industry])
 <div class="container">
 	<div class="row">
 		<div class="col-md-12" style="margin: 20px 0px;">
@@ -52,7 +51,8 @@
 			@guest
 				@include('ITResources.widget.firstApplication', [
 					'position' =>  $position,
-					'update' => route('ITResources.update')])
+					'update' => route('ITResources.update'),
+					'password' => $password ])
 				<input type="button" class="btn btn-success" value="Enviar CV" data-toggle="modal" data-target="#exampleModal">
 			@else
 				@if($applied)
@@ -79,8 +79,6 @@
 
 			<b>Se ofrece</b>
 			<p>Flexibilidad horaria y beneficios corporativos, tales como clases de inglés, reconocimiento al desempeño plan de carrera.</p>
-
-			<input type="button" class="btn btn-success" value="Enviar CV" name="" data-toggle="modal" data-target="#positionForm">
 		</div>
 	</div>
 </div>

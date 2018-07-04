@@ -64,8 +64,8 @@
 	$(document).ready(function(){
 		/*$('#experience').modal('show');*/
 	});
-	$('#experience #from').datepicker();
-	$('#experience  #to').datepicker();
+	/*$('#experience #from').datepicker();
+	$('#experience  #to').datepicker();*/
 	//$('#experience #industry').attr('disabled', 'disabled');
 })(window,document);
 </script>

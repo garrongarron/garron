@@ -44,7 +44,6 @@ class PositionController extends Controller
 
         $rules = array(
             'title'       => 'required',
-            'title_slug'       => 'required',
             'description'       => 'required',
             'type'       => 'required',
             'salary'       => 'required',

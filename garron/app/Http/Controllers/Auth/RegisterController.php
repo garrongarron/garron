@@ -42,6 +42,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->redirectTo = url()->previous();
+        $this->redirectTo = route('ITResources.professional.home');
         $this->middleware('guest');
     }
 
