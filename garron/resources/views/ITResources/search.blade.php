@@ -21,7 +21,11 @@
 			
 				@if(isset($skills))
 				@foreach($skills as $skill)
-					<span class="badge badge-success skill">{{ $skill->name }}</span>
+					@if(isset($skill->quantity) && $skill->quantity!=1)
+						<span class="badge badge-success skill" skill-name="{{ $skill->name }}">{{ $skill->name.' ('.$skill->quantity.')' }}</span>
+					@else
+						<span class="badge badge-success skill" skill-name="{{ $skill->name }}">{{ $skill->name }}</span>
+					@endif
 				@endforeach
 				@endif
 			<script type="text/javascript">
@@ -31,7 +35,7 @@
 					$('span.skill').css('cursor','pointer');
 					$('span.skill').on('click', function(){
 						$('#searchProfessional input[name=s]')
-							.val($(this).html());
+							.val($(this).attr('skill-name'));
 						$('#searchProfessional').submit();
 					})
 				});
@@ -40,29 +44,32 @@
 			</div>
 
 			<div class="col-md-12">
-				@foreach ($employees as $employee)
-				<div class="row">
-					<div class="col-md-6">
-						<div class="row">
-							<div class="col-md-3">
-								<div style="background: green;float: left;width: 100px; height: 100px; margin: 10px; border-radius: 50px; overflow: hidden;">
+
+				@if(count($employees)>0)
+					@foreach ($employees as $employee)
+					<div class="row">
+						<div class="col-md-6">
+							<div class="row">
+								<div class="col-md-3">
+									<div style="background: green;float: left;width: 100px; height: 100px; margin: 10px; border-radius: 50px; overflow: hidden;">
+									</div>
+								</div>
+								<div class="col-md-9">
+									<h2><a target="_blank" href="{{ route('ITResources.profile', [
+										'slug' => $employee->slug
+										]) }}">{{ $employee->name }}</a></h2>
+									<p>{{ $employee->description }}</p>
 								</div>
 							</div>
-							<div class="col-md-9">
-								<h2><a target="_blank" href="{{ route('ITResources.profile', [
-									'slug' => $employee->slug
-									]) }}">{{ $employee->name }}</a></h2>
-								<p>{{ $employee->description }}</p>
-							</div>
+						</div>
+						<div class="col-md-6" style="margin: 10px 0px;">
+							@include('ITResources.widget.card')
 						</div>
 					</div>
-					<div class="col-md-6" style="margin: 10px 0px;">
-						@include('ITResources.widget.card')
-					</div>
-				</div>
-				@endforeach
-
-
+					@endforeach
+				@else
+					<b>No hay Profesionales con esas habilidades o conocimientos</b>
+				@endif
 				<hr>
 			</div>
 		</div>

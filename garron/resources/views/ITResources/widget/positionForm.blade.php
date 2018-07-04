@@ -23,7 +23,7 @@
 
 				<div class="form-group">
 					{{ Form::label('type', 'Tipo de empleo') }}
-					{{ Form::select('type', ['Part-Time','Full-Time'],
+					{{ Form::select('type', ['Part-Time'=>'Part-Time','Full-Time'=>'Full-Time'],
 					null,
 					array('class' => 'form-control')) }}
 				</div>

@@ -132,11 +132,17 @@ class ITResources extends Controller
                     ->where('position_id',$positionId)->exists();
         }
         $password = substr( str_shuffle( str_repeat( 'abcdefghijklmnopqrstuvwxyz0123456789', 10 ) ), 0, 6 );
+
+        $date =   \Carbon\Carbon::parse($position->created_at)->diffForHumans();
+        
+        $industry = $this->getIndustry();
+
         return view('ITResources.position',[
             'position' => $position,
+            'date' => $date,
             'positionId' => $positionId,
             'applied' => $applied,
-            'industry' => $this->getIndustry(),
+            'industry' => $industry,
             'password'=> $password]);
     }
 
@@ -155,23 +161,30 @@ class ITResources extends Controller
             ->join('skills as S', 'S.id', '=', 'US.skill_id')
             ->select('U.*','S.name as skill')
             ->where('S.name', 'LIKE', '%'.$position.'%')->get();
+
             //dd($users);
-        $skill = DB::table('skills')->get();
 
         return view('ITResources.search', [
             'position'=>$position,
-            'skills' => $skill,
+            'skills' => $this->getSkils(),
             'employees' => $users
         ]);
     }
 
+    private function getSkils(){
+        return DB::table('skills as S')
+                ->leftJoin('user_skill as US', 'S.id', '=', 'US.skill_id')
+                ->select('S.name',  DB::raw('count(S.name) as quantity'))
+                ->groupBy('S.name')
+                ->get();
+    }
+
     public function search($position){
-        $skill = DB::table('skills')->get();
         $employees = DB::table('users')->where('role', '=', 'employee')->get();
         return view('ITResources.search', [
             'position'=>$this->positions[$position],
             'positions' => $this->positions,
-            'skills' => $skill,
+            'skills' => $this->getSkils(),
             'employees' => $employees]);
     }
 

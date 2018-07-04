@@ -26,10 +26,10 @@
 					<h2>{{ $position->title or 'Position' }}</h2>
 					<table class="table">
 						<tr>
-							<td>Publicado</td><td>{{ $position->when or 'Hoy' }}</td>
+							<td>Publicado</td><td>{{ $date or 'Hoy' }}</td>
 						</tr>
 						<tr>
-							<td>Area</td><td>{{ $position->industry or 'Tecnologia' }}</td>
+							<td>Area</td><td>{{ $industry[$position->industry] or 'Tecnologia' }}</td>
 						</tr>
 							<td>Tipo de puesto</td><td>{{ $position->type or 'Full-Time*' }}</td>
 						</tr>
@@ -41,10 +41,31 @@
 						</tr>
 					</table>
 				</div>
-				<div class="col-md-4" style="background: #ddd; ">
+				<div class="col-md-4" style="background: #ddd; padding-bottom: 20px; margin: 10px 0px;">
 					<h4 style="padding-top: 10px;">Garron Consulting Group</h4>
 					<p style="text-align: justify;">Aquí las mejores empresas buscan a los mejores profesionales.</p>
-					<img src="/img/GarronConsultingGroup.png" style="margin-left: 10%;  margin-bottom: 10px; width: 80%;  background: gray">
+
+<style type="text/css">
+
+div.title{
+	margin: 10px 30px;
+	margin-bottom: 0px;
+	background: #F2784B;
+	padding: 10px 30px;
+	text-align: center;
+	color: white;
+	font-family: sans-serif;
+	border-radius:30px 0px 30px 0px ;
+	text-align: center;
+	display: block;
+}
+div.title img{
+	display: inline;
+}
+</style>
+					<div class="title" >
+						<img style="width: 280px" src="http://garron.com.ar/img/GarronConsultingGroup.png">
+					</div>
 				</div>
 			</div>
 

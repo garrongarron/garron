@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Carbon\Carbon;
 
 class PositionTableSeeder extends Seeder
 {
@@ -32,6 +33,8 @@ class PositionTableSeeder extends Seeder
                 'desiderable_requirements' => $faker->realText(100),
                 'industry' => 'Tecnologia de la Información',
                 'location' => 'Buenos Aires',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
         }
     }

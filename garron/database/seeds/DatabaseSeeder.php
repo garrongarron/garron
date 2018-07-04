@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Fede',
             'email' => 'fede@email.com',
-            'role' => CreateUsersTable::$roles[0],
+            'role' => CreateUsersTable::$roles[1],
             'description' => $faker->realText(),
             'password' => bcrypt('123456'),
             'slug' => str_slug('Fede'),
