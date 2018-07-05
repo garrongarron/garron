@@ -151,29 +151,42 @@
 							  clearTimeout(timer);
 							  timer = setTimeout(function(){
 							  	suggestion($( '#skills' ).serialize());
-							  },2000);
+							  },1000);
 						  }
 						  //return false;
 						});
 
+						var triggerDelete = function(){
+							deleteSkill($(this).parent().find('span').html(),this);
+							return false;
+						}
 						var send = function(dataSkill){
 							$.ajax({
 								method: "POST",
 								url: "/ITResources/skills",
 								data: dataSkill
 							}).done(function( msg ) {
-								$('.tags').prepend('<span class="badge badge-success">'+msg+'<a href="#">x</a></span>');
+								var skillAdded = $('<span class="badge badge-success"><span>'+msg+'</span><a href="#">x</a></span>');
+								$(skillAdded).find('a').on("click",triggerDelete)
+								$('.tags').prepend(skillAdded);
 								console.log(msg);
 							});
 						}
 
-						var deleteSkill = function(dataSkill){
+						$( document ).ready(function(){
+							$('div.tags').find('a').on("click", triggerDelete)
+						})
+
+
+						var deleteSkill = function(skillName, skillElement){
 							$.ajax({
-								method: "GET",
-								url: "/ITResources/skills",
-								data: dataSkill
+								method: "POST",
+								url: "/ITResources/skillsDelete",
+								data: 'tags='+skillName
 							}).done(function( msg ) {
-								$('.tags').prepend('<span class="badge badge-success">'+msg+'<a href="#">x</a></span>');
+								if(msg.transaction == 'ok'){
+									$(skillElement).parent().remove();
+								}
 								console.log(msg);
 							});
 						}
@@ -212,7 +225,8 @@
 				</script>
 				<div class="tags">
 					@foreach($userSkills as $skill)
-						<span class="badge badge-success">{{ $skill->name }}<a href="#">x</a></span>
+						{{--<!-- <span class="badge badge-success">{{ $skill->name }}<a href="#">x</a></span>-->--}}
+						<span class="badge badge-success"><span>{{ $skill->name }}</span><a href="#">x</a></span>
 					@endforeach
 				</div>
 				

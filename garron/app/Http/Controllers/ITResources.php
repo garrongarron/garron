@@ -90,6 +90,29 @@ class ITResources extends Controller
         }
     }
 
+    public function skillsDelete(Request $request){
+        $user = auth()->user();
+        $skill = $this->getSkill($request->input('tags'));
+        $conditions = ['user_id'=>$user->id, 'skill_id'=>$skill->id];
+        /*$userSkill = UserSkill::where($conditions)->first();*/
+        if(UserSkill::where($conditions)->exists()){
+            $userSkill = UserSkill::where($conditions)->delete();
+        } else {
+            return $this->responseBodyDeleteSkill('fail',$conditions, 'skillsDelete','No data found');
+        }
+        if(!UserSkill::where($conditions)->exists()){
+            return $this->responseBodyDeleteSkill('ok',$conditions, 'skillsDelete');
+        } else {
+            return $this->responseBodyDeleteSkill('fail',$conditions, 'skillsDelete', 'No data deleted');
+        }
+    }
+    private function responseBodyDeleteSkill($transaction, $data, $action='undefined', $message='none'){
+        return ['transaction'=>$transaction,
+            'message'=>$message,
+            'data'=>$data
+        ];
+    }
+
     private function getSkill($skillName){
         $slug = str_slug($skillName);
         $skill = Skill::where('slug' ,$slug )->first();
