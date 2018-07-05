@@ -5,7 +5,7 @@
  @include('ITResources.header')
  <style type="text/css">
  	.number{
- 		color: #7CFC00;
+ 		color: #FFAA1D;
  	}
  </style>
 	<div class="container">
@@ -20,8 +20,10 @@
 					action="{{ route('ITResources.searchProfesional') }}"
 					style="display:inline">
 					<input placeholder="Analista Funcional"  type="text" name="s"
-					value="{{ $position or 'Analista Funcional'}}">
-					<input class="btn btn-success" type="submit" value="Buscar">
+					value="{{ $position or 'Analista Funcional'}}"
+
+					style="border-radius: 5px; padding: 3px 5px; border: 1px solid gray;">
+					<input class="btn btn-warning" type="submit" value="Buscar">
 				</form>
 			
 				@if(isset($skills))

@@ -1,4 +1,9 @@
 <!-- Start Header -->
+<style type="text/css">
+	a:hover{
+		color: #F2784B;
+	}
+</style>
 <header id="header">
 	<!-- Header Inner -->
 	<div class="header-inner">
@@ -36,6 +41,24 @@
 							
 							<div class="mobile-nav"></div>
 
+
+<style type="text/css">
+#header .nav ul.dropdown-menu li a, #header .nav ul.dropdown-menu li.active a {
+    background: white !important;
+    color: black;
+    border-radius: 0px !important;
+}
+#header .nav ul.dropdown-menu li a {
+    padding: 15px 12px;
+    color: black;
+    border-radius: 0px !important;
+}
+#header .nav ul.dropdown-menu li a, #header .nav ul.dropdown-menu li.active a {
+    background: white !important;
+    color: black;
+    border-radius: 0px !important;
+}
+</style>
 							<div class="collapse navbar-collapse">
 								<ul id="menu-top-menu" class="nav navbar-nav">
 <!--<li class="menu-item menu-item-type-custom menu-item-object-custom"><a title="{{ trans('home.home') }}" href="#header">{{ trans('home.home') }}</a></li>-->

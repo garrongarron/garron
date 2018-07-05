@@ -36,10 +36,39 @@
 				<li>
 					<form action="{{ route('ITResources.searchJobs') }}">
 						<input placeholder="Analista Funcional" class="form-control" type="text" name="s">
-						<input class="btn btn-success form-control" type="submit" value="Buscar">
+						<input class="btn btn-warning form-control" type="submit" value="Buscar">
 					</form>
 				</li>
 			</ul>
+		</div>
+
+		<div class="col-md-6" >
+			<h2 align="center">Desarrollo Profesional</h2> 
+			<div style="background: #ddd; padding: 20px; margin: 10px 0px;">
+				<p style="text-align: justify;">Aquí las mejores empresas buscan a los mejores profesionales.</p>
+
+				<style type="text/css">
+				div.title{
+					margin: 10px 30px;
+					margin-bottom: 0px;
+					background: #F2784B;
+					padding: 10px 30px;
+					text-align: center;
+					color: white;
+					font-family: sans-serif;
+					border-radius:30px 0px 30px 0px ;
+					text-align: center;
+					display: block;
+				}
+				div.title img{
+					display: inline;
+				}
+				</style>
+				<div class="title" >
+					<img style="width: 280px" src="http://garron.com.ar/img/GarronConsultingGroup.png">
+				</div>
+				<p>Portal de busqueda laboral de profesionales de tecnología de la información</p>
+			</div>
 		</div>
 
 		@if(false)

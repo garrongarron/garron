@@ -5,6 +5,6 @@
 				@endforeach
 				<form action="{{ route('ITResources.searchProfesional') }}">
 					<input placeholder="Analista Funcional" class="form-control" type="text" name="s">
-					<input class="btn btn-success form-control" type="submit" value="Buscar">
+					<input class="btn btn-warning form-control" type="submit" value="Buscar">
 				</form>
 			</ul>

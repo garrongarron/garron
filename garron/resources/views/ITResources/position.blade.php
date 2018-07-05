@@ -45,24 +45,23 @@
 					<h4 style="padding-top: 10px;">Garron Consulting Group</h4>
 					<p style="text-align: justify;">Aquí las mejores empresas buscan a los mejores profesionales.</p>
 
-<style type="text/css">
-
-div.title{
-	margin: 10px 30px;
-	margin-bottom: 0px;
-	background: #F2784B;
-	padding: 10px 30px;
-	text-align: center;
-	color: white;
-	font-family: sans-serif;
-	border-radius:30px 0px 30px 0px ;
-	text-align: center;
-	display: block;
-}
-div.title img{
-	display: inline;
-}
-</style>
+					<style type="text/css">
+					div.title{
+						margin: 10px 30px;
+						margin-bottom: 0px;
+						background: #F2784B;
+						padding: 10px 30px;
+						text-align: center;
+						color: white;
+						font-family: sans-serif;
+						border-radius:30px 0px 30px 0px ;
+						text-align: center;
+						display: block;
+					}
+					div.title img{
+						display: inline;
+					}
+					</style>
 					<div class="title" >
 						<img style="width: 280px" src="http://garron.com.ar/img/GarronConsultingGroup.png">
 					</div>
