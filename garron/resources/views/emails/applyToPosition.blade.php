@@ -8,7 +8,8 @@ $imgSrc = 'data: '.mime_content_type($img_file).';base64,'.$imgData;
 ?>
 <div class="container" style="background: white">
 	<div class="title" style="margin-bottom: 10px;">
-		<img style="width: 280px" src="{{ $imgSrc }}">
+		<!--<img style="width: 280px" src="{{ $imgSrc }}">-->
+		<img style="width: 280px" src="http://www.garron.com.ar/img/GarronConsultingGroup.png">
 	</div>
 	<div class="body" >
 		<div align="center">
