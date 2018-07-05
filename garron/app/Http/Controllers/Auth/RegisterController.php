@@ -73,7 +73,7 @@ class RegisterController extends Controller
         $path  = null;
         if($request->hasFile('file')){
             $validation = $request->validate([
-                'file' => 'file|max:2048'
+                'file' => 'file|max:4096'
             ]);
             $file      = $validation['file']; // get the validated file
             $extension = $file->getClientOriginalExtension();

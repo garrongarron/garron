@@ -169,7 +169,6 @@
         hideForms('.register-form')
         return false;
     });
-    register-button
 })(document, jQuery)
 </script>
 

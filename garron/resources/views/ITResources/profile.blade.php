@@ -140,16 +140,34 @@
 						$('input[name=tags]').autocomplete({
 							source:['a','b']
 						});
+
+						var timer
 						$('input[name=tags]').keypress(function( event ) {
 						  if ( event.which == 13 ) {
 						  	send($( '#skills' ).serialize());
 						    $(this).val('')
 						    event.preventDefault();
+						  } else {
+							  clearTimeout(timer);
+							  timer = setTimeout(function(){
+							  	suggestion($( '#skills' ).serialize());
+							  },2000);
 						  }
 						  //return false;
 						});
 
 						var send = function(dataSkill){
+							$.ajax({
+								method: "POST",
+								url: "/ITResources/skills",
+								data: dataSkill
+							}).done(function( msg ) {
+								$('.tags').prepend('<span class="badge badge-success">'+msg+'<a href="#">x</a></span>');
+								console.log(msg);
+							});
+						}
+
+						var deleteSkill = function(dataSkill){
 							$.ajax({
 								method: "GET",
 								url: "/ITResources/skills",
@@ -159,6 +177,24 @@
 								console.log(msg);
 							});
 						}
+
+						var suggestion = function(tagTyped){
+							$.ajax({
+								method: "POST",
+								url: "/ITResources/skillSuggestion",
+								data: tagTyped
+							}).done(function( suggestion ) {
+								console.log(suggestion);
+								$('#browsers').html('');
+								for(var key in suggestion){
+									$('#browsers').prepend('<option value="'+suggestion[key].name+'">');
+								}
+							});
+						}
+						suggestion($( '#skills' ).serialize());
+						//suggestion('tags=test');
+
+
 						$('.addExperience').on('click', function(){
 							$('#experience').modal('show');
 							return false;

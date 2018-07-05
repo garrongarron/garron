@@ -80,6 +80,16 @@ class ITResources extends Controller
         return $skill->name;
     }
 
+    public function skillSuggestion(Request $request){
+        $tag = $request->input('tags');
+        if(empty($tag)){
+            return Skill::limit(5)->select('id','name')->get();
+        }else{
+            $slug = str_slug($tag);
+            return Skill::select('id','name')->where('slug' , 'LIKE' ,'%'.$slug.'%' )->get();
+        }
+    }
+
     private function getSkill($skillName){
         $slug = str_slug($skillName);
         $skill = Skill::where('slug' ,$slug )->first();
