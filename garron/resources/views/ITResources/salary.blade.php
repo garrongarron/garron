@@ -26,6 +26,7 @@
 				@include('ITResources.widget.search')
 			</div>
 		</div>
+ 		@include('ITResources.footer')
 	</div>
  @include('main.footer')
 

@@ -129,7 +129,8 @@ class ITResources extends Controller
     public function jobs($position =null, Request $request){
         if($position==null){
             $position = request()->input('s');
-            if(empty($position)){
+            $page = request()->input('page');
+            if(empty($position) && !empty($page)){
                 $position = session('itSearch');
             } else {
                 session(['itSearch' =>$position]);
@@ -193,13 +194,14 @@ class ITResources extends Controller
             ->join('user_skill as US', 'US.user_id', '=', 'U.id')
             ->join('skills as S', 'S.id', '=', 'US.skill_id')
             ->select('U.*','S.name as skill')
-            ->where('S.name', 'LIKE', '%'.$position.'%')->get();
+            ->where('S.name', 'LIKE', '%'.$position.'%')->paginate(4);
 
             //dd($users);
-
+            $paginatorLink = $users->links();
         return view('ITResources.search', [
             'position'=>$position,
             'skills' => $this->getSkils(),
+            'paginatorLink' => $paginatorLink,
             'employees' => $users
         ]);
     }
@@ -214,11 +216,13 @@ class ITResources extends Controller
     }
 
     public function search($position){
-        $employees = DB::table('users')->where('role', '=', 'employee')->get();
+        $employees = DB::table('users')->where('role', '=', 'employee')->paginate(4);
+        $paginatorLink = $employees->links();
         return view('ITResources.search', [
             'position'=>$this->positions[$position],
             'positions' => $this->positions,
             'skills' => $this->getSkils(),
+            'paginatorLink' => $paginatorLink,
             'employees' => $employees]);
     }
 

@@ -56,7 +56,10 @@
 						<div class="col-md-6">
 							<div class="row">
 								<div class="col-md-3">
-									<div style="background: green;float: left;width: 100px; height: 100px; margin: 10px; border-radius: 50px; overflow: hidden;">
+
+									<!--<div style="background: green;float: left;width: 100px; height: 100px; margin: 10px; border-radius: 50px; overflow: hidden;">-->
+									<div style="float: left;width: 100px; height: 100px; margin: 10px;">
+										<img src="img/ITResources/profesional.png">
 									</div>
 								</div>
 								<div class="col-md-9">
@@ -72,12 +75,14 @@
 						</div>
 					</div>
 					@endforeach
+					<div align="center">{{ $paginatorLink }}</div>
 				@else
 					<b>No hay Profesionales con esas habilidades o conocimientos</b>
 				@endif
 				<hr>
 			</div>
 		</div>
+ 		@include('ITResources.footer')
 	</div>
  @include('main.footer')
 

@@ -28,12 +28,12 @@ h3, img{
 						<li><a target="_blank" href="{{ route('ITResources.position', ['position' => str_slug($title->title).'-'.$title->id]) }}">{{ $title->title }}</a></li>
 					@endforeach
 				</ul>
-				<div style="padding: 0px 10px; color: black;"><b>Búsqueda de trabajo</b></div>
+				{{--<!--<div style="padding: 0px 10px; color: black;"><b>Búsqueda de trabajo</b></div>
 				<ul style="padding: 0px 10px;">
 					@foreach($positions as $title)
-						<li><a target="_blank" href="{{ route('ITResources.Iam', ['position' => str_slug($title->title)]) }}">{{ $title->title }}</a></li>
+						<li><a target="_blank" href="{{ route('ITResources.jobs', ['position' => str_slug($title->title)]) }}">{{ $title->title }}</a></li>
 					@endforeach
-				</ul>
+				</ul>-->--}}
 			</div>
 		</div>
 		<div class="col-md-9">
@@ -52,28 +52,33 @@ h3, img{
 				</form>
 			</div>
 
-
-			@foreach($positions as $title)
-			<div class="row offer" onclick="window.open('{{ route('ITResources.position', ['position' => str_slug($title->title).'-'.$title->id]) }}', '_blank')" style="cursor: pointer;">
-				<div class="col-md-3">
-					<img src="/img/GarronConsultingGroup.png" width="80%" alt="IMAGEN" style="margin-left: 10%; background: silver; ; border: 1px solid gray;">
+			@if(count($positions)>0)
+				@foreach($positions as $title)
+				<div class="row offer" onclick="window.open('{{ route('ITResources.position', ['position' => str_slug($title->title).'-'.$title->id]) }}', '_blank')" style="cursor: pointer;">
+					<div class="col-md-3">
+						<img src="/img/GarronConsultingGroup.png" width="80%" alt="IMAGEN" style="margin-left: 10%; background: silver; ; border: 1px solid gray;">
+					</div>
+					<div class="col-md-9">
+						<h3>{{ $title->title }}</h3>
+						<div><b>Garron Consulting Grup</b></div>
+						<div><span>Capital Federal</span> <span>Full time</span> <span><i>Ayer</i></span></div>
+					</div>
 				</div>
-				<div class="col-md-9">
-					<h3>{{ $title->title }}</h3>
-					<div><b>Garron Consulting Grup</b></div>
-					<div><span>Capital Federal</span> <span>Full time</span> <span><i>Ayer</i></span></div>
-				</div>
-			</div>
-			@endforeach
+				@endforeach
+			@else
+				<b>No hay resultados para esta búsqueda</b>
+			@endif
 
 			{{ $paginatorLink or 'Links'}}
 			
 			
 		</div>
 	</div>
+	@include('ITResources.footer')
 </div>
 
 
+ 
  @include('main.footer')
 
 		

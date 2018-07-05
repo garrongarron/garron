@@ -102,9 +102,10 @@ div.title img{
 			<p>Flexibilidad horaria y beneficios corporativos, tales como clases de inglés, reconocimiento al desempeño plan de carrera.</p>
 		</div>
 	</div>
+	@include('ITResources.footer')
 </div>
 
-
+ 
  @include('main.footer')
 
 		

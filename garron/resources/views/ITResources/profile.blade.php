@@ -288,7 +288,9 @@
 		
 
 		</div>
+		@include('ITResources.footer')
 	</div>
+ 
  @include('main.footer')
 
 		

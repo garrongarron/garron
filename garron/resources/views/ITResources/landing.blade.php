@@ -8,10 +8,6 @@
 
 <div class="container">
 	<div class="row">
-		@include('ITResources.modal')
-		
-
-
 
 		<div class="col-md-6">
 			<hr>
@@ -123,29 +119,30 @@
 		</div>
 
 
-<script type="text/javascript">
-(function(document, $){
-	$('input').on('shown.bs.modal', function () {
-		$('#myInput').trigger('focus')
-	});
+		<script type="text/javascript">
+		(function(document, $){
+			$('input').on('shown.bs.modal', function () {
+				$('#myInput').trigger('focus')
+			});
 
-	$(document).ready(function(){
-		$('.search-job').on('click', function(){
-			var str = $('input[name=search-job').val();
-			if(str == ''){
-				return false;
-			}
-			$('.result-job-offer').html(str);
-		})
-	});
+			$(document).ready(function(){
+				$('.search-job').on('click', function(){
+					var str = $('input[name=search-job').val();
+					if(str == ''){
+						return false;
+					}
+					$('.result-job-offer').html(str);
+				})
+			});
 
-})(document, jQuery)
-	
-</script>
+		})(document, jQuery)
 			
-		</div>
+		</script>
+			
 	</div>
+	@include('ITResources.footer')
 </div>
+ 
  @include('main.footer')
 
 		
