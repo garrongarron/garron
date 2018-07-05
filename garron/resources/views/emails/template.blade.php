@@ -86,6 +86,7 @@ td.margin-right{width: 50%}
 	}
 }
 
+
 </style>
 </head>
 <body style="background: #ddd">

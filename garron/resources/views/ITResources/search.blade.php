@@ -3,6 +3,11 @@
 @section('content')
 
  @include('ITResources.header')
+ <style type="text/css">
+ 	.number{
+ 		color: #7CFC00;
+ 	}
+ </style>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -21,8 +26,8 @@
 			
 				@if(isset($skills))
 				@foreach($skills as $skill)
-					@if(isset($skill->quantity) && $skill->quantity!=1)
-						<span class="badge badge-success skill" skill-name="{{ $skill->name }}">{{ $skill->name.' ('.$skill->quantity.')' }}</span>
+					@if(isset($skill->quantity) && $skill->quantity>0)
+						<span class="badge badge-success skill" skill-name="{{ $skill->name }}">{!! $skill->name.' <span class="number">'.$skill->quantity.'</span>' !!}</span>
 					@else
 						<span class="badge badge-success skill" skill-name="{{ $skill->name }}">{{ $skill->name }}</span>
 					@endif

@@ -174,8 +174,9 @@ class ITResources extends Controller
     private function getSkils(){
         return DB::table('skills as S')
                 ->leftJoin('user_skill as US', 'S.id', '=', 'US.skill_id')
-                ->select('S.name',  DB::raw('count(S.name) as quantity'))
+                ->select('S.name',  DB::raw('count(US.skill_id) as quantity'))
                 ->groupBy('S.name')
+                ->orderByRaw('count(US.skill_id) DESC')
                 ->get();
     }
 

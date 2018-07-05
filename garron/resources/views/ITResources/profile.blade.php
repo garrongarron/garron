@@ -182,24 +182,24 @@
 				
 				@if(auth()->user()->role != 'company')
 					<h4>Aplicaste como:</h4>
-					<ul>
+					<div>
 					@foreach($positions as $application)
 					<?php $slug = str_slug($application->title).'-'.$application->id; ?>
-						<li><a href="{{ route('ITResources.position',  $slug) }}">{{ $application->title }}</a></li>
+						<span> <a href="{{ route('ITResources.position',  $slug) }}">{{ $application->title }}</a> </span>
 					@endforeach
-					</ul>
+					</div>
 				@else
 					@include('ITResources.widget.positionForm', ['industry'=>$industry])
 						<div style="padding: 10px 0px;">
 							<input type="button" class="btn btn-success" value="Crear publicación" name="" data-toggle="modal" data-target="#positionForm">
 						</div>
 					<h4>Tus Publicaciones:</h4>
-					<ul>
+					<div>
 					@foreach($myPositions as $application)
 					<?php $slug = str_slug($application->title).'-'.$application->id; ?>
-						<li><a href="{{ route('ITResources.position',  $slug) }}">{{ $application->title }}</a></li>
+						<span> <a href="{{ route('ITResources.position',  $slug) }}">{{ $application->title }}</a> </span>
 					@endforeach
-					</ul>
+					</div>
 				@endif
 
 

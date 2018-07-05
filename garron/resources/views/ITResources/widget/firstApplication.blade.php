@@ -27,7 +27,7 @@ input[type="file"] {
 				<input type="button" id="hasUser" value="Con usuario"  class="btn btn-primary" style="margin-bottom: 15px;">
 				<input type="button" id="noUser" value="Sin Usuario"  class="btn btn-primary" style="margin-bottom: 15px;">
 				
-				<form id="first-application" method="POST" action="{{ route('register') }}">
+				<form id="first-application" enctype="multipart/form-data" method="POST" action="{{ route('register') }}">
 		        	{{ csrf_field() }}
 		        	<input type="hidden" name="positionId" value="{{ $position->id }}">
 		        	<input type="hidden" name="password" value="{{ $password }}">
@@ -105,13 +105,13 @@ input[type="file"] {
 
 		$(document).ready(function(){
 			var $ = jQuery;
-			/*$('#exampleModal').modal('show');*/
+			/*$('#exampleModal').modal('show');
 			$('input[name=name]').keyup(function(){
 				$('h2').html($(this).val());
 			});
 			$('textarea[name=description]').keyup(function(){
 				$('.description').html($(this).val());
-			});
+			});*/
 		});
 		$('.file').on('click', function(){
 			$('input[type=file]').click();	

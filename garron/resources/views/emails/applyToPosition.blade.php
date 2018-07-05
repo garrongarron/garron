@@ -1,9 +1,14 @@
 @extends('emails.template')
 
 @section('content')
+<?php
+$img_file = './img/GarronConsultingGroup.png';
+$imgData = base64_encode(file_get_contents($img_file));
+$imgSrc = 'data: '.mime_content_type($img_file).';base64,'.$imgData;
+?>
 <div class="container" style="background: white">
 	<div class="title" style="margin-bottom: 10px;">
-		<img style="width: 280px" src="http://garron.com.ar/img/GarronConsultingGroup.png">
+		<img style="width: 280px" src="{{ $imgSrc }}">
 	</div>
 	<div class="body" >
 		<div align="center">

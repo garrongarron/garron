@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Wellcome;
+use App\Cvfile;
 
 use App\Http\Controllers\EmployeeController;
 
@@ -67,12 +68,21 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create($request)
     {
-        if(isset($data['phone'])){
-            $this->redirectTo = route('ITResources.Iam');
+        $path  = null;
+        if($request->hasFile('file')){
+            $validation = $request->validate([
+                'file' => 'file|max:2048'
+            ]);
+            $file      = $validation['file']; // get the validated file
+            $extension = $file->getClientOriginalExtension();
+            $filename  = 'file-' . time() . '.' . $extension;
+            $path      = $file->storeAs('cvs', $filename);
         }
 
+
+        $data = $request->all();
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -81,6 +91,13 @@ class RegisterController extends Controller
             'description' => '',
             'role' => $data['role']
         ]);
+
+        if($path != null){
+            $cvfile = new Cvfile();
+            $cvfile->user_id = $user->id;
+            $cvfile->file = $path;
+            $cvfile->save();
+        }
 
         Mail::to($data['email'],$data['name'])
             ->send(new Wellcome($data));
