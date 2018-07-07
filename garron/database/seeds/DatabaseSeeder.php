@@ -14,18 +14,18 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(CountryTableSeeder::class);
         $this->call(IndustryTableSeeder::class);
-        $this->call(PositionTableSeeder::class);
+        //$this->call(PositionTableSeeder::class);
         $faker = Faker::create();
         DB::table('users')->insert([
-            'name' => 'Fede',
-            'email' => 'fede@email.com',
+            'name' => 'Federico Zacayan',
+            'email' => 'federicozaca@hotmail.com',
             'role' => CreateUsersTable::$roles[2],
-            'description' => $faker->realText(),
+            'description' => 'Desarrollador Fullstak PHP con orientación a procesos de gestión y fuertes skills en bases de datos e integración de sistemas vía API Rest y SOAP',
             'password' => bcrypt('123456'),
-            'slug' => str_slug('Fede'),
+            'slug' => str_slug('Federico Zacayan'),
         ]);
         
-        foreach (range(1,2) as $index) {
+        /*foreach (range(1,2) as $index) {
             $name = $faker->name;
             DB::table('users')->insert([
                 'name' => $name,
@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt('secret'),
                 'slug' => str_slug($name),
             ]);
-        }
+        }*/
         
 
         $this->call(SkillTableSeeder::class);

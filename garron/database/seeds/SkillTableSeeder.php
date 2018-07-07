@@ -104,7 +104,7 @@ class SkillTableSeeder extends Seeder
 		        'slug' => str_slug($skill)
 		    ]);
         }
-        $usersQuentity = DB::table('users')->select('id')->where('role', 'employee')->get()->toArray();
+        /*$usersQuentity = DB::table('users')->select('id')->where('role', 'employee')->get()->toArray();
         //dd($usersQuentity);
 
         for ($i=1; $i < count($skills); $i++) { 
@@ -123,6 +123,6 @@ class SkillTableSeeder extends Seeder
 		    if($i > 3){
 		    	break;
 		    }
-        }
+        }*/
     }
 }

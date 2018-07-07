@@ -13,7 +13,15 @@
         <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
         <meta name="csrf-token" content="{{ csrf_token() }}">	
 	<title>Garron Consulting Group</title>
-		
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121976976-1"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'UA-121976976-1');
+		</script>
+	
 		<style type="text/css">
 img.wp-smiley,
 img.emoji {
