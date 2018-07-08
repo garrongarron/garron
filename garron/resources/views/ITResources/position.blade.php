@@ -63,7 +63,7 @@
 					}
 					</style>
 					<div class="title" >
-						<img style="width: 280px" src="https://garron.com.ar/img/GarronConsultingGroup.png">
+						<img style="width: 280px" src="img/GarronConsultingGroup.png">
 					</div>
 				</div>
 			</div>

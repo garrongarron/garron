@@ -65,7 +65,7 @@
 				}
 				</style>
 				<div class="title" >
-					<img style="width: 280px" src="https://garron.com.ar/img/GarronConsultingGroup.png">
+					<img style="width: 280px" src="img/GarronConsultingGroup.png">
 				</div>
 				<p>Portal de busqueda laboral de profesionales de tecnología de la información</p>
 			</div>
