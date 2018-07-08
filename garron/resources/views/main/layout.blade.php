@@ -36,7 +36,7 @@ img.emoji {
 	padding: 0 !important;
 }
 </style>
-<link rel='stylesheet' id='google-fonts-css'  href='https://fonts.googleapis.com/css?family=Roboto%3A300%2C300i%2C400%2C400i%2C500%2C700%7CPlayfair+Display%3A400%2C700%2C400italic%2C700italic&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='google-fonts-css'  href='css/font.css' type='text/css' media='all' />
 <link rel='stylesheet' id='hover-css'  href='css/hover.css?ver=4.9.5' type='text/css' media='all' />
 <link rel='stylesheet' id='font-awesome-css'  href='css/font-awesome.css?ver=4.9.5' type='text/css' media='all' />
 <link rel='stylesheet' id='slicknav-css'  href='css/slicknav.css?ver=4.9.5' type='text/css' media='all' />
