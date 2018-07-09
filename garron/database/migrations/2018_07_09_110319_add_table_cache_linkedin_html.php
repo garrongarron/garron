@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTablePositionLoader extends Migration
+class AddTableCacheLinkedinHtml extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,13 @@ class AddTablePositionLoader extends Migration
      */
     public function up()
     {
-        /*Schema::table('position_loader', function (Blueprint $table) {
+        Schema::create('cache_linkedin', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('position');
-            $table->string('when');
-            $table->string('title');
-            $table->longText('description');
+            $table->longText('url');
             $table->string('type');
-            $table->string('company_name');
-            $table->string('industry');
-            $table->longText('img');
+            $table->longText('description');
             $table->timestamps();
-        });*/
+        });
     }
 
     /**
@@ -34,6 +29,6 @@ class AddTablePositionLoader extends Migration
      */
     public function down()
     {
-        //Schema::dropIfExists('position_loader');
+        Schema::dropIfExists('cache_linkedin');
     }
 }
