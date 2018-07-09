@@ -89,13 +89,17 @@
 			<br>
 			
 			<b>Descripción</b>
-			<p>{{ $position->description or 'CABA*' }}</p>
+			<p>{!! $position->description or 'CABA*' !!}</p>
 			
+			@if(!empty($position->mandatory_requirements))
 			<b>Requisitos Obligatorios</b>
-			<p>{{ $position->mandatory_requirements or 'CABA*' }}</p>
+			<p>{!! $position->mandatory_requirements or 'CABA*' !!}</p>
+			@endif
 			
+			@if(!empty($position->desiderable_requirements))
 			<b>Requisitos Deseables</b>
-			<p>{{ $position->desiderable_requirements or 'CABA*' }}</p>
+			<p>{!! $position->desiderable_requirements or 'CABA*' !!}</p>
+			@endif
 
 			<b>Se ofrece</b>
 			<p>Flexibilidad horaria y beneficios corporativos, tales como clases de inglés, reconocimiento al desempeño plan de carrera.</p>

@@ -45,6 +45,8 @@ Route::group(['middleware'=>'auth'], function(){
 });
 
 
+Route::resource('positionloader','PositionLoaderController');
+
 Route::get('/ITResources/busco', 'ITResources@searchProfesional')
 			->name('ITResources.searchProfesional');
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPosition extends Migration
+class AddTablePositionLoader extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,18 @@ class AddPosition extends Migration
      */
     public function up()
     {
-        Schema::create('position', function (Blueprint $table) {
+        /*Schema::table('position_loader', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->default(1);
+            $table->integer('position');
+            $table->string('when');
             $table->string('title');
-            $table->string('title_slug');
             $table->longText('description');
             $table->string('type');
-            $table->string('salary')->nullable();
-            $table->longText('mandatory_requirements')->nullable();
-            $table->longText('desiderable_requirements')->nullable();
+            $table->string('company_name');
             $table->string('industry');
-            $table->string('location');
+            $table->longText('img');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -36,6 +34,6 @@ class AddPosition extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('position');
+        //Schema::dropIfExists('position_loader');
     }
 }

@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(CountryTableSeeder::class);
         $this->call(IndustryTableSeeder::class);
-        //$this->call(PositionTableSeeder::class);
+        $this->call(PositionTableSeeder::class);
         $faker = Faker::create();
         DB::table('users')->insert([
             'name' => 'Federico Zacayan',
@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             'slug' => str_slug('Federico Zacayan'),
         ]);
         
-        /*foreach (range(1,2) as $index) {
+        foreach (range(1,2) as $index) {
             $name = $faker->name;
             DB::table('users')->insert([
                 'name' => $name,
@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt('secret'),
                 'slug' => str_slug($name),
             ]);
-        }*/
+        }
         
 
         $this->call(SkillTableSeeder::class);

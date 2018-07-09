@@ -46,9 +46,6 @@ class PositionController extends Controller
             'title'       => 'required',
             'description'       => 'required',
             'type'       => 'required',
-            'salary'       => 'required',
-            'desiderable_requirements'       => 'required',
-            'mandatory_requirements'       => 'required',
             'industry'       => 'required',
             'location'       => 'required',
         );
@@ -59,15 +56,16 @@ class PositionController extends Controller
                 ->withInput(Input::except('password'))
                 ;
         } else {
+            //dd($request->description);
             $position = new Position();
             $position->user_id = auth()->user()->id;
             $position->title = $request->title;
             $position->title_slug = str_slug($request->title);
-            $position->description = $request->description;
+            $position->description = str_replace("\n", '<br>', $request->description);
             $position->type = $request->type;
             $position->salary = $request->salary;
-            $position->mandatory_requirements = $request->mandatory_requirements;
-            $position->desiderable_requirements = $request->desiderable_requirements;
+            $position->mandatory_requirements = str_replace("\n", '<br>', $request->mandatory_requirements);
+            $position->desiderable_requirements = str_replace("\n", '<br>', $request->desiderable_requirements);
             $position->industry = $request->industry;
             $position->location = $request->location;
             $position->save();

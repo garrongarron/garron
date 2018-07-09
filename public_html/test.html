@@ -1,0 +1,58 @@
+<html><head>
+<script type="text/javascript">
+window.onload = function() {
+  // Parse the tracking code from cookies.
+  document.cookie = 'bcookie="v=2&4f8af1ee-e8c2-4bd3-87f0-ccd98569cade"; _ga=GA1.2.1576223786.1530268220; liap=true; JSESSIONID="ajax:0579811936093156201"; _guid=71731949-7a0e-4944-a264-65783be33d0e; li_oatml=AQF6DIHui2Rf0QAAAWRPq_v_ZRZO16NRZZUD2t9S3LSHPbS9FFS5dfn-tuMvl1LjwmkcEqTGt6ZyhOBr-bvwdrtdQ43hThHx; visit="v=1&M"; sl="v=1&U8bKm"; lang="v=2&lang=es-es"; _gat=1; _lipt=CwEAAAFkeofBXaN4mkvBKWsKaPnwFmIg5VN49V3SNYywEC2g7v13y6R1oxfAJfwNrk5d6WFJ9SzlNbbvxBtLgCLWUdOxrPUADaa1vu0olk4u_ClrkAC-In8iLdbaITBIfV6iYjLiKznJD20qR0JJezEtZkuAbYpXSxujWisiaSufwRLOz6O7krtteanmWSzTJZQy-fC72wkHeXo7zYWP7aeDIWgWHNQlS2NXSYBBntHDCK34bIGOJyA-KLcK4OeyHga16BfOLA5XeyPk8AbiQTWEWarEeim2MwN4r72JbSDHGAZThu7-Miabe9n3EdV6lowCTLV4pDco4QMdPBbrdmgdYkqeTOjrL3AHd_nrrNVhFb7we2HgLvYaWp5T7sd3iW0PGqvvIwleAKG3013-1A; lidc="b=OB74:g=849:u=25:i=1531064455:t=1531134993:s=AQEC3aQrum3SRnkdIygIO8DLFXe8Oisy"';
+  var trk = "bf";
+  var trkInfo = "bf";
+  var cookies = document.cookie.split("; ");
+
+  console.log(window.location.protocol);
+  console.log(window.location.href.substring(window.location.protocol.length));
+  console.log(window.location.href.substring(window.location.protocol.length));
+    //"trkCode="
+    //"trkInfo="
+ console.log(location.host);
+
+  // Get the new domain. For international domains such as
+  // fr.linkedin.com, we convert it to www.linkedin.com
+  var domain = "www.linkedin.com";
+  if (domain != location.host) {
+    var subdomainIndex = location.host.indexOf(".linkedin");
+    if (subdomainIndex != -1) {
+      domain = "www" + location.host.substring(subdomainIndex);
+    }
+  }
+
+  console.log(trkInfo);
+  console.log(domain);
+  console.log(trk);
+  document.cookie = 'bcookie="v=2&4f8af1ee-e8c2-4bd3-87f0-ccd98569cade"; _ga=GA1.2.1576223786.1530268220; liap=true; JSESSIONID="ajax:0579811936093156201"; _guid=71731949-7a0e-4944-a264-65783be33d0e; li_oatml=AQF6DIHui2Rf0QAAAWRPq_v_ZRZO16NRZZUD2t9S3LSHPbS9FFS5dfn-tuMvl1LjwmkcEqTGt6ZyhOBr-bvwdrtdQ43hThHx; visit="v=1&M"; sl="v=1&U8bKm"; lang="v=2&lang=es-es"; _gat=1; _lipt=CwEAAAFkeofBXaN4mkvBKWsKaPnwFmIg5VN49V3SNYywEC2g7v13y6R1oxfAJfwNrk5d6WFJ9SzlNbbvxBtLgCLWUdOxrPUADaa1vu0olk4u_ClrkAC-In8iLdbaITBIfV6iYjLiKznJD20qR0JJezEtZkuAbYpXSxujWisiaSufwRLOz6O7krtteanmWSzTJZQy-fC72wkHeXo7zYWP7aeDIWgWHNQlS2NXSYBBntHDCK34bIGOJyA-KLcK4OeyHga16BfOLA5XeyPk8AbiQTWEWarEeim2MwN4r72JbSDHGAZThu7-Miabe9n3EdV6lowCTLV4pDco4QMdPBbrdmgdYkqeTOjrL3AHd_nrrNVhFb7we2HgLvYaWp5T7sd3iW0PGqvvIwleAKG3013-1A; lidc="b=OB74:g=849:u=25:i=1531064455:t=1531134993:s=AQEC3aQrum3SRnkdIygIO8DLFXe8Oisy"';
+  var k = document.cookie.split("; ")
+  for(i in k){
+    var koo = k[i].split('=')
+    console.log(koo);
+  }
+
+  function setCookie(name,value,days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+  }
+
+  console.log(document.cookie);
+  /*window.location.href = 'https://www.linkedin.com/jobs/view/677911329/'*/
+  console.log(encodeURIComponent(window.location.href));
+
+  var h = "https://www.linkedin.com/authwall?trk=" + trk + "&trkInfo=" + trkInfo +
+      "&originalReferer=" + document.referrer.substr(0, 200) +
+      "&sessionRedirect=" + encodeURIComponent('https://www.linkedin.com/jobs/view/677911329/');
+      console.log(h)
+  //window.location.href = h;
+}
+</script>
+</head></html>
