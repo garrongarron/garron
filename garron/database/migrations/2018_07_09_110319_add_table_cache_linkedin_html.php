@@ -17,7 +17,7 @@ class AddTableCacheLinkedinHtml extends Migration
             $table->increments('id');
             $table->longText('url');
             $table->string('type');
-            $table->longText('description');
+            $table->longText('html');
             $table->timestamps();
         });
     }

@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Position;
+use Carbon\Carbon;
 
 class PositionLoaderController extends Controller
 {
+    static public $MOBILE = 'mobile';
+    static public $DESKOTP = 'desktop';
     /**
      * Display a listing of the resource.
      *
@@ -42,45 +47,66 @@ class PositionLoaderController extends Controller
      */
     public function store(Request $request)
     {
+
+        
         if(!empty($request->input('url'))){
             $url = $request->input('url');
-            $html = $this->index2($url);
-            
-            $doc = new \DOMDocument();
-            $searchPage = mb_convert_encoding($html, 'HTML-ENTITIES', "UTF-8"); 
-            $node = @$doc->loadHTML($searchPage);
-            $xpath = new \DOMXPath($doc);
+            $url = explode('?', $url)[0];
+            $desktop = $this->dataFromDesktop($url);
+            //var_dump($desktop);
+            $mobile = $this->dataFromMobile($url);
+            //var_dump($mobile);exit();
+            $position = new Position();
+            # id, user_id, 
+            $position->user_id = 1;
+            $position->title = $mobile['title']; 
+            $position->title_slug = str_slug($mobile['title']);
+            $position->description = $mobile['description']; 
+            $position->type = $mobile['type'];
+            $position->salary = 'N/A';
+            //$position->mandatory_requirements = 'asdasd';
+            //$position->desiderable_requirements = 'asdasd';
+            $position->industry = (!isset($mobile['industry'][0]))?$mobile['industry']:$mobile['industry'][0];
+            $position->location = $desktop['location']; 
+            $position->created_at = Carbon::createFromTimestamp(substr($desktop['when'], 0,10)); 
+            $position->save();
 
-            $result = $xpath->query('/html/body/code');//      /html/body/code[9]
-           // var_dump($result);
-            foreach ($result as $value) {
-                //var_dump($value->attributes[1]);
-                if(strpos($value->nodeValue, '"companyDetails"')){echo '<pre>';
-                    $data = json_decode($value->nodeValue, 1);
-                    var_dump(['when'=>$data['listedAt']]);
-                    var_dump(['title'=>$data['title']]);
-                    var_dump(['description'=>$data['description']['text']]);
-                    var_dump(['location'=>$data['formattedLocation']]);
-                    var_dump(['position'=>explode(':',$data['entityUrn'])[3]]);
-                    var_dump(['companyDetails'=>$data['companyDetails']['com.linkedin.voyager.jobs.JobPostingCompany']['company']]);
-                    var_dump(['entityUrn'=>$data['companyDetails']['com.linkedin.voyager.jobs.JobPostingCompany']['companyResolutionResult']['entityUrn']]);
-                    var_dump(['name'=>$data['companyDetails']['com.linkedin.voyager.jobs.JobPostingCompany']['companyResolutionResult']['name']]);
-                    var_dump(['logo'=>$data['companyDetails']['com.linkedin.voyager.jobs.JobPostingCompany']['companyResolutionResult']['logo']['image']['com.linkedin.common.VectorImage']['rootUrl']]);
-                    var_dump(['artifacts'=>$data['companyDetails']['com.linkedin.voyager.jobs.JobPostingCompany']['companyResolutionResult']['logo']['image']['com.linkedin.common.VectorImage']['artifacts'][0]['fileIdentifyingUrlPathSegment']]);
-                }
-                //$string = $doc->saveHTML($value);
-                //var_dump( $string);
-                //var_dump( $value->attributes);
-                /*foreach ($value->attributes as $v) {
-                    var_dump($v);
-                }*/
-            }
-            
+            $resultado = Position::find($position->id);
+
+            var_dump($resultado);
             return 'ok';
         } else {
             $this->search($request);
         }
         return $result;
+    }
+
+    private function dataFromMobile($url){
+        $html = $this->getHtmlMobile($url);
+        return $this->getDataPosition($html);
+    }
+    private function dataFromDesktop($url){
+        $html = $this->getHtmlDesktop($url);
+        $xpath = $this->getXpathObject($html);
+        $result = $xpath->query('/html/body/code');
+        $dataFromDesktop = [];
+        foreach ($result as $value) {
+            //var_dump($value->attributes[1]);
+            if(strpos($value->nodeValue, '"companyDetails"')){
+                $data = json_decode($value->nodeValue, 1);
+                $dataFromDesktop['when'] = $data['listedAt'];
+                $dataFromDesktop['title'] = $data['title'];
+                $dataFromDesktop['description'] = $data['description']['text'];
+                $dataFromDesktop['location'] = $data['formattedLocation'];
+                $dataFromDesktop['position'] = explode(':',$data['entityUrn'])[3];
+                $dataFromDesktop['companyDetails'] = $data['companyDetails']['com.linkedin.voyager.jobs.JobPostingCompany']['company'];
+                $dataFromDesktop['entityUrn'] = $data['companyDetails']['com.linkedin.voyager.jobs.JobPostingCompany']['companyResolutionResult']['entityUrn'];
+                $dataFromDesktop['name'] = $data['companyDetails']['com.linkedin.voyager.jobs.JobPostingCompany']['companyResolutionResult']['name'];
+                $dataFromDesktop['logo'] = $data['companyDetails']['com.linkedin.voyager.jobs.JobPostingCompany']['companyResolutionResult']['logo']['image']['com.linkedin.common.VectorImage']['rootUrl'];
+                $dataFromDesktop['artifacts'] = $data['companyDetails']['com.linkedin.voyager.jobs.JobPostingCompany']['companyResolutionResult']['logo']['image']['com.linkedin.common.VectorImage']['artifacts'][0]['fileIdentifyingUrlPathSegment'];
+            }
+        }
+        return $dataFromDesktop;
     }
 
     private function search($request){
@@ -110,43 +136,38 @@ class PositionLoaderController extends Controller
         $node = @$doc->loadHTML($searchPage);
         $xpath = new \DOMXPath($doc);
 
-
-
-
+        $dataMobilePosition = [];
 
         $title = $xpath->query('//*[@id="app-container"]/section/div/dl/dt')[0]->nodeValue;
-        var_dump($title);
+        $dataMobilePosition['title'] = $title;
         
         $domElement = $xpath->query('//*[@id="app-container"]/section/section[*]/div')[0];//[0]->nodeValue;
-        $string = $doc->saveHTML($domElement);
-        var_dump($string);
+        $description = $doc->saveHTML($domElement);
+        $dataMobilePosition['description'] = $description;
 
-        $typo = $xpath->query('//*[@id="app-container"]/section/section[1]/div/div/div[2]/div[3]')[0]->nodeValue;
-        var_dump($typo);
+        $type = $xpath->query('//*[@id="app-container"]/section/section[1]/div/div/div[2]/div[3]')[0]->nodeValue;
+        $dataMobilePosition['type'] = $type;
 
 
 
         $industry = $xpath->query('//*[@id="app-container"]/section/section[1]/div/div/div[2]/div[2]')[0]->nodeValue;
         $industry=array_map('trim',explode(',', $industry));
-        var_dump($industry);
+        $dataMobilePosition['industry'] = $industry;
 
 
-        $cuando = $xpath->query('//*[@id="app-container"]/section/div/dl/dd[2]/span')[0]->nodeValue;
-        var_dump($cuando);
+
+        $when = $xpath->query('//*[@id="app-container"]/section/div/dl/dd[2]/span')[0]->nodeValue;
+        $dataMobilePosition['when'] = $when;
 
 
         $img = $xpath->query('//*[@id="company-logo"]/img')[0]->attributes[4]->value;
-        var_dump($img);
-        echo '<img src="'.$img.'">';
+        $dataMobilePosition['img'] = $img;
+        //echo '<img src="'.$img.'">';
 
 
-        $company = $xpath->query('//*[@id="company-name"]')[0]->nodeValue;
-        var_dump($company);
-        exit();
-
-        
-
-        //
+        $companyName = $xpath->query('//*[@id="company-name"]')[0]->nodeValue;
+        $dataMobilePosition['companyName'] = $companyName;
+        return $dataMobilePosition;
     }
 
     /**
@@ -213,38 +234,103 @@ class PositionLoaderController extends Controller
         return $data;
     }
 
-    public function index2($url = null, $flag = null){
-    //public function getHtmlDescktop($url = null, $flag = null){
+    
+    public function getHtmlDesktop($url = null, $flag = null){
+        $conditions = [['url', '=', $url], ['type', '=', PositionLoaderController::$DESKOTP]];
+        $htmlData =  DB::table('cache_linkedin')->where($conditions)->first();
+        if($htmlData == null){
+            $html =  $this->getLinkedinDesktop($url);
+            DB::table('cache_linkedin')->insert([
+            'url' => $url,
+            'html' => $html,
+            'type' => PositionLoaderController::$DESKOTP,
+            ]);
+        } else {
+            $html = $htmlData->html;
+        }
+        //dd($html);
+        return $html;
+    }
 
-//curl_setopt($ch, CURLOPT_URL, "https://www.linkedin.com/jobs/view/677911329/");
-//curl_setopt($ch, CURLOPT_URL, "https://www.linkedin.com/jobs/view/693629350/");
-// Generated by curl-to-PHP: http://incarnate.github.io/curl-to-php/
-$ch = curl_init();
-https://www.linkedin.com/jobs/view/737562730/
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+    public function getHtmlMobile($url = null, $flag = null){
+        $conditions = [['url', '=', $url], ['type', '=', PositionLoaderController::$MOBILE]];
+        $htmlData =  DB::table('cache_linkedin')->where($conditions)->first();
+        if($htmlData == null){
+            $html =  $this->getLinkedinMobile($url);
+            DB::table('cache_linkedin')->insert([
+            'url' => $url,
+            'html' => $html,
+            'type' => PositionLoaderController::$MOBILE,
+            ]);
+        } else {
+            $html = $htmlData->html;
+        }
+        //dd($html);
+        return $html;
+    }
+       
+    public function getLinkedinDesktop($url = null, $flag = null){
 
-curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
+        //curl_setopt($ch, CURLOPT_URL, "https://www.linkedin.com/jobs/view/677911329/");
+        //curl_setopt($ch, CURLOPT_URL, "https://www.linkedin.com/jobs/view/693629350/");
+        // Generated by curl-to-PHP: http://incarnate.github.io/curl-to-php/
+        $ch = curl_init();
+        https://www.linkedin.com/jobs/view/737562730/
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
 
-$headers = array();
-$headers[] = "Accept-Encoding: gzip, deflate, br";
-$headers[] = "Accept-Language: en-US,en;q=0.9";
-$headers[] = "Upgrade-Insecure-Requests: 1";
-$headers[] = "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36";
-$headers[] = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";
-$headers[] = "Cache-Control: max-age=0";
-$headers[] = "Authority: www.linkedin.com";
-$headers[] = "Cookie: bcookie=\"v=2&89051535-2e23-458b-88b6-8c4e93e4e803\"; bscookie=\"v=1&201803290241299396f588-fca1-43b5-80b5-82e2d5bfc3d4AQGT4p08PwMSMtQh7CNhLKct0wPu8CFQ\"; _ga=GA1.2.1580299069.1522291290; visit=\"v=1&G\"; _gat=1; leo_auth_token=\"GST:ZC83WpK6Z-BkMLrXBm8jpszKNtW_rkiXrL3zpW0QmDvoMROSmRtCR_:1531076541:684bda292faa154c042cef817fd397e933ed78a1\"; sl=\"v=1&oUYOq\"; li_at=AQEDASI8vzgEMBQ0AAABZHtF_RwAAAFkn1KBHE4AovC-xmhlZpBiAzD-275USnvimivRnZ5y3FZNeJs6LVLP1n83huxilVEtVtm7td76qJ8EbKAo0DKWM4U7xOBCf7AL3fzs2zphVbYaz_D8krdNsihT; liap=true; JSESSIONID=\"ajax:4402266317887323820\"; lang=v=2&lang=es-es; RT=s=1531076541154&r=https%3A%2F%2Fwww.linkedin.com%2Fuas%2Flogin-submit; _guid=a4b08a9f-3874-4125-b3ec-d9f1a8429f69; li_oatml=AQHDn4hPqPQ5owAAAWR7Rh7HTu-lz7ELyWyZ8xAHPWjqfRWlCk9lOWyJiJvEKD8qbayTRGc20OZ0_nvyWVeIywxytcprl-C_; _lipt=CwEAAAFke0Z90vSsH3fgcJyBFFAxR2vx8d5wJ1eGJ8KUEVjlRwH8BojQ3xa0CUB2QPZ4NYUa02-C143jOE_vC5g8Mc07VBkzYSFyy_NZyTYueXq4hbrv7o-oDZeBhCP_IkBAzhOQKvbjBfzxwogI54PvpYEfXNLwDXceUiD2pRQuPmOWJ8PD5Cy74mFgz3qM-tjiPy0_9Ld2lByhgjE2zjvW1BZf1Iw00iXGfT54GJ1LlNZV3_nLohTUgDsR1Htk5dPd_29doKdX1sjRpAYnwZfcc7GbDcm2eIC4HsE7WRuP9a4Ff9dmYLg46nO0EuFdaaoBsPzYjolqX7UEHv6V7VeJOj3B0Fov_OIV530Zvr0QsBjVIvxhtFp3; pushPermState=default; lidc=\"b=OGST00:g=819:u=1:i=1531076593:t=1531162993:s=AQEyHQpHkq1dh56dK3eMwp37I39qjxVL\"";
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
 
-$result = curl_exec($ch);
-if (curl_errno($ch)) {
-    echo 'Error:' . curl_error($ch);
-}
-curl_close ($ch); 
+        $headers = array();
+        $headers[] = "Accept-Encoding: gzip, deflate, br";
+        $headers[] = "Accept-Language: en-US,en;q=0.9";
+        $headers[] = "Upgrade-Insecure-Requests: 1";
+        $headers[] = "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36";
+        $headers[] = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";
+        $headers[] = "Cache-Control: max-age=0";
+        $headers[] = "Authority: www.linkedin.com";
+        $headers[] = "Cookie: bcookie=\"v=2&89051535-2e23-458b-88b6-8c4e93e4e803\"; bscookie=\"v=1&201803290241299396f588-fca1-43b5-80b5-82e2d5bfc3d4AQGT4p08PwMSMtQh7CNhLKct0wPu8CFQ\"; _ga=GA1.2.1580299069.1522291290; visit=\"v=1&G\"; _gat=1; leo_auth_token=\"GST:ZC83WpK6Z-BkMLrXBm8jpszKNtW_rkiXrL3zpW0QmDvoMROSmRtCR_:1531076541:684bda292faa154c042cef817fd397e933ed78a1\"; sl=\"v=1&oUYOq\"; li_at=AQEDASI8vzgEMBQ0AAABZHtF_RwAAAFkn1KBHE4AovC-xmhlZpBiAzD-275USnvimivRnZ5y3FZNeJs6LVLP1n83huxilVEtVtm7td76qJ8EbKAo0DKWM4U7xOBCf7AL3fzs2zphVbYaz_D8krdNsihT; liap=true; JSESSIONID=\"ajax:4402266317887323820\"; lang=v=2&lang=es-es; RT=s=1531076541154&r=https%3A%2F%2Fwww.linkedin.com%2Fuas%2Flogin-submit; _guid=a4b08a9f-3874-4125-b3ec-d9f1a8429f69; li_oatml=AQHDn4hPqPQ5owAAAWR7Rh7HTu-lz7ELyWyZ8xAHPWjqfRWlCk9lOWyJiJvEKD8qbayTRGc20OZ0_nvyWVeIywxytcprl-C_; _lipt=CwEAAAFke0Z90vSsH3fgcJyBFFAxR2vx8d5wJ1eGJ8KUEVjlRwH8BojQ3xa0CUB2QPZ4NYUa02-C143jOE_vC5g8Mc07VBkzYSFyy_NZyTYueXq4hbrv7o-oDZeBhCP_IkBAzhOQKvbjBfzxwogI54PvpYEfXNLwDXceUiD2pRQuPmOWJ8PD5Cy74mFgz3qM-tjiPy0_9Ld2lByhgjE2zjvW1BZf1Iw00iXGfT54GJ1LlNZV3_nLohTUgDsR1Htk5dPd_29doKdX1sjRpAYnwZfcc7GbDcm2eIC4HsE7WRuP9a4Ff9dmYLg46nO0EuFdaaoBsPzYjolqX7UEHv6V7VeJOj3B0Fov_OIV530Zvr0QsBjVIvxhtFp3; pushPermState=default; lidc=\"b=OGST00:g=819:u=1:i=1531076593:t=1531162993:s=AQEyHQpHkq1dh56dK3eMwp37I39qjxVL\"";
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-       // dd($result);
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            $error =  'Error:' . curl_error($ch);
+            dd($error);
+        }
+        curl_close ($ch); 
+
+       
+        return $result;
+    }
+    private function getLinkedinMobile($url, $flag = null){
+        ////////////////////////////////////////////////////////////////////
+        // Generated by curl-to-PHP: http://incarnate.github.io/curl-to-php/
+        $ch = curl_init();
+
+        //curl_setopt($ch, CURLOPT_URL, "https://www.linkedin.com/jobs/view/693629350/");
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
+
+        $headers = array();
+        $headers[] = "Accept-Encoding: gzip, deflate, br";
+        $headers[] = "Accept-Language: en-US,en;q=0.9";
+        $headers[] = "Upgrade-Insecure-Requests: 1";
+        $headers[] = "User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Mobile Safari/537.36";
+        $headers[] = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";
+        $headers[] = "Cache-Control: max-age=0";
+        $headers[] = "Authority: www.linkedin.com";
+        $headers[] = "Cookie: bcookie=\"v=2&89051535-2e23-458b-88b6-8c4e93e4e803\"; bscookie=\"v=1&201803290241299396f588-fca1-43b5-80b5-82e2d5bfc3d4AQGT4p08PwMSMtQh7CNhLKct0wPu8CFQ\"; _ga=GA1.2.1580299069.1522291290; visit=\"v=1&G\"; _gat=1; leo_auth_token=\"GST:ZC83WpK6Z-BkMLrXBm8jpszKNtW_rkiXrL3zpW0QmDvoMROSmRtCR_:1531076541:684bda292faa154c042cef817fd397e933ed78a1\"; sl=\"v=1&oUYOq\"; li_at=AQEDASI8vzgEMBQ0AAABZHtF_RwAAAFkn1KBHE4AovC-xmhlZpBiAzD-275USnvimivRnZ5y3FZNeJs6LVLP1n83huxilVEtVtm7td76qJ8EbKAo0DKWM4U7xOBCf7AL3fzs2zphVbYaz_D8krdNsihT; liap=true; JSESSIONID=\"ajax:4402266317887323820\"; lang=v=2&lang=es-es; RT=s=1531076541154&r=https%3A%2F%2Fwww.linkedin.com%2Fuas%2Flogin-submit; _guid=a4b08a9f-3874-4125-b3ec-d9f1a8429f69; li_oatml=AQHDn4hPqPQ5owAAAWR7Rh7HTu-lz7ELyWyZ8xAHPWjqfRWlCk9lOWyJiJvEKD8qbayTRGc20OZ0_nvyWVeIywxytcprl-C_; lidc=\"b=TB56:g=1421:u=34:i=1531076566:t=1531153394:s=AQE1e6FZKKZIXcduATVCc2B2yHzMvkqs\"; _lipt=CwEAAAFke0Z90vSsH3fgcJyBFFAxR2vx8d5wJ1eGJ8KUEVjlRwH8BojQ3xa0CUB2QPZ4NYUa02-C143jOE_vC5g8Mc07VBkzYSFyy_NZyTYueXq4hbrv7o-oDZeBhCP_IkBAzhOQKvbjBfzxwogI54PvpYEfXNLwDXceUiD2pRQuPmOWJ8PD5Cy74mFgz3qM-tjiPy0_9Ld2lByhgjE2zjvW1BZf1Iw00iXGfT54GJ1LlNZV3_nLohTUgDsR1Htk5dPd_29doKdX1sjRpAYnwZfcc7GbDcm2eIC4HsE7WRuP9a4Ff9dmYLg46nO0EuFdaaoBsPzYjolqX7UEHv6V7VeJOj3B0Fov_OIV530Zvr0QsBjVIvxhtFp3";
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close ($ch);
         return $result;
     }
     private function getHtml($url, $flag = null){
@@ -262,7 +348,7 @@ curl_close ($ch);
         $ch = curl_init();
 
         //curl_setopt($ch, CURLOPT_URL, "https://www.linkedin.com/jobs/view/693629350/");
-        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
 
