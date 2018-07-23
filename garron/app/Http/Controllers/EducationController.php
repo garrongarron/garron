@@ -53,19 +53,19 @@ class EducationController extends Controller
                 ->withInput(Input::except('password'))
                 ;
         } else {
-            $experience = new Education();
+            $education = new Education();
             $user = auth()->user();
-            $experience->user_id = $user->id;
-            $experience->school       = Input::get('school');
-            $experience->degree       = Input::get('degree');
-            $experience->field_of_study       = Input::get('field_of_study');
-            $experience->grade       = Input::get('grade');
-            $experience->activities       = Input::get('activities');
-            $experience->from       = Carbon::parse('01-01-'.Input::get('from'));
-            $experience->to       = Carbon::parse('01-01-'.Input::get('to'));
-            $experience->description       = Input::get('description');
+            $education->user_id = $user->id;
+            $education->school       = Input::get('school');
+            $education->degree       = Input::get('degree');
+            $education->field_of_study       = Input::get('field_of_study');
+            $education->grade       = Input::get('grade');
+            $education->activities       = Input::get('activities');
+            $education->from       = Carbon::parse('01-01-'.Input::get('from'));
+            $education->to       = Carbon::parse('01-01-'.Input::get('to'));
+            $education->description       = Input::get('description');
 
-            $experience->save();
+            $education->save();
             Session::flash('message', 'Successfully created Education!');
             return Redirect::back();
         }
@@ -79,7 +79,15 @@ class EducationController extends Controller
      */
     public function show($id)
     {
-        //
+        $education = Education::find($id);
+        $education->from = date('Y', strtotime($education->from));
+        $education->to = date('Y', strtotime($education->to));
+        $ITR = new ITResources();
+        $sectores = $ITR->getIndustry();
+        $country = $ITR->getCountry();
+        return view('ITResources.widget.educationForm', [
+            'education' => $education,
+            'toUpdate' => '-update']);
     }
 
     /**
@@ -102,7 +110,36 @@ class EducationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // validate
+        // read more on validation at http://laravel.com/docs/validation
+        /*$rules = array(
+            'name'       => 'required',
+            'email'      => 'required|email',
+            'nerd_level' => 'required|numeric'
+        );
+        $validator = Validator::make(Input::all(), $rules);*/
+
+        // process the login
+        // if ($validator->fails()) {
+        //     return Redirect::to('nerds/' . $id . '/edit')
+        //         ->withErrors($validator)
+        //         ->withInput(Input::except('password'));
+        // } else {
+            // store
+            $education = Education::find($id);
+            $education->school = Input::get('school');
+            $education->degree = Input::get('degree');
+            $education->field_of_study = Input::get('field_of_study');
+            $education->grade = Input::get('grade');
+            $education->activities = Input::get('activities');
+            $education->from = Carbon::parse('01-01-'.Input::get('from'));
+            $education->to = Carbon::parse('01-01-'.Input::get('to'));
+            $education->description = Input::get('description');
+            $education->save();
+            // redirect
+            Session::flash('message', 'Successfully updated education!');
+            return redirect()->back();
+        // }
     }
 
     /**

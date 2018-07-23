@@ -71,7 +71,7 @@
 							
 							@foreach($experience as $value)
 							<li>
-								<h5>{{ $value->title }}</h5> <!--<a href="#"><i class="fa fa-edit"></i></a>--> en {{ $value->company }}
+								<h5>{{ $value->title }}</h5>  en {{ $value->company }} <a href="#" class="editExperience" experience-id="{{ $value->id }}"><i class="fa fa-edit"></i></a>
 								<p>{{ Carbon\Carbon::parse($value->from)->formatLocalized('%b.  %Y') }} - {{ Carbon\Carbon::parse($value->to)->formatLocalized('%b. %Y') }}<br>
 								{{ $value->description }}</p>
 							</li>
@@ -84,7 +84,7 @@
 						<ul>
 							@foreach($education as $value)
 							<li>
-								<h5>{{ $value->school }}</h5> <!--<a href="#"><i class="fa fa-edit"></i></a>-->
+								<h5>{{ $value->school }}</h5> <a href="#" class="editStudy" study-id="{{ $value->id }}"><i class="fa fa-edit"></i></a>
 								<p>{{ $value->degree }}</p>
 								<p>{{ Carbon\Carbon::parse($value->from)->format('Y') }} - {{ Carbon\Carbon::parse($value->to)->format('Y') }}
 								{{--<!--<b>{{ $value->field_of_study }}</b>: {{ $value->description }}-->--}}
@@ -221,8 +221,34 @@
 							$('#userModal').modal('show');
 							return false;
 						})
+
+						$('.editStudy').on('click', function(event){
+							$.ajax({
+								method: "GET",
+								url: "/education/"+$(this).attr('study-id'),
+							}).done(function( form ) {
+								console.log(form);
+								$('.editor-container').html(form);
+								$('#education-update').modal('show');
+
+							});
+							event.preventDefault();
+						})
+						$('.editExperience').on('click', function(event){
+							$.ajax({
+								method: "GET",
+								url: "/experience/"+$(this).attr('experience-id'),
+							}).done(function( form ) {
+								console.log(form);
+								$('.editor-container').html(form);
+								$('#experience-update').modal('show');
+
+							});
+							event.preventDefault();
+						})
 					})(window, document)
 				</script>
+				<div class="editor-container"></div>
 				<div class="tags">
 					@foreach($userSkills as $skill)
 						{{--<!-- <span class="badge badge-success">{{ $skill->name }}<a href="#">x</a></span>-->--}}

@@ -135,12 +135,17 @@ class ITResources extends Controller
             } else {
                 session(['itSearch' =>$position]);
             }
-            $jobs = Position::where('title_slug','LIKE','%'.str_slug($position).'%')->paginate(4);
+            
+            PositionLoaderController::searchOnLinkedin($position);
+
         } else {
-            $title = $position;
-            $jobs = Position::where('title_slug', $title)->paginate(4);
+            //$jobs = Position::where('title_slug', $position)->paginate(4);
             $position = $this->positions[$position];
         }
+        $jobs = Position::where('title_slug','LIKE','%'.str_slug($position).'%')
+                ->orWhere('description', 'LIKE', '%'.$position.'%')
+                ->orderByRaw('created_at DESC')
+                ->paginate(8);
         $paginatorLink = $jobs->links();
 
 
@@ -226,7 +231,7 @@ class ITResources extends Controller
             'employees' => $employees]);
     }
 
-    private function getIndustry(){
+    public function getIndustry(){
         $sectoresTmp = DB::table('industry')->select('id', 'description_es')->get();
         $sectores = [];
         $sectores[''] = 'Escoge un sector…';
@@ -236,7 +241,7 @@ class ITResources extends Controller
         return $sectores;
     }
 
-    private function getCountry(){
+    public function getCountry(){
         $countryTmp = DB::table('country')->select('code', 'name')->get();
         $country = [];
         foreach($countryTmp as $value){

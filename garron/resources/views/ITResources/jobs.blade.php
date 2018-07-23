@@ -60,8 +60,12 @@ h3, img{
 					</div>
 					<div class="col-md-9">
 						<h3>{{ $title->title }}</h3>
-						<div><b>Garron Consulting Grup</b></div>
-						<div><span>Capital Federal</span> <span>Full time</span> <span><i>Ayer</i></span></div>
+						{{-- <div><b>Garron Consulting Grup</b></div> --}}
+						<div>
+							<span>{{ $title->location }}</span> -
+							<span>{{ $title->type }}</span> -
+							<span><i>{{ \Carbon\Carbon::parse($title->created_at)->diffForHumans() }}</i></span>
+						</div>
 					</div>
 				</div>
 				@endforeach

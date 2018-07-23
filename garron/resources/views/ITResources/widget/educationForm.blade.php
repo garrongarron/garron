@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="education" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="education{{ $toUpdate or '' }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -8,7 +8,21 @@
 				  <span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			{{ Form::open(array('url' => 'education')) }}
+			@if(!isset($toUpdate))
+				{{ Form::open(array('url' => 'education')) }}
+			@else
+				{{ Form::model(
+						$education, 
+						array(
+							'route'=> array( 
+								'education.update', 
+								$education->id
+							),
+							'method' => 'put'
+						)
+					)
+				}}
+			@endif
 			<div class="modal-body">
 				<div class="form-group">
 					{{ Form::label('school', 'Escuela') }}

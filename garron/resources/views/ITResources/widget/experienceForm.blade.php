@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="experience" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="experience{{ $toUpdate or '' }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -9,7 +9,21 @@
 				</button>
 
 			</div>
-			{{ Form::open(array('url' => 'experience')) }}
+			@if(!isset($toUpdate))
+				{{ Form::open(array('url' => 'experience')) }}
+			@else
+				{{ Form::model(
+						$experience, 
+						array(
+							'route'=> array( 
+								'experience.update', 
+								$experience->id
+							),
+							'method' => 'put'
+						)
+					)
+				}}
+			@endif
 			<div class="modal-body">
 				<div class="form-group">
 					{{ Form::label('title', 'Cargo') }}
