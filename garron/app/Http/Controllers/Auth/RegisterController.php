@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+
+use Illuminate\Http\Request;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -68,11 +70,10 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create($request)
+    protected function create(Request $request)
     {
         $path  = null;
-        $data = $request->all();
-        if(isset($data['file'])){
+        if($request->hasFile('file')){
             $validation = $request->validate([
                 'file' => 'file|max:4096'
             ]);
@@ -83,6 +84,7 @@ class RegisterController extends Controller
         }
 
 
+        $data = $request->all();
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
