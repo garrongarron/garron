@@ -74,25 +74,6 @@ class PositionController extends Controller
             Session::flash('message', 'Successfully created Position!');
             return Redirect::back();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             
     }
 
@@ -102,9 +83,17 @@ class PositionController extends Controller
      * @param  \App\Position  $position
      * @return \Illuminate\Http\Response
      */
-    public function show(Position $position)
+    public function show($id)
     {
-        //
+        $position = Position::find($id);
+        
+        $ITR = new ITResources();
+        $sectores = $ITR->getIndustry();
+        $country = $ITR->getCountry();
+        return view('ITResources.widget.positionForm', [
+            'position' => $position,
+            'industry' => $sectores,
+            'toUpdate' => '-update']);
     }
 
     /**
@@ -125,9 +114,39 @@ class PositionController extends Controller
      * @param  \App\Position  $position
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Position $position)
+    public function update($id)
     {
-        //
+        // validate
+        // read more on validation at http://laravel.com/docs/validation
+        /*$rules = array(
+            'name'       => 'required',
+            'email'      => 'required|email',
+            'nerd_level' => 'required|numeric'
+        );
+        $validator = Validator::make(Input::all(), $rules);*/
+
+        // process the login
+        // if ($validator->fails()) {
+        //     return Redirect::to('nerds/' . $id . '/edit')
+        //         ->withErrors($validator)
+        //         ->withInput(Input::except('password'));
+        // } else {
+            // store
+            $position = Position::find($id);
+            $position->title = Input::get('title');
+            $position->description = Input::get('description');
+            $position->type = Input::get('type');
+            $position->salary = Input::get('salary');
+            $position->mandatory_requirements = Input::get('mandatory_requirements');
+            $position->desiderable_requirements = Input::get('desiderable_requirements');
+            $position->industry = Input::get('industry');
+            $position->location = Input::get('location');
+            $position->save();
+
+            // redirect
+            Session::flash('message', 'Successfully updated position!');
+            return redirect()->back();
+        // }
     }
 
     /**

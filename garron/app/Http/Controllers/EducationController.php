@@ -82,9 +82,6 @@ class EducationController extends Controller
         $education = Education::find($id);
         $education->from = date('Y', strtotime($education->from));
         $education->to = date('Y', strtotime($education->to));
-        $ITR = new ITResources();
-        $sectores = $ITR->getIndustry();
-        $country = $ITR->getCountry();
         return view('ITResources.widget.educationForm', [
             'education' => $education,
             'toUpdate' => '-update']);

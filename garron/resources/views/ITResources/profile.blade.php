@@ -128,6 +128,70 @@
 						<option value="Safari">
 					</datalist>
 				</form>
+
+				<div class="editor-container"></div>
+				<div class="tags">
+					@foreach($userSkills as $skill)
+						{{--<!-- <span class="badge badge-success">{{ $skill->name }}<a href="#">x</a></span>-->--}}
+						<span class="badge badge-success"><span>{{ $skill->name }}</span><a href="#">x</a></span>
+					@endforeach
+				</div>
+				
+				@if(auth()->user()->role != 'company')
+					<h4>Aplicaste como:</h4>
+					<div>
+					@foreach($positions as $application)
+					<?php $slug = str_slug($application->title).'-'.$application->id; ?>
+						<span> <a href="{{ route('ITResources.position',  $slug) }}">{{ $application->title }}</a> </span>
+					@endforeach
+					</div>
+				@else
+					@include('ITResources.widget.positionForm', ['industry'=>$industry])
+						<div style="padding: 10px 0px;">
+							<input type="button" class="btn btn-success" value="Crear publicación" name="" data-toggle="modal" data-target="#position">
+						</div>
+					<h4>Tus Publicaciones:</h4>
+					<div>
+					@foreach($myPositions as $application)
+					<?php $slug = str_slug($application->title).'-'.$application->id; ?>
+						<span> <a href="{{ route('ITResources.position',  $slug) }}">{{ $application->title }}</a> <a href="#" class="editPosition" position-id="{{ $application->id }}"><i class="fa fa-edit"></i></a></span>
+					@endforeach
+					</div>
+				@endif
+
+
+
+			</div>
+			
+			{{--<!--<div class="col-md-12">
+				<hr>
+
+				<hr>
+				<h3>Otra cosa</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<hr>
+			</div>
+
+
+
+		
+			<p>Aquí las mejores empresas buscan a los mejores recursos. Oportunidades de mejora.</p>
+			<div class="col-md-12">
+				<hr>
+				<ul>
+					<li>{{ $position }}</li>
+					<li>{{ $position }}</li>
+					<li>{{ $position }}</li>
+					<li>{{ $position }}</li>
+					<li>{{ $position }}</li>
+					<li>{{ $position }}</li>
+				</ul>
+			</div>-->--}}
 				<script type="text/javascript">
 					(function(window, document){
 						var $ = jQuery;
@@ -246,72 +310,20 @@
 							});
 							event.preventDefault();
 						})
+						$('.editPosition').on('click', function(event){
+							event.preventDefault();
+							$.ajax({
+								method: "GET",
+								url: "/position/"+$(this).attr('position-id'),
+							}).done(function( form ) {
+								console.log(form);
+								$('.editor-container').html(form);
+								$('#position-update').modal('show');
+
+							});
+						})
 					})(window, document)
 				</script>
-				<div class="editor-container"></div>
-				<div class="tags">
-					@foreach($userSkills as $skill)
-						{{--<!-- <span class="badge badge-success">{{ $skill->name }}<a href="#">x</a></span>-->--}}
-						<span class="badge badge-success"><span>{{ $skill->name }}</span><a href="#">x</a></span>
-					@endforeach
-				</div>
-				
-				@if(auth()->user()->role != 'company')
-					<h4>Aplicaste como:</h4>
-					<div>
-					@foreach($positions as $application)
-					<?php $slug = str_slug($application->title).'-'.$application->id; ?>
-						<span> <a href="{{ route('ITResources.position',  $slug) }}">{{ $application->title }}</a> </span>
-					@endforeach
-					</div>
-				@else
-					@include('ITResources.widget.positionForm', ['industry'=>$industry])
-						<div style="padding: 10px 0px;">
-							<input type="button" class="btn btn-success" value="Crear publicación" name="" data-toggle="modal" data-target="#positionForm">
-						</div>
-					<h4>Tus Publicaciones:</h4>
-					<div>
-					@foreach($myPositions as $application)
-					<?php $slug = str_slug($application->title).'-'.$application->id; ?>
-						<span> <a href="{{ route('ITResources.position',  $slug) }}">{{ $application->title }}</a> </span>
-					@endforeach
-					</div>
-				@endif
-
-
-
-			</div>
-			
-			{{--<!--<div class="col-md-12">
-				<hr>
-
-				<hr>
-				<h3>Otra cosa</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-				<hr>
-			</div>
-
-
-
-		
-			<p>Aquí las mejores empresas buscan a los mejores recursos. Oportunidades de mejora.</p>
-			<div class="col-md-12">
-				<hr>
-				<ul>
-					<li>{{ $position }}</li>
-					<li>{{ $position }}</li>
-					<li>{{ $position }}</li>
-					<li>{{ $position }}</li>
-					<li>{{ $position }}</li>
-					<li>{{ $position }}</li>
-				</ul>
-			</div>-->--}}
-		
 
 		</div>
 		@include('ITResources.footer')

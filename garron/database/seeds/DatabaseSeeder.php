@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Federico Zacayan',
             'email' => 'federicozaca@hotmail.com',
-            'role' => CreateUsersTable::$roles[2],
+            'role' => CreateUsersTable::$roles[1],
             'description' => 'Desarrollador Fullstak PHP con orientación a procesos de gestión y fuertes skills en bases de datos e integración de sistemas vía API Rest y SOAP',
             'password' => bcrypt('123456'),
             'slug' => str_slug('Federico Zacayan'),

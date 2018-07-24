@@ -21,7 +21,7 @@ class PositionTableSeeder extends Seeder
             ,'IT Profesional'];
         $faker = Faker::create();
 
-        foreach (range(1,15) as $index) {
+        foreach (range(1,1) as $index) {
             $position = $positions[random_int( 0,count($positions)-1)];
             DB::table('position')->insert([
                 'title' => $position,
