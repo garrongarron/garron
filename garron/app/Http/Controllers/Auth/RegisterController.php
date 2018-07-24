@@ -71,7 +71,8 @@ class RegisterController extends Controller
     protected function create($request)
     {
         $path  = null;
-        if($request->hasFile('file')){
+        $data = $request->all();
+        if(isset($data['file'])){
             $validation = $request->validate([
                 'file' => 'file|max:4096'
             ]);
@@ -82,7 +83,6 @@ class RegisterController extends Controller
         }
 
 
-        $data = $request->all();
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
