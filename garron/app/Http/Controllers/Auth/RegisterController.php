@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-
-use Illuminate\Http\Request;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -70,8 +68,9 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(Request $request)
+    protected function create($request)
     {
+        $request = request();
         $path  = null;
         if($request->hasFile('file')){
             $validation = $request->validate([
