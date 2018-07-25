@@ -61,7 +61,7 @@
 </style>
 							<div class="collapse navbar-collapse">
 								<ul id="menu-top-menu" class="nav navbar-nav">
-<!--<li class="menu-item menu-item-type-custom menu-item-object-custom"><a title="{{ trans('home.home') }}" href="#header">{{ trans('home.home') }}</a></li>-->
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a title="{{ trans('home.home') }}" href="{{ route('ITResources') }}">Entrada</a></li>
 		 						<!-- Authentication Links -->
 		                        @guest
 		                            <li><a href="{{ route('login') }}">Login</a></li>
@@ -69,7 +69,7 @@
 		                        @else
 
 		                        	@if(true)
-		                        	 <li><a href="{{ route('ITResources.professional.home') }}">Home</a></li>
+		                        	 <li><a href="{{ route('ITResources.professional.home') }}">Inicio</a></li>
 		                        	@endif
 		                            <li class="dropdown">
 		                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>

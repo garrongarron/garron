@@ -21,8 +21,7 @@ class ITResources extends Controller
             'Full Stack Developer'
             ,'Team Leader'
             ,'System Administrator'
-            ,'DBA'
-            ,'IT Profesional'];
+            ,'DBA'];
 
     public function __construct(){
         $var = [];
@@ -30,8 +29,6 @@ class ITResources extends Controller
             $var[str_slug($value)] = $value;
         }
         $this->positions = $var;
-
-        
     }
     public function home(){
         Lang::setLocale(session('locale')); 
@@ -145,7 +142,10 @@ class ITResources extends Controller
         $jobs = Position::where('title_slug','LIKE','%'.str_slug($position).'%')
                 ->orWhere('description', 'LIKE', '%'.$position.'%')
                 ->orderByRaw('created_at DESC')
+                ->distinct()
                 ->paginate(8);
+
+
         $paginatorLink = $jobs->links();
 
 

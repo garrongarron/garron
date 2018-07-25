@@ -13,6 +13,7 @@
 			<hr>
 			<h1>IT Resources</h1>
 			<p>Aquí las mejores empresas buscan a los mejores recursos.</p>
+			<input class="btn btn-success register" type="button" value="Crear Perfil">
 		</div>
 		
 		<div class="col-md-6">
@@ -163,6 +164,9 @@
 					$('.result-job-offer').html(str);
 				})
 			});
+			$('.register').on('click', function(){
+				window.location.href = '{{ route('login',['register'=>'register']) }}';
+			})
 
 		})(document, jQuery)
 			

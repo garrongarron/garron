@@ -78,7 +78,7 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Full Name</label>
+                            <label for="name" class="col-md-4 control-label">Nombre Completo</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
@@ -92,7 +92,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                            <label for="email" class="col-md-4 control-label">E-mail</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
@@ -106,7 +106,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+                            <label for="password" class="col-md-4 control-label">Contraseña</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" name="password" required>
@@ -120,7 +120,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                            <label for="password-confirm" class="col-md-4 control-label">Confirma Contraseña</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
@@ -129,12 +129,13 @@
 
 
                         <div class="form-group">
-                            <label for="role" class="col-md-4 control-label">Mode</label>
+                            <label for="role" class="col-md-4 control-label">Modo</label>
 
                             <div class="col-md-6">
                                 <select class="form-control" id="role" name="role" required>
-                                    <option value="employee">Employee</option>
-                                    <option value="company">Company</option>
+                                    <option value="">-Seleccionar-</option>
+                                    <option value="employee">Profesional</option>
+                                    <option value="company">Reclutador</option>
                                 </select>
                             </div>
                         </div>
@@ -169,6 +170,10 @@
         hideForms('.register-form')
         return false;
     });
+
+    @if(request()->input('register') == 'register')
+        $('.register-button').click()
+    @endif
 })(document, jQuery)
 </script>
 
