@@ -1,4 +1,10 @@
 <!-- Modal -->
+<?php 
+$anos = [];
+for ($i=0; $i < 30; $i++) { 
+	$anos[date('Y')-$i] = date('Y')-$i;
+}
+?>
 <div class="modal fade" id="education{{ $toUpdate or '' }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -46,13 +52,13 @@
 				</div>
 				<div class="form-group">
 					{{ Form::label('from', 'Desde') }}
-					{{ Form::select('from', ['2018'=>'2018','2017'=>'2017','2016'=>'2016'], 
+					{{ Form::select('from', $anos, 
 					null,
 					array('class' => 'form-control')) }}
 				</div>
 				<div class="form-group">
 					{{ Form::label('to', 'Hasta') }}
-					{{ Form::select('to', ['2018'=>'2018','2017'=>'2017','2016'=>'2016'],
+					{{ Form::select('to', $anos,
 					null,
 					array('class' => 'form-control')) }}
 				</div>
