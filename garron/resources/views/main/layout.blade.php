@@ -15,6 +15,7 @@
         @if(isset($user))
         <meta property="og:title" content="{{ $user->name or 'Garron Consulting Group' }}" />
 		<meta property="og:description" content="{{ $user->description or 'Aquí las mejores empresas buscan a los mejores recursos.' }}" />
+		<meta property="og:image" content="https://www.garron.com.ar/img/garron-consulting-group.png" />
         @endif
 	<title> {{ $user->name or 'Garron Consulting Group' }}</title>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
