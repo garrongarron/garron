@@ -51,6 +51,7 @@ img.emoji {
 <link rel='stylesheet' id='orange-css'  href='css/skin/orange.css?ver=4.9.5' type='text/css' media='all' />
 <script type='text/javascript' src='js/jquery/jquery.js?ver=1.12.4'></script>
 <script type='text/javascript' src='js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript' src='js/jquery/jquery-ui.js'></script>
 <!--<link rel="canonical" href="https://demo.samuraithemes.com/agency-x/" />
 <link rel='shortlink' href='https://demo.samuraithemes.com/agency-x/' />
 <link rel="icon" href="https://demo.samuraithemes.com/agency-x/wp-content/uploads/2018/03/cropped-cropped-cropped-logo-black-1-2-1-32x32.png" sizes="32x32" />
