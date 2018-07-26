@@ -55,7 +55,7 @@
 						</button>
 					
 						<h2>{{ $user->name or 'Nombre Aprellido' }}</h2>
-						<a href="#" name="edituser"><i class="fa fa-edit"></i></a>
+						<a href="#" name="edituser" class="editUser" user-id="{{ $user->id }}"><i class="fa fa-edit"></i></a>
 						<h3>{{ $position }}</h3>
 						<p class="description">
 							{{ $user->description or 'Mis tareas consisten en... Mi funcion es ...'}}
@@ -281,11 +281,24 @@
 							return false;
 						});
 
-						$('a[name=edituser]').on('click', function(){
+						/*$('a[name=edituser]').on('click', function(){
 							$('#userModal').modal('show');
 							return false;
-						})
+						})*/
 
+
+						$('.editUser').on('click', function(event){
+							$.ajax({
+								method: "GET",
+								url: "/user/"+$(this).attr('user-id'),
+							}).done(function( form ) {
+								console.log(form);
+								$('.editor-container').html(form);
+								$('#user-update').modal('show');
+
+							});
+							event.preventDefault();
+						})
 						$('.editStudy').on('click', function(event){
 							$.ajax({
 								method: "GET",

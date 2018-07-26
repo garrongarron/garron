@@ -39,6 +39,7 @@ Route::group(['middleware'=>'auth'], function(){
 	Route::resource('experience','ExperienceController');
 	Route::resource('education','EducationController');
 	Route::resource('position','PositionController');
+	Route::resource('user','UserController');
 	Route::post('/ITResources/skills', 'ITResources@saveSkill');
 	Route::post('/ITResources/skillSuggestion', 'ITResources@skillSuggestion');
 	Route::post('/ITResources/skillsDelete', 'ITResources@skillsDelete');
