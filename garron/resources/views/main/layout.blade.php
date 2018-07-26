@@ -12,7 +12,11 @@
         <meta name="google-site-verification" content="_j9Odvd7R5lCOb7_w48wcP3yy-2z2vQIQ8FOnrxOZ50" />
         <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
         <meta name="csrf-token" content="{{ csrf_token() }}">	
-	<title>Garron Consulting Group</title>
+        @if(isset($user))
+        <meta property="og:title" content="{{ $user->name or 'Garron Consulting Group' }}" />
+		<meta property="og:description" content="{{ $user->description or 'Aquí las mejores empresas buscan a los mejores recursos.' }}" />
+        @endif
+	<title> {{ $user->name or 'Garron Consulting Group' }}</title>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121976976-1"></script>
 		<script>
