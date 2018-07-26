@@ -21,7 +21,9 @@ class ITResources extends Controller
             'Full Stack Developer'
             ,'Team Leader'
             ,'System Administrator'
-            ,'DBA'];
+            ,'DBA',
+            ,'IT Profesional'];
+
 
     public function __construct(){
         $var = [];
