@@ -16,8 +16,31 @@ export class ClassifieldsComponent implements OnInit {
   ngOnInit() {
     this.nav.updateRoute('/');
   }
-  getJobs(event: any){
-    console.log(event.target.value)
+
+  select(event: any){
+    let who =  event.target.name;
+    console.log(who);
+    let el = $('input[name='+who+']')
+    let str = el.val();
+    let container = el.parent().parent();
+    if(str == ''){
+      $('.list').hide();
+      $('.searcher').show();
+      container.addClass('col-md-6')
+      container.removeClass('col-md-12');
+    } else {
+      $('.searcher').hide();
+      container.addClass('col-md-12')
+      container.removeClass('col-md-6')
+      container.show();
+      container.find('.list').show();
+
+    }
+    console.log(str);
+  }
+  /*getJobs(event: any){
+    console.log(event.target.name);
+    console.log(event.target.value);
     if(event.target.value){
       $('#jobs-list').show();
       $('#jobs').addClass('col-md-12').removeClass('col-md-6');
@@ -38,8 +61,7 @@ export class ClassifieldsComponent implements OnInit {
       $('#profesionals-list').hide();
       $('#profesionals').addClass('col-md-6').removeClass('col-md-12');
       $('#jobs').show();
-
     }
-  }
+  }*/
 
 }

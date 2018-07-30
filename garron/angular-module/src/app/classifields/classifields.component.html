@@ -4,17 +4,17 @@
       <h1>Clasificados IT</h1>
       <p>Aqui las mejores empresas buscan a los mejores recursos</p>
       <div class="row">
-        <div class="col-md-6" id="profesionals">
+        <div class="col-md-6 searcher" id="profesionals">
           <b>Busco Profesionales de IT</b>
           <div class="form-group">
             <i class="fa fa-search form-control-search"></i>
             <input type="text"
-              (keyup)="getProfessionals($event)"
-              name="Profesionales"
+              (keyup)="select($event)"
+              name="professionals"
               placeholder="DBA"
               class="form-control">
           </div>
-          <ul id="profesionals-list">
+          <ul class="list">
             <li *ngFor="let item of items">
               <div class="header">
                 <div class="circle"></div>
@@ -59,25 +59,41 @@
             </li>
           </ul>
         </div>
-        <div class="col-md-6" id="jobs">
+        <div class="col-md-6 searcher" id="jobs">
           <b>Busco Empleo en IT</b>
           <div class="form-group">
             <i class="fa fa-search form-control-search"></i>
             <input type="text"
-                (keyup)="getJobs($event)"
+                (keyup)="select($event)"
                 name="empleos"
                 class="form-control"
                 placeholder="DBA">
           </div>
-          <ul id="jobs-list">
+          <ul class="list">
             <li *ngFor="let item of items">
               <div class="company-logo">
-
               </div>
-
               <a href="#"><b>Titulo de un empleo en algun lugar</b></a><i> hace 1 día.</i><br>
               <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6 searcher" id="projects">
+          <b>Busco Implementar Proyecto IT</b>
+          <div class="form-group">
+            <i class="fa fa-search form-control-search"></i>
+            <input type="text"
+                (keyup)="select($event)"
+                name="projects"
+                class="form-control"
+                placeholder="DBA">
+          </div>
+          <ul class="list">
+            <li *ngFor="let item of items">
+              <div class="company-logo">
+              </div>
+              <a href="#"><b>Web Service Consummer SOAP</b></a><i> hace 1 día.</i><br>
+              <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             </li>
           </ul>
         </div>
@@ -85,12 +101,24 @@
           <h2>Desarrollo a medida</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
           <ul>
-            <li><a href="#">Integracion de servicios</a></li>
-            <li><a href="#">Plataformas de Gestion)</a></li>
-            <li><a href="#">Mantenimineto de Aplicaciones</a></li>
-            <li><a href="#">Diferentes Lenguajes, Sistemas Operativos, Softwares</a></li>
+            <li class="services"><i class="fa fa-desktop" aria-hidden="true"></i>&nbsp;<a href="#">Integracion de servicios</a></li>
+            <li class="services"><i class="fa fa-desktop" aria-hidden="true"></i>&nbsp;<a href="#">Plataformas de Gestion</a></li>
+            <li class="services"><i class="fa fa-desktop" aria-hidden="true"></i>&nbsp;<a href="#">Mantenimineto de Aplicaciones</a></li>
+            <li class="services"><i class="fa fa-desktop" aria-hidden="true"></i>&nbsp;<a href="#">Diferentes Lenguajes, Sistemas Operativos, Softwares</a></li>
           </ul>
         </div>
+      </div>
+      <div class="customers">
+        <div class="customer" *ngFor="let item of items">
+          (C)
+        </div>
+        <div class="customer" *ngFor="let item of items">
+          (C)
+        </div>
+        <div class="customer" *ngFor="let item of items">
+          (C)
+        </div>
+
       </div>
     </div>
     <div class="col-md-6">

@@ -101,7 +101,7 @@ ul li p{
 .fa-star{
   color: orange;
 }
-#profesionals-list, #jobs-list{
+.list{
   display: none;
 }
 ul.contact li{
@@ -124,4 +124,28 @@ ul.contact li i{
   float: left;
   margin-top: .2em;
   margin-right: .5em;
+}
+.customers{
+  display: flex;
+  justify-content: space-space-around;
+  overflow-x: hidden;
+}
+.customer{
+  min-width: 86px;
+  min-height: 86px;
+  background: green;
+  border: 2px solid white;
+  line-height: 86px;
+  display: inline;
+}
+.services{
+  background: #333;
+}
+.services i{
+  color: #F8724B;
+}
+.services a{
+  text-decoration: none;
+  font-weight: bold;
+  color:  white;
 }
