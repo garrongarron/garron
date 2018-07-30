@@ -1,0 +1,47 @@
+h1{
+  text-align: center;
+}
+p{
+  margin: 0px;
+  padding: 0px;
+  display: inline;
+}
+.skill{
+  text-align: center;
+}
+.half{
+  padding: 0px;
+  margin: 0px;
+  width: 50%;
+  display: inline-block;
+  text-align: center;
+}
+.left{
+  clear: both;
+  text-align: left;
+}
+.fa-star{
+  color: orange;
+}
+.col-md-2{
+  background: red;
+  height: auto;
+  text-align: center;
+}
+.circle{
+  margin: 1em auto;
+  background: green;
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+}
+.education{
+  display: none;
+}
+.col-md-3{
+  text-align: center;
+}
+.justify{
+  text-align: justify;
+  padding: 1em;
+}

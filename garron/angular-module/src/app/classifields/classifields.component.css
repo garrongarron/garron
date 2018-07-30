@@ -1,0 +1,127 @@
+a{
+  color: #1a0dab;
+}
+ul{
+  padding: 0px;
+  margin: 0em;
+  margin-bottom: 1em;
+}
+ul li{
+  list-style: none;
+  border: 1px solid #ddd;
+  text-align: justify;
+  padding: .5em;
+  margin: .3em 0em;
+}
+ul li p{
+  border: 0px;
+  margin: 0px;
+  display: inline;
+  color: #666;
+}
+
+.banner h3{
+  text-align: center;
+}
+.img{
+  background: #F8724B;
+  min-height: 2em;
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1em 0em 1em 0em;
+}
+.img span{
+  line-height: 2em;
+  color: white;
+  font-weight: bold;
+  padding: .5em;
+}
+
+.logo{
+  background: silver;
+  padding: .5em 1em;
+  height: auto;
+}
+.logo p{
+  margin: 0px;
+}
+.form-control-search {
+  position: absolute;
+  right: 20px;
+  padding: 10px;
+  pointer-events: none;
+  border-left: 1px solid silver;
+}
+
+.form-control {
+  padding-right: 40px!important;
+}
+
+.form-group{
+  padding: .5em 0em;
+  margin: 0px;
+}
+
+.header{
+  min-height: 50px;
+}
+.header .circle{
+  position: absolute;
+  display: inline-block;
+  background: green;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  height: 50px;
+}
+.header .name{
+  padding: 0px;
+  padding-left: 60px;
+  margin: 0px;
+  position: relative;
+  display: inline-block;
+  height: 50px;
+  width: 100%;
+  line-height: 1.5em;
+  text-align: center;
+}
+.half{
+  padding: 0px;
+  margin: 0px;
+  width: 50%;
+  display: inline-block;
+  text-align: center;
+}
+.left{
+  clear: both;
+  text-align: left;
+}
+.fa-star{
+  color: orange;
+}
+#profesionals-list, #jobs-list{
+  display: none;
+}
+ul.contact li{
+  text-align: left;
+  background: #333;
+  color: white;
+}
+ul.contact li a{
+  color: #F8724B;
+}
+
+ul.contact li i{
+  color: #F8724B;
+}
+
+.company-logo{
+  width: 65px;
+  height: 65px;
+  background: green;
+  float: left;
+  margin-top: .2em;
+  margin-right: .5em;
+}

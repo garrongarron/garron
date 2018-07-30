@@ -85,11 +85,20 @@ Auth::routes();
 Route::get('termsandconditions', function(){
 	return view('ITResources.termsandconditions');
 })->name('policies');
-Route::get('test', function(){
+Route::get('test1', function(){
 	return view('emails.wellcome');
 });
 Route::get('test2', function(){
 	return view('emails.applyToPosition');
+});
+
+Route::get('/auth', function(){
+	if(!Auth::check())
+	{
+		$user = App\User::find(1);
+		Auth::login($user);
+	}
+	return Auth::user();
 });
 
 

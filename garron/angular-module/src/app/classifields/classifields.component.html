@@ -1,0 +1,140 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Clasificados IT</h1>
+      <p>Aqui las mejores empresas buscan a los mejores recursos</p>
+      <div class="row">
+        <div class="col-md-6" id="profesionals">
+          <b>Busco Profesionales de IT</b>
+          <div class="form-group">
+            <i class="fa fa-search form-control-search"></i>
+            <input type="text"
+              (keyup)="getProfessionals($event)"
+              name="Profesionales"
+              placeholder="DBA"
+              class="form-control">
+          </div>
+          <ul id="profesionals-list">
+            <li *ngFor="let item of items">
+              <div class="header">
+                <div class="circle"></div>
+                <div class="name">
+                  <a routerLink="user"><i class="fa fa-graduation-cap"></i><b>Juan de los Palotes</b></a>
+                  <div class="skill">Profesional</div>
+                </div>
+              </div>
+              <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <i> Hace 1 día</i>
+              <br>
+              <div class="half left">
+                <span> Experiencia: </span>
+              </div>
+              <div class="half">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+              </div>
+              <div class="half left">
+                <span> Ingles: </span>
+              </div>
+              <div class="half">
+                <div class="progress">
+                  <div class="progress-bar"
+                      role="progressbar"
+                        style="width: 25%"
+                        aria-valuenow="25"
+                        aria-valuemin="0"
+                        aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+              <div>
+                <span><i class="fa fa-envelope" aria-hidden="true"></i> Mail: </span>
+                <a href="#">info@garron.com.ar</a><br>
+                <span><i class="fa fa-phone-square" aria-hidden="true"></i> Phone: </span>
+                <a href="#">15-6260-4333</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6" id="jobs">
+          <b>Busco Empleo en IT</b>
+          <div class="form-group">
+            <i class="fa fa-search form-control-search"></i>
+            <input type="text"
+                (keyup)="getJobs($event)"
+                name="empleos"
+                class="form-control"
+                placeholder="DBA">
+          </div>
+          <ul id="jobs-list">
+            <li *ngFor="let item of items">
+              <div class="company-logo">
+
+              </div>
+
+              <a href="#"><b>Titulo de un empleo en algun lugar</b></a><i> hace 1 día.</i><br>
+              <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-12">
+          <h2>Desarrollo a medida</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <ul>
+            <li><a href="#">Integracion de servicios</a></li>
+            <li><a href="#">Plataformas de Gestion)</a></li>
+            <li><a href="#">Mantenimineto de Aplicaciones</a></li>
+            <li><a href="#">Diferentes Lenguajes, Sistemas Operativos, Softwares</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <ul class="contact">
+        <li><i class="fa fa-map" aria-hidden="true"></i> Address: Viamonte 1549, Ciudad Autonoma de Buenos Aires</li>
+        <li><i class="fa fa-phone-square" aria-hidden="true"></i> Phone: +54-911-6260-4333</li>
+        <li><i class="fa fa-envelope" aria-hidden="true"></i> Email: <a href="email:info@garron.com">info@garron.com</a></li>
+      </ul>
+      <div class="banner">
+        <h3>Desarrollo Profesional</h3>
+        <div class="logo">
+          <p>Aqui las mejores empresas buscan a los mejores profesionales</p>
+          <div class="img">
+            <span>Clasificados IT</span>
+          </div>
+          <p>Clasificados de empleos en el área de Tecnología de la Información</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <ul>
+            <li *ngFor="let item of items">
+              <div class="header">
+                <div class="circle"></div>
+                <div class="name">
+                  <a href="#"><b>Juan de los Palotes</b></a>
+                  <div class="skill">Profesional</div>
+                </div>
+              </div>
+              <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <i> Hace 1 día</i>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <ul>
+            <li *ngFor="let item of items">
+              <a href="#"><b>Titulo de un empleo en algun lugar</b></a>
+              <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <i> Hace 1 día</i>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+</div>
